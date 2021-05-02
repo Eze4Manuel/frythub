@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fryghthub/app/ui/pages/onboarding.dart';
 import 'package:fryghthub/app/ui/theme/app_strings.dart';
 
 
@@ -11,6 +12,6 @@ void main() {
     title: Strings.appName,
     debugShowCheckedModeBanner: false,
     // routes: Routes.routes,
-    // home: SplashScreen(),
+    home: Onboarding(),
   )));
 }
