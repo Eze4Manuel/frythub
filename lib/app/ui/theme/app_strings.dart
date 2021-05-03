@@ -24,7 +24,7 @@ class Strings {
   static const String accountType = "Change Account Type";
   static const String fillDetails = "Kindly fill in your details to move";
   static const String createAccountMessage =
-      "Creating an account requires that you\ncreate a preferred username you want to\nbe identified with.";
+      "Creating an account requires that you\ncreate a preferred username you want to be identified with.";
   static const String username = "Username";
   static const String setUsername = "Set Your Username";
   static const String userTaken = "This username is not available";
@@ -42,7 +42,8 @@ class Strings {
   static const String forgotPassword = "Forgot Password";
   static const String verifyCode = "Verification Code";
   static const String newPassword = "New Password";
-  static const String continueText = "continue";
+  static const String continueText = "Continue";
+  static const String show = "Show";
   static const String resetPassword = "Reset Password";
 
 

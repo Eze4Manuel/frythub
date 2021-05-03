@@ -11,6 +11,7 @@ class Onboarding extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.whiteColor,
       body: ResponsiveSafeArea(builder: (context, size) {
         return ContentPage();
       }),
@@ -55,7 +56,7 @@ class ContentPageStage extends State<ContentPage> {
         value: SystemUiOverlayStyle.light,
         child: Container(
           height: MediaQuery.of(context).size.height,
-          color: AppColors.appColor4,
+          color: AppColors.whiteColor,
           child: ListView(
             children: <Widget>[
               Container(
@@ -71,19 +72,17 @@ class ContentPageStage extends State<ContentPage> {
                   children: <Widget>[
                     Container(
                       height: DeviceUtils.getScaledHeight(context, scale: 0.43),
-                      width: DeviceUtils.getScaledWidth(context, scale: 0.43),
-                      margin: EdgeInsets.fromLTRB(32, 0, 32, 0),
+                      width: DeviceUtils.getScaledWidth(context, scale: 1),
                       color: AppColors.appColor4,
                     ),
                     Container(
                       height: DeviceUtils.getScaledHeight(context, scale: 0.43),
-                      width: DeviceUtils.getScaledWidth(context, scale: 0.43),
-                      margin: EdgeInsets.fromLTRB(32, 0, 32, 0),
+                      width: DeviceUtils.getScaledWidth(context, scale: 1),
                       color: AppColors.appColor4,
                     ),
                     Container(
                       height: DeviceUtils.getScaledHeight(context, scale: 0.43),
-                      width: DeviceUtils.getScaledWidth(context, scale: 0.43),
+                      width: DeviceUtils.getScaledWidth(context, scale: 1),
                       color: AppColors.appColor4,
                     ),
                   ],
@@ -92,42 +91,61 @@ class ContentPageStage extends State<ContentPage> {
               SizedBox(
                 height: DeviceUtils.getScaledHeight(context, scale: 0.04),
               ),
-              Text(
-                Strings.borderlessDelivery,
-                style: TextStyle(
-                    color: AppColors.appColor1,
-                    fontSize: 32,
-                    fontFamily: FontFamily.sofiaBold),
-                //style: kTitleStyle,
+              Container(
+                margin: EdgeInsets.only(left: 33),
+                child: Text(
+                  Strings.borderlessDelivery,
+                  style: TextStyle(
+                      color: AppColors.appColor1,
+                      fontSize: 32,
+                      fontFamily: FontFamily.sofiaBold),
+                  //style: kTitleStyle,
+                ),
               ),
               SizedBox(
                 height: DeviceUtils.getScaledHeight(context, scale: 0.04),
               ),
-              Text(
-                Strings.selectAccount,
-                style: TextStyle(
-                    color: AppColors.appColor2,
-                    fontSize: 16,
-                    fontFamily: FontFamily.sofiaMedium),
-                //style: kTitleStyle,
+              Container(
+                margin: EdgeInsets.only(left: 33),
+                child: Text(
+                  Strings.selectAccount,
+                  style: TextStyle(
+                      color: AppColors.appColor2,
+                      fontSize: 16,
+                      fontFamily: FontFamily.sofiaMedium),
+                  //style: kTitleStyle,
+                ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: _buildPageIndicator(),
+              SizedBox(
+                height: DeviceUtils.getScaledHeight(context, scale: 0.04),
               ),
               Container(
-                height: 56,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: AppColors.appPrimaryColor),
-                margin: EdgeInsets.symmetric(horizontal: 32),
-                child: Center(
-                  child: Text(
-                    Strings.startShipping,
-                    style: TextStyle(
-                      color: AppColors.whiteColor,
-                      fontSize: 20,
-                      fontFamily: FontFamily.sofiaSemiBold,
+                margin: EdgeInsets.only(left: 33),
+                child: Row(
+                  children: _buildPageIndicator(),
+                ),
+              ),
+              SizedBox(
+                height: DeviceUtils.getScaledHeight(context, scale: 0.04),
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, _startShipping(context));
+                },
+                child: Container(
+                  height: 56,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: AppColors.appPrimaryColor),
+                  margin: EdgeInsets.symmetric(horizontal: 32),
+                  child: Center(
+                    child: Text(
+                      Strings.startShipping,
+                      style: TextStyle(
+                        color: AppColors.whiteColor,
+                        fontSize: 20,
+                        fontFamily: FontFamily.sofiaSemiBold,
+                      ),
                     ),
                   ),
                 ),
@@ -139,7 +157,7 @@ class ContentPageStage extends State<ContentPage> {
     );
   }
 
-  void _startShipping(context) {
+  _startShipping(context) {
     showModalBottomSheet(
         backgroundColor: AppColors.whiteColor,
         shape: RoundedRectangleBorder(
@@ -194,12 +212,14 @@ class ContentPageStage extends State<ContentPage> {
                         borderRadius: BorderRadius.circular(8),
                         color: AppColors.whiteColor,
                         border: Border.all(width: 1, color: AppColors.color5)),
-                    child: Text(
-                      Strings.signIn,
-                      style: TextStyle(
-                        color: AppColors.appPrimaryColor,
-                        fontSize: 20,
-                        fontFamily: FontFamily.sofiaSemiBold,
+                    child: Center(
+                      child: Text(
+                        Strings.signIn,
+                        style: TextStyle(
+                          color: AppColors.appPrimaryColor,
+                          fontSize: 20,
+                          fontFamily: FontFamily.sofiaSemiBold,
+                        ),
                       ),
                     ),
                   ),
@@ -210,8 +230,7 @@ class ContentPageStage extends State<ContentPage> {
                 GestureDetector(
                   onTap: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => AccountType())
-                    );
+                        MaterialPageRoute(builder: (context) => AccountType()));
                   },
                   child: Container(
                     height: 56,
@@ -220,12 +239,14 @@ class ContentPageStage extends State<ContentPage> {
                       borderRadius: BorderRadius.circular(8),
                       color: AppColors.appPrimaryColor,
                     ),
-                    child: Text(
-                      Strings.createAccount,
-                      style: TextStyle(
-                        color: AppColors.whiteColor,
-                        fontSize: 20,
-                        fontFamily: FontFamily.sofiaSemiBold,
+                    child: Center(
+                      child: Text(
+                        Strings.createAccount,
+                        style: TextStyle(
+                          color: AppColors.whiteColor,
+                          fontSize: 20,
+                          fontFamily: FontFamily.sofiaSemiBold,
+                        ),
                       ),
                     ),
                   ),

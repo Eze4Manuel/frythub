@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fryghthub/app/ui/pages/register/create_account.dart';
+import 'package:fryghthub/app/ui/widgets/custom_checkbox.dart';
 import 'package:fryghthub/app/utils/responsive_safe_area.dart';
 import 'package:fryghthub/app/utils/device_utils.dart';
 import 'package:fryghthub/app/ui/theme/app_colors.dart';
@@ -35,27 +37,33 @@ class _AccountTypeState extends State<AccountType> {
       body: ResponsiveSafeArea(builder: (context, size) {
         return ListView(
           children: [
-            Text(
-              Strings.howdy,
-              style: TextStyle(
-                  color: AppColors.appColor1,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 28.0,
-                  fontFamily: FontFamily.sofiaBold),
+            Container(
+              margin: EdgeInsets.only(left: 32),
+              child: Text(
+                Strings.howdy,
+                style: TextStyle(
+                    color: AppColors.appColor1,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 28.0,
+                    fontFamily: FontFamily.sofiaBold),
+              ),
             ),
             SizedBox(
               height: DeviceUtils.getScaledHeight(context, scale: 0.02),
             ),
-            Text(
-              Strings.selectAccount,
-              style: TextStyle(
-                  color: AppColors.appColor2,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 16.0,
-                  fontFamily: FontFamily.sofiaMedium),
+            Container(
+              margin: EdgeInsets.only(left: 32),
+              child: Text(
+                Strings.selectAccount,
+                style: TextStyle(
+                    color: AppColors.appColor2,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16.0,
+                    fontFamily: FontFamily.sofiaMedium),
+              ),
             ),
             SizedBox(
-              height: DeviceUtils.getScaledHeight(context, scale: 0.06),
+              height: DeviceUtils.getScaledHeight(context, scale: 0.04),
             ),
             GestureDetector(
               onTap: () {
@@ -64,7 +72,8 @@ class _AccountTypeState extends State<AccountType> {
                 // );
               },
               child: Container(
-                height: 104,
+                margin: EdgeInsets.only(left: 32, right: 32),
+                height: 100,
                 width: 312,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
@@ -75,6 +84,12 @@ class _AccountTypeState extends State<AccountType> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
+                    Padding(
+                      padding: const EdgeInsets.only(right:11.0,top: 11),
+                      child: Align(
+                          alignment: Alignment.topRight,
+                          child: CircleCheckbox(value: true, onChanged: null)),
+                    ),
                     Row(
                       children: [
                         SizedBox(
@@ -84,7 +99,9 @@ class _AccountTypeState extends State<AccountType> {
                         Container(
                           height: 56,
                           width: 56,
-                          decoration: BoxDecoration(color: AppColors.color1),
+                          decoration: BoxDecoration(
+                              color: AppColors.color1,
+                              borderRadius: BorderRadius.circular(8)),
                         ),
                         SizedBox(
                           width:
@@ -105,7 +122,7 @@ class _AccountTypeState extends State<AccountType> {
               ),
             ),
             SizedBox(
-              height: DeviceUtils.getScaledHeight(context, scale: 0.06),
+              height: DeviceUtils.getScaledHeight(context, scale: 0.02),
             ),
             GestureDetector(
               onTap: () {
@@ -114,8 +131,9 @@ class _AccountTypeState extends State<AccountType> {
                 // );
               },
               child: Container(
-                height: 104,
+                height: 100,
                 width: 312,
+                margin: EdgeInsets.only(left: 32, right: 32),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
                     color: AppColors.appPrimaryColor,
@@ -124,6 +142,12 @@ class _AccountTypeState extends State<AccountType> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
+                    Padding(
+                      padding: const EdgeInsets.only(right:11.0,top: 11),
+                      child: Align(
+                          alignment: Alignment.topRight,
+                          child: CircleCheckbox(value: true, onChanged: null)),
+                    ),
                     Row(
                       children: [
                         SizedBox(
@@ -133,7 +157,9 @@ class _AccountTypeState extends State<AccountType> {
                         Container(
                           height: 56,
                           width: 56,
-                          decoration: BoxDecoration(color: AppColors.color1),
+                          decoration: BoxDecoration(
+                              color: AppColors.color1,
+                              borderRadius: BorderRadius.circular(8)),
                         ),
                         SizedBox(
                           width:
@@ -154,7 +180,7 @@ class _AccountTypeState extends State<AccountType> {
               ),
             ),
             SizedBox(
-              height: DeviceUtils.getScaledHeight(context, scale: 0.06),
+              height: DeviceUtils.getScaledHeight(context, scale: 0.02),
             ),
             GestureDetector(
               onTap: () {
@@ -163,8 +189,9 @@ class _AccountTypeState extends State<AccountType> {
                 // );
               },
               child: Container(
-                height: 104,
+                height: 100,
                 width: 312,
+                margin: EdgeInsets.only(left: 32, right: 32),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
                     color: AppColors.appPrimaryColor,
@@ -173,6 +200,12 @@ class _AccountTypeState extends State<AccountType> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
+                    Padding(
+                      padding: const EdgeInsets.only(right:11.0,top: 11),
+                      child: Align(
+                          alignment: Alignment.topRight,
+                          child: CircleCheckbox(value: true, onChanged: null)),
+                    ),
                     Row(
                       children: [
                         SizedBox(
@@ -182,7 +215,9 @@ class _AccountTypeState extends State<AccountType> {
                         Container(
                           height: 56,
                           width: 56,
-                          decoration: BoxDecoration(color: AppColors.color1),
+                          decoration: BoxDecoration(
+                              color: AppColors.color1,
+                              borderRadius: BorderRadius.circular(8)),
                         ),
                         SizedBox(
                           width:
@@ -203,7 +238,7 @@ class _AccountTypeState extends State<AccountType> {
               ),
             ),
             SizedBox(
-              height: DeviceUtils.getScaledHeight(context, scale: 0.06),
+              height: DeviceUtils.getScaledHeight(context, scale: 0.02),
             ),
             GestureDetector(
               onTap: () {
@@ -212,8 +247,9 @@ class _AccountTypeState extends State<AccountType> {
                 // );
               },
               child: Container(
-                height: 104,
+                height: 100,
                 width: 312,
+                margin: EdgeInsets.only(left: 32, right: 32),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
                     color: AppColors.appPrimaryColor,
@@ -222,6 +258,12 @@ class _AccountTypeState extends State<AccountType> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
+                    Padding(
+                      padding: const EdgeInsets.only(right:11.0,top: 11),
+                      child: Align(
+                          alignment: Alignment.topRight,
+                          child: CircleCheckbox(value: true, onChanged: null)),
+                    ),
                     Row(
                       children: [
                         SizedBox(
@@ -231,7 +273,7 @@ class _AccountTypeState extends State<AccountType> {
                         Container(
                           height: 56,
                           width: 56,
-                          decoration: BoxDecoration(color: AppColors.color1),
+                          decoration: BoxDecoration(color: AppColors.color1, borderRadius: BorderRadius.circular(8)),
                         ),
                         SizedBox(
                           width:
@@ -251,25 +293,30 @@ class _AccountTypeState extends State<AccountType> {
                 ),
               ),
             ),
+            SizedBox(
+              height: DeviceUtils.getScaledHeight(context, scale: 0.05),
+            ),
             GestureDetector(
               onTap: () {
-                // Navigator.push(context,
-                //     MaterialPageRoute(builder: (context) => LiveStream())
-                // );
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => CreateAccount()));
               },
               child: Container(
                 height: 56,
-                width: 311,
+                // width: 311,
+                margin: EdgeInsets.only(left: 32, right: 32,bottom: 32),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   color: AppColors.appPrimaryColor,
                 ),
-                child: Text(
-                  Strings.continueText,
-                  style: TextStyle(
-                    color: AppColors.whiteColor,
-                    fontSize: 20,
-                    fontFamily: FontFamily.sofiaSemiBold,
+                child: Center(
+                  child: Text(
+                    Strings.continueText,
+                    style: TextStyle(
+                      color: AppColors.whiteColor,
+                      fontSize: 20,
+                      fontFamily: FontFamily.sofiaSemiBold,
+                    ),
                   ),
                 ),
               ),

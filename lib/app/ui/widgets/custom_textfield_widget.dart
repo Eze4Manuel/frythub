@@ -23,6 +23,7 @@ class TextFieldWidget extends StatelessWidget {
   final String labelText;
   final Widget suffixIcon;
   final TextStyle hintStyle;
+  final bool enabled;
 
   const TextFieldWidget(
       {Key key,
@@ -47,7 +48,7 @@ class TextFieldWidget extends StatelessWidget {
       this.borderSideColor,
       this.filledColor,
       this.hintStyle,
-      this.filled})
+      this.filled, this.enabled})
       : super(key: key);
 
   @override
@@ -64,17 +65,19 @@ class TextFieldWidget extends StatelessWidget {
       keyboardType: this.inputType,
 //      style: Theme.of(context).textTheme.body1,
       decoration: InputDecoration(
-          contentPadding: const EdgeInsets.fromLTRB(16, 16, 0, 16),
+          // contentPadding: const EdgeInsets.fromLTRB(, , 0, 16),
           hintText: this.hint,
           labelText: labelText,
           hintStyle: hintStyle,
           errorText: errorText,
+          // enabled: enabled,
+
           focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: borderSideColor),
-              borderRadius: BorderRadius.circular(12)),
+              borderRadius: BorderRadius.circular(8)),
           enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.transparent),
-              borderRadius: BorderRadius.circular(12)),
+              borderRadius: BorderRadius.circular(8)),
           filled: filled,
           fillColor: filledColor,
           border: InputBorder.none,

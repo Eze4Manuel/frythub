@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:fryghthub/app/ui/pages/register/user_contact.dart';
 
 import 'package:fryghthub/app/ui/theme/app_colors.dart';
+import 'package:fryghthub/app/ui/widgets/custom_checkbox.dart';
 import 'package:fryghthub/app/ui/widgets/custom_textfield_widget.dart';
 import 'package:fryghthub/app/utils/responsive_safe_area.dart';
 import 'package:fryghthub/app/utils/device_utils.dart';
@@ -38,47 +40,41 @@ class _CreateAccountState extends State<CreateAccount> {
       body: ResponsiveSafeArea(builder: (context, size) {
         return ListView(
           children: [
-            Text(
-              Strings.createAccount,
-              style: TextStyle(
-                  color: AppColors.appColor1,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 28.0,
-                  fontFamily: FontFamily.sofiaBold),
+            Container(
+              margin: EdgeInsets.only(left: 33),
+              child: Text(
+                Strings.createAccount,
+                style: TextStyle(
+                    color: AppColors.appColor1,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 28.0,
+                    fontFamily: FontFamily.sofiaBold),
+              ),
             ),
             SizedBox(
               height: DeviceUtils.getScaledHeight(context, scale: 0.02),
             ),
-            Text(
-              Strings.fillDetails,
-              style: TextStyle(
-                  color: AppColors.appColor2,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 16.0,
-                  fontFamily: FontFamily.sofiaMedium),
+            Container(
+              margin: EdgeInsets.only(left: 33),
+              child: Text(
+                Strings.fillDetails,
+                style: TextStyle(
+                    color: AppColors.appColor2,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16.0,
+                    fontFamily: FontFamily.sofiaMedium),
+              ),
             ),
-            // DropdownButton<String>(
-            //   onChanged: changeAccountType,
-            //   value: Strings.accountType,
-            //   style: TextStyle(
-            //     color: AppColors.color5,
-            //     fontSize: 16,
-            //     fontWeight: FontWeight.bold,
-            //     fontFamily: FontFamily.sofiaBold,
-            //   ),
-            //   items: <DropdownMenuItem<String>>[
-            //     const DropdownMenuItem<String>(value: "Child 1",
-            //         child: const Text(Strings.accountType,)),
-            //     const DropdownMenuItem<String>(value: "Child 2",
-            //         child: const Text("Child 2")),
-            //     const DropdownMenuItem<String>(value: "Child 3",
-            //         child: const Text("Child 3")),
-            //   ],
-            // ),
+            SizedBox(
+              height: DeviceUtils.getScaledHeight(context, scale: 0.06),
+            ),
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                _changeAccountType(context);
+              },
               child: Container(
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       Strings.accountType,
@@ -98,12 +94,20 @@ class _CreateAccountState extends State<CreateAccount> {
                 ),
               ),
             ),
+            SizedBox(
+              height: DeviceUtils.getScaledHeight(context, scale: 0.06),
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
                   width: 80,
                   height: 48,
+                  child: Icon(
+                    FontAwesomeIcons.google,
+                    color: AppColors.whiteColor,
+                    size: 18,
+                  ),
                   decoration: BoxDecoration(
                       color: AppColors.color7,
                       borderRadius: BorderRadius.circular(8)),
@@ -117,78 +121,148 @@ class _CreateAccountState extends State<CreateAccount> {
                   decoration: BoxDecoration(
                       color: AppColors.color8,
                       borderRadius: BorderRadius.circular(8)),
+                  child: Icon(
+                    FontAwesomeIcons.facebookSquare,
+                    color: AppColors.whiteColor,
+                    size: 18,
+                  ),
                 ),
               ],
             ),
+            SizedBox(
+              height: DeviceUtils.getScaledHeight(context, scale: 0.024),
+            ),
             Container(
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Divider(),
+                  Container(
+                    width: 100,
+                    height: 1,
+                    color: AppColors.color9,
+                  ),
                   SizedBox(
                     width: DeviceUtils.getScaledWidth(context, scale: 0.03),
                   ),
-                  Text(Strings.or),
+                  Text(
+                    Strings.or,
+                    style: TextStyle(
+                      color: AppColors.color10,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: FontFamily.sofiaBold,
+                    ),
+                  ),
                   SizedBox(
                     width: DeviceUtils.getScaledWidth(context, scale: 0.03),
                   ),
-                  Divider(),
+                  Container(
+                    width: 100,
+                    height: 1,
+                    color: AppColors.color9,
+                  )
                 ],
               ),
             ),
             SizedBox(
-              height: DeviceUtils.getScaledHeight(context, scale: 0.06),
+              height: DeviceUtils.getScaledHeight(context, scale: 0.024),
             ),
             Stack(
               children: [
-                Text(
-                  Strings.firstName,
-                  style: TextStyle(
-                    color: AppColors.color6,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    fontFamily: FontFamily.sofiaMedium,
+                Padding(
+                  padding: const EdgeInsets.only(left: 32.0),
+                  child: Text(
+                    Strings.firstName,
+                    style: TextStyle(
+                      color: AppColors.color6,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      fontFamily: FontFamily.sofiaMedium,
+                    ),
                   ),
                 ),
-                TextFieldWidget()
+                Padding(
+                  padding: const EdgeInsets.only(top: 16.0, right: 32),
+                  child: TextFieldWidget(
+                    hint: Strings.firstName,
+                    fontSize: 14,
+                    hintColor: AppColors.color11,
+                    borderSideColor: AppColors.color9,
+                    autoFocus: true,
+                  ),
+                )
               ],
+            ),
+            SizedBox(
+              height: DeviceUtils.getScaledHeight(context, scale: 0.02),
             ),
             Stack(
               children: [
-                Text(
-                  Strings.lastName,
-                  style: TextStyle(
-                    color: AppColors.color6,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    fontFamily: FontFamily.sofiaMedium,
+                Padding(
+                  padding: const EdgeInsets.only(left: 32.0),
+                  child: Text(
+                    Strings.lastName,
+                    style: TextStyle(
+                      color: AppColors.color6,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      fontFamily: FontFamily.sofiaMedium,
+                    ),
                   ),
                 ),
-                TextFieldWidget()
+                Padding(
+                  padding: const EdgeInsets.only(top: 18, right: 32),
+                  child: TextFieldWidget(
+                    // enabled: false,
+                    hint: Strings.lastName,
+                    fontSize: 14,
+                    hintColor: AppColors.color11,
+                    borderSideColor: AppColors.color9,
+                    autoFocus: true,
+                  ),
+                )
               ],
+            ),
+            SizedBox(
+              height: DeviceUtils.getScaledHeight(context, scale: 0.02),
             ),
             Stack(
               children: [
-                Text(
-                  Strings.email,
-                  style: TextStyle(
-                    color: AppColors.color6,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    fontFamily: FontFamily.sofiaMedium,
+                Padding(
+                  padding: const EdgeInsets.only(left: 32.0),
+                  child: Text(
+                    Strings.email,
+                    style: TextStyle(
+                      color: AppColors.color6,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      fontFamily: FontFamily.sofiaMedium,
+                    ),
                   ),
                 ),
-                TextFieldWidget()
+                Padding(
+                  padding: const EdgeInsets.only(top: 18, right: 32.0),
+                  child: TextFieldWidget(
+                    hint: Strings.email,
+                    fontSize: 14,
+                    hintColor: AppColors.color11,
+                    borderSideColor: AppColors.color9,
+                    autoFocus: true,
+                  ),
+                )
               ],
+            ),
+            SizedBox(
+              height: DeviceUtils.getScaledHeight(context, scale: 0.04),
             ),
             GestureDetector(
               onTap: () {
-                // Navigator.push(context,
-                //     MaterialPageRoute(builder: (context) => LiveStream())
-                // );
+                Navigator.pushNamed(context, _setUsername(context));
               },
               child: Container(
                 height: 56,
-                width: 311,
+                // width: 311,
+                margin: EdgeInsets.only(left: 32, right: 32),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   color: AppColors.appPrimaryColor,
@@ -211,132 +285,147 @@ class _CreateAccountState extends State<CreateAccount> {
     );
   }
 
-  void _setUsername(context) {
+  _setUsername(context) {
     showModalBottomSheet(
         backgroundColor: AppColors.whiteColor,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(10), topRight: Radius.circular(10))),
         context: context,
+        isScrollControlled: true,
         builder: (BuildContext bc) {
           return Container(
-            margin: EdgeInsets.symmetric(horizontal: 32),
-            height: DeviceUtils.getScaledHeight(context, scale: 0.5),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                SizedBox(
-                  height: DeviceUtils.getScaledHeight(context, scale: 0.04),
-                ),
-                Container(
-                  child: Text(
-                    Strings.setUsername,
-                    style: TextStyle(
-                        color: AppColors.appColor1,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 24.0,
-                        fontFamily: FontFamily.sofiaBold),
+            height: DeviceUtils.getScaledHeight(context, scale: 0.6),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(right: 26.0),
+                    child: Align(
+                      alignment: Alignment.topRight,
+                      child: IconButton(
+                          icon: Icon(FontAwesomeIcons.times),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          }),
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: DeviceUtils.getScaledHeight(context, scale: 0.02),
-                ),
-                Container(
-                  child: RichText(
-                    text: TextSpan(
-                        text: Strings.hi,
-                        style: TextStyle(
-                            color: AppColors.appColor1,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 24.0,
-                            fontFamily: FontFamily.sofiaBold),
-                        children: <TextSpan>[
-                          TextSpan(
-                            text: 'Abdul',
-                            style: TextStyle(
-                                color: AppColors.appColor1,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 24.0,
-                                fontFamily: FontFamily.sofiaBold),
+                  SizedBox(
+                    height: DeviceUtils.getScaledHeight(context, scale: 0.04),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(left: 32),
+                    child: Text(
+                      Strings.setUsername,
+                      style: TextStyle(
+                          color: AppColors.appColor1,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 22.0,
+                          fontFamily: FontFamily.sofiaBold),
+                    ),
+                  ),
+                  SizedBox(
+                    height: DeviceUtils.getScaledHeight(context, scale: 0.02),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(left: 32),
+                    child: RichText(
+                      text: TextSpan(
+                          text: Strings.hi,
+                          style: TextStyle(
+                              color: AppColors.appColor1,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20.0,
+                              fontFamily: FontFamily.sofiaBold),
+                          children: <TextSpan>[
+                            TextSpan(
+                              text: 'Abdul',
+                              style: TextStyle(
+                                  color: AppColors.appColor1,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20.0,
+                                  fontFamily: FontFamily.sofiaBold),
+                            ),
+                          ]),
+                    ),
+                  ),
+                  SizedBox(
+                    height: DeviceUtils.getScaledHeight(context, scale: 0.017),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 32.0, right: 32),
+                    child: Text(
+                      Strings.createAccountMessage,
+                      style: TextStyle(
+                          color: AppColors.appColor2,
+                          // fontWeight: FontWeight.w500,
+                          fontSize: 16.0,
+                          fontFamily: FontFamily.sofiaMedium),
+                    ),
+                  ),
+                  SizedBox(
+                    height: DeviceUtils.getScaledHeight(context, scale: 0.04),
+                  ),
+                  Stack(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 32.0),
+                        child: Text(
+                          Strings.username,
+                          style: TextStyle(
+                            color: AppColors.color6,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                            fontFamily: FontFamily.sofiaMedium,
                           ),
-                        ]),
-                  ),
-                ),
-                Text(
-                  Strings.createAccountMessage,
-                  style: TextStyle(
-                      color: AppColors.appColor2,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 16.0,
-                      fontFamily: FontFamily.sofiaMedium),
-                ),
-                SizedBox(
-                  height: DeviceUtils.getScaledHeight(context, scale: 0.04),
-                ),
-                Stack(
-                  children: [
-                    Text(
-                      Strings.username,
-                      style: TextStyle(
-                        color: AppColors.color6,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                        fontFamily: FontFamily.sofiaMedium,
+                        ),
                       ),
-                    ),
-                    TextFieldWidget()
-                  ],
-                ),
-                GestureDetector(
-                  onTap: () {
-                    // Navigator.push(context,
-                    //     MaterialPageRoute(builder: (context) => LiveStream())
-                    // );
-                  },
-                  child: Container(
-                    height: 56,
-                    width: 311,
-                    decoration: BoxDecoration(
+                      Padding(
+                        padding: const EdgeInsets.only(top: 18.0, right: 32),
+                        child: TextFieldWidget(
+                          fontSize: 14,
+                          hintColor: AppColors.color11,
+                          borderSideColor: AppColors.color9,
+                          autoFocus: true,
+                          hint: Strings.username,
+                        ),
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: DeviceUtils.getScaledHeight(context, scale: 0.04),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => UserContact()));
+                    },
+                    child: Container(
+                      height: 56,
+                      // width: 311,
+                      margin: EdgeInsets.only(left: 32, right: 32),
+                      decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
-                        color: AppColors.whiteColor,
-                        border: Border.all(width: 1, color: AppColors.color5)),
-                    child: Text(
-                      Strings.Next,
-                      style: TextStyle(
                         color: AppColors.appPrimaryColor,
-                        fontSize: 20,
-                        fontFamily: FontFamily.sofiaSemiBold,
+                      ),
+                      child: Center(
+                        child: Text(
+                          Strings.Next,
+                          style: TextStyle(
+                            color: AppColors.whiteColor,
+                            fontSize: 20,
+                            fontFamily: FontFamily.sofiaSemiBold,
+                          ),
+                        ),
                       ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: DeviceUtils.getScaledHeight(context, scale: 0.02),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => UserContact()));
-                  },
-                  child: Container(
-                    height: 56,
-                    width: 311,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: AppColors.appPrimaryColor,
-                    ),
-                    child: Text(
-                      Strings.createAccount,
-                      style: TextStyle(
-                        color: AppColors.whiteColor,
-                        fontSize: 20,
-                        fontFamily: FontFamily.sofiaSemiBold,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
           );
         });
@@ -349,44 +438,68 @@ class _CreateAccountState extends State<CreateAccount> {
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(10), topRight: Radius.circular(10))),
         context: context,
+        isScrollControlled: true,
         builder: (BuildContext bc) {
           return Container(
-            margin: EdgeInsets.symmetric(horizontal: 32),
-            height: DeviceUtils.getScaledHeight(context, scale: 0.5),
+            height: DeviceUtils.getScaledHeight(context, scale: 0.8),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 SizedBox(
-                  height: DeviceUtils.getScaledHeight(context, scale: 0.02),
+                  height: DeviceUtils.getScaledHeight(context, scale: 0.01),
                 ),
-                Text(
-                  Strings.accountType,
-                  style: TextStyle(
-                      color: AppColors.appColor2,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 16.0,
-                      fontFamily: FontFamily.sofiaMedium),
-                ),
-                Text(
-                  Strings.preferredAccount,
-                  style: TextStyle(
-                      color: AppColors.appColor2,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 16.0,
-                      fontFamily: FontFamily.sofiaMedium),
+                Padding(
+                  padding: const EdgeInsets.only(right: 26.0),
+                  child: Align(
+                    alignment: Alignment.topRight,
+                    child: IconButton(
+                        icon: Icon(FontAwesomeIcons.times),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        }),
+                  ),
                 ),
                 SizedBox(
-                  height: DeviceUtils.getScaledHeight(context, scale: 0.06),
+                  height: DeviceUtils.getScaledHeight(context, scale: 0.01),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 32.0),
+                  child: Text(
+                    Strings.accountType,
+                    style: TextStyle(
+                        color: AppColors.appColor1,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 24.0,
+                        fontFamily: FontFamily.sofiaBold),
+                  ),
+                ),
+                SizedBox(
+                  height: DeviceUtils.getScaledHeight(context, scale: 0.01),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 32.0),
+                  child: Text(
+                    Strings.preferredAccount,
+                    style: TextStyle(
+                        color: AppColors.appColor2,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16.0,
+                        fontFamily: FontFamily.sofiaMedium),
+                  ),
+                ),
+                SizedBox(
+                  height: DeviceUtils.getScaledHeight(context, scale: 0.04),
                 ),
                 GestureDetector(
                   onTap: () {
-                    // Navigator.push(context,
-                    //     MaterialPageRoute(builder: (context) => LiveStream())
-                    // );
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => UserContact())
+                    );
                   },
                   child: Container(
-                    height: 104,
+                    margin: EdgeInsets.only(left: 32, right: 32),
+                    height: 100,
                     width: 312,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
@@ -397,6 +510,13 @@ class _CreateAccountState extends State<CreateAccount> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
                       children: [
+                        Padding(
+                          padding: const EdgeInsets.only(right: 11.0, top: 11),
+                          child: Align(
+                              alignment: Alignment.topRight,
+                              child:
+                                  CircleCheckbox(value: true, onChanged: null)),
+                        ),
                         Row(
                           children: [
                             SizedBox(
@@ -406,8 +526,9 @@ class _CreateAccountState extends State<CreateAccount> {
                             Container(
                               height: 56,
                               width: 56,
-                              decoration:
-                                  BoxDecoration(color: AppColors.color1),
+                              decoration: BoxDecoration(
+                                  color: AppColors.color1,
+                                  borderRadius: BorderRadius.circular(8)),
                             ),
                             SizedBox(
                               width: DeviceUtils.getScaledWidth(context,
@@ -428,7 +549,7 @@ class _CreateAccountState extends State<CreateAccount> {
                   ),
                 ),
                 SizedBox(
-                  height: DeviceUtils.getScaledHeight(context, scale: 0.06),
+                  height: DeviceUtils.getScaledHeight(context, scale: 0.01),
                 ),
                 GestureDetector(
                   onTap: () {
@@ -437,8 +558,9 @@ class _CreateAccountState extends State<CreateAccount> {
                     // );
                   },
                   child: Container(
-                    height: 104,
+                    height: 100,
                     width: 312,
+                    margin: EdgeInsets.only(left: 32, right: 32),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
                         color: AppColors.appPrimaryColor,
@@ -447,6 +569,13 @@ class _CreateAccountState extends State<CreateAccount> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
                       children: [
+                        Padding(
+                          padding: const EdgeInsets.only(right: 11.0, top: 11),
+                          child: Align(
+                              alignment: Alignment.topRight,
+                              child:
+                                  CircleCheckbox(value: true, onChanged: null)),
+                        ),
                         Row(
                           children: [
                             SizedBox(
@@ -456,8 +585,9 @@ class _CreateAccountState extends State<CreateAccount> {
                             Container(
                               height: 56,
                               width: 56,
-                              decoration:
-                                  BoxDecoration(color: AppColors.color1),
+                              decoration: BoxDecoration(
+                                  color: AppColors.color1,
+                                  borderRadius: BorderRadius.circular(8)),
                             ),
                             SizedBox(
                               width: DeviceUtils.getScaledWidth(context,
@@ -478,7 +608,7 @@ class _CreateAccountState extends State<CreateAccount> {
                   ),
                 ),
                 SizedBox(
-                  height: DeviceUtils.getScaledHeight(context, scale: 0.06),
+                  height: DeviceUtils.getScaledHeight(context, scale: 0.01),
                 ),
                 GestureDetector(
                   onTap: () {
@@ -487,8 +617,9 @@ class _CreateAccountState extends State<CreateAccount> {
                     // );
                   },
                   child: Container(
-                    height: 104,
+                    height: 100,
                     width: 312,
+                    margin: EdgeInsets.only(left: 32, right: 32),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
                         color: AppColors.appPrimaryColor,
@@ -497,6 +628,13 @@ class _CreateAccountState extends State<CreateAccount> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
                       children: [
+                        Padding(
+                          padding: const EdgeInsets.only(right: 11.0, top: 11),
+                          child: Align(
+                              alignment: Alignment.topRight,
+                              child:
+                                  CircleCheckbox(value: true, onChanged: null)),
+                        ),
                         Row(
                           children: [
                             SizedBox(
@@ -506,8 +644,9 @@ class _CreateAccountState extends State<CreateAccount> {
                             Container(
                               height: 56,
                               width: 56,
-                              decoration:
-                                  BoxDecoration(color: AppColors.color1),
+                              decoration: BoxDecoration(
+                                  color: AppColors.color1,
+                                  borderRadius: BorderRadius.circular(8)),
                             ),
                             SizedBox(
                               width: DeviceUtils.getScaledWidth(context,
@@ -528,7 +667,7 @@ class _CreateAccountState extends State<CreateAccount> {
                   ),
                 ),
                 SizedBox(
-                  height: DeviceUtils.getScaledHeight(context, scale: 0.06),
+                  height: DeviceUtils.getScaledHeight(context, scale: 0.01),
                 ),
                 GestureDetector(
                   onTap: () {
@@ -537,8 +676,9 @@ class _CreateAccountState extends State<CreateAccount> {
                     // );
                   },
                   child: Container(
-                    height: 104,
+                    height: 100,
                     width: 312,
+                    margin: EdgeInsets.only(left: 32, right: 32),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
                         color: AppColors.appPrimaryColor,
@@ -547,6 +687,13 @@ class _CreateAccountState extends State<CreateAccount> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
                       children: [
+                        Padding(
+                          padding: const EdgeInsets.only(right: 11.0, top: 11),
+                          child: Align(
+                              alignment: Alignment.topRight,
+                              child:
+                                  CircleCheckbox(value: true, onChanged: null)),
+                        ),
                         Row(
                           children: [
                             SizedBox(
@@ -556,8 +703,9 @@ class _CreateAccountState extends State<CreateAccount> {
                             Container(
                               height: 56,
                               width: 56,
-                              decoration:
-                                  BoxDecoration(color: AppColors.color1),
+                              decoration: BoxDecoration(
+                                  color: AppColors.color1,
+                                  borderRadius: BorderRadius.circular(8)),
                             ),
                             SizedBox(
                               width: DeviceUtils.getScaledWidth(context,
