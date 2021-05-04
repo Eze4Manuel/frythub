@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fryghthub/app/ui/pages/login/reset_password.dart';
 import 'package:fryghthub/app/ui/theme/app_colors.dart';
 import 'package:fryghthub/app/ui/theme/app_fonts.dart';
 import 'package:fryghthub/app/ui/theme/app_strings.dart';
@@ -6,56 +7,35 @@ import 'package:fryghthub/app/ui/widgets/custom_textfield_widget.dart';
 import 'package:fryghthub/app/utils/device_utils.dart';
 import 'package:fryghthub/app/utils/responsive_safe_area.dart';
 
-class VerifyEmail extends StatefulWidget {
+class ForgotPassword extends StatefulWidget {
   @override
-  _VerifyEmailState createState() => _VerifyEmailState();
+  _ForgotPasswordState createState() => _ForgotPasswordState();
 }
 
-class _VerifyEmailState extends State<VerifyEmail> {
+class _ForgotPasswordState extends State<ForgotPassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.whiteColor,
       body: ResponsiveSafeArea(builder: (context, size) {
         return ListView(
           children: [
             Container(
               color: AppColors.appColor4,
-              height: DeviceUtils.getScaledHeight(context, scale: 0.21),
+              height: DeviceUtils.getScaledHeight(context, scale: 0.28),
+            ),
+            SizedBox(
+              height: DeviceUtils.getScaledHeight(context, scale: 0.04),
             ),
             Container(
               margin: EdgeInsets.only(left: 32),
               child: Text(
-                Strings.verifyEmail,
+                Strings.forgotPassword,
                 style: TextStyle(
                     color: AppColors.appColor1,
                     fontWeight: FontWeight.bold,
                     fontSize: 28.0,
                     fontFamily: FontFamily.sofiaBold),
-              ),
-            ),
-            SizedBox(
-              height: DeviceUtils.getScaledHeight(context, scale: 0.02),
-            ),
-            Container(
-              margin: EdgeInsets.only(left: 32),
-              child: RichText(
-                text: TextSpan(
-                    text: Strings.hi,
-                    style: TextStyle(
-                        color: AppColors.appColor1,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20.0,
-                        fontFamily: FontFamily.sofiaBold),
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: 'Abdul',
-                        style: TextStyle(
-                            color: AppColors.appColor1,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20.0,
-                            fontFamily: FontFamily.sofiaBold),
-                      ),
-                    ]),
               ),
             ),
             SizedBox(
@@ -67,20 +47,20 @@ class _VerifyEmailState extends State<VerifyEmail> {
                 Strings.otpMessage,
                 style: TextStyle(
                     color: AppColors.appColor1,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 28.0,
-                    fontFamily: FontFamily.sofiaBold),
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16.0,
+                    fontFamily: FontFamily.sofiaMedium),
               ),
             ),
             SizedBox(
-              height: DeviceUtils.getScaledHeight(context, scale: 0.02),
+              height: DeviceUtils.getScaledHeight(context, scale: 0.04),
             ),
             Stack(
               children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 32.0),
                   child: Text(
-                    Strings.verifyCode,
+                    Strings.emailAddress,
                     style: TextStyle(
                       color: AppColors.color6,
                       fontSize: 14,
@@ -105,7 +85,7 @@ class _VerifyEmailState extends State<VerifyEmail> {
             GestureDetector(
               onTap: () {
                 Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => null));
+                    context, MaterialPageRoute(builder: (context) => ResetPassword()));
               },
               child: Container(
                 height: 56,
@@ -117,7 +97,7 @@ class _VerifyEmailState extends State<VerifyEmail> {
                 ),
                 child: Center(
                   child: Text(
-                    Strings.verify,
+                    Strings.verifyEmail,
                     style: TextStyle(
                       color: AppColors.whiteColor,
                       fontSize: 20,
@@ -127,14 +107,6 @@ class _VerifyEmailState extends State<VerifyEmail> {
                 ),
               ),
             ),
-            SizedBox(
-              height: DeviceUtils.getScaledHeight(context, scale: 0.04),
-            ),
-            Center(child: Text(Strings.noCode)),
-            SizedBox(
-              height: DeviceUtils.getScaledHeight(context, scale: 0.02),
-            ),
-            Center(child: Text(Strings.resendCode)),
           ],
         );
       }),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fryghthub/app/ui/pages/login/login.dart';
 import 'package:fryghthub/app/ui/widgets/custom_textfield_widget.dart';
 import 'package:fryghthub/app/utils/responsive_safe_area.dart';
 
@@ -169,9 +170,9 @@ class _UserContactState extends State<UserContact> {
               ),
               GestureDetector(
                 onTap: () {
-                  // Navigator.push(context,
-                  //     MaterialPageRoute(builder: (context) => LiveStream())
-                  // );
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => UserLogin())
+                  );
                 },
                 child: Container(
                   height: 56,

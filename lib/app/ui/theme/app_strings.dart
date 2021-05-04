@@ -34,16 +34,19 @@ class Strings {
   static const String emailAddress = "Email Address";
   static const String password = "Password";
   static const String createAccount = "Create Account";
+  static const String noAccount = "Don’t have an account?";
   static const String verifyEmail = "Verify Your Email";
   static const String otpMessage =
       "We have sent a 6-digits code to your\nemail box.Kindly copy and paste it here to\nverify your email. Code expires in 10mins";
   static const String noCode = "Didn’t Receive any code?";
   static const String resendCode = "Resend Code";
-  static const String forgotPassword = "Forgot Password";
+  static const String forgotPassword = "Forgot Password?";
   static const String verifyCode = "Verification Code";
   static const String newPassword = "New Password";
   static const String continueText = "Continue";
+  static const String continueShipping = "Continue Shipping";
   static const String show = "Show";
+  static const String verify = "Verify";
   static const String resetPassword = "Reset Password";
 
 

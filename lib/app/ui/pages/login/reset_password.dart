@@ -6,12 +6,12 @@ import 'package:fryghthub/app/ui/widgets/custom_textfield_widget.dart';
 import 'package:fryghthub/app/utils/device_utils.dart';
 import 'package:fryghthub/app/utils/responsive_safe_area.dart';
 
-class VerifyEmail extends StatefulWidget {
+class ResetPassword extends StatefulWidget {
   @override
-  _VerifyEmailState createState() => _VerifyEmailState();
+  _ResetPasswordState createState() => _ResetPasswordState();
 }
 
-class _VerifyEmailState extends State<VerifyEmail> {
+class _ResetPasswordState extends State<ResetPassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +25,7 @@ class _VerifyEmailState extends State<VerifyEmail> {
             Container(
               margin: EdgeInsets.only(left: 32),
               child: Text(
-                Strings.verifyEmail,
+                Strings.resetPassword,
                 style: TextStyle(
                     color: AppColors.appColor1,
                     fontWeight: FontWeight.bold,
@@ -66,9 +66,9 @@ class _VerifyEmailState extends State<VerifyEmail> {
               child: Text(
                 Strings.otpMessage,
                 style: TextStyle(
-                    color: AppColors.appColor1,
+                    color: AppColors.appColor2,
                     fontWeight: FontWeight.bold,
-                    fontSize: 28.0,
+                    fontSize: 16.0,
                     fontFamily: FontFamily.sofiaBold),
               ),
             ),
@@ -100,12 +100,56 @@ class _VerifyEmailState extends State<VerifyEmail> {
               ],
             ),
             SizedBox(
+              height: DeviceUtils.getScaledHeight(context, scale: 0.02),
+            ),
+            Stack(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 32.0),
+                  child: Text(
+                    Strings.newPassword,
+                    style: TextStyle(
+                      color: AppColors.color6,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      fontFamily: FontFamily.sofiaMedium,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 18.0, right: 32),
+                  child: TextFieldWidget(
+                    fontSize: 14,
+                    isObscure: true,
+                    hintColor: AppColors.color11,
+                    borderSideColor: AppColors.color9,
+                    autoFocus: true,
+                    suffixIcon: Padding(
+                      padding: const EdgeInsets.only(top: 16.0),
+                      child: Container(
+                        child: Text(
+                          Strings.show,
+                          style: TextStyle(
+                            color: AppColors.color12,
+                            fontSize: 14,
+                            fontStyle: FontStyle.italic,
+                            fontWeight: FontWeight.w500,
+                            fontFamily: FontFamily.sofiaMedium,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
+            SizedBox(
               height: DeviceUtils.getScaledHeight(context, scale: 0.04),
             ),
             GestureDetector(
               onTap: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => null));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ResetPassword()));
               },
               child: Container(
                 height: 56,
@@ -117,7 +161,7 @@ class _VerifyEmailState extends State<VerifyEmail> {
                 ),
                 child: Center(
                   child: Text(
-                    Strings.verify,
+                    Strings.resetPassword,
                     style: TextStyle(
                       color: AppColors.whiteColor,
                       fontSize: 20,
@@ -130,11 +174,29 @@ class _VerifyEmailState extends State<VerifyEmail> {
             SizedBox(
               height: DeviceUtils.getScaledHeight(context, scale: 0.04),
             ),
-            Center(child: Text(Strings.noCode)),
+            Center(
+                child: Text(
+              Strings.noCode,
+              style: TextStyle(
+                color: AppColors.appColor2,
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+                fontFamily: FontFamily.sofiaMedium,
+              ),
+            )),
             SizedBox(
-              height: DeviceUtils.getScaledHeight(context, scale: 0.02),
+              height: DeviceUtils.getScaledHeight(context, scale: 0.01),
             ),
-            Center(child: Text(Strings.resendCode)),
+            Center(
+                child: Text(
+              Strings.resendCode,
+              style: TextStyle(
+                color: AppColors.appPrimaryColor,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                fontFamily: FontFamily.sofiaBold,
+              ),
+            )),
           ],
         );
       }),
