@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:fryghthub/app/controller/account_creation.dart';
 import 'package:fryghthub/app/ui/pages/register/user_contact.dart';
 
 import 'package:fryghthub/app/ui/theme/app_colors.dart';
@@ -442,290 +443,296 @@ class _CreateAccountState extends State<CreateAccount> {
         builder: (BuildContext bc) {
           return Container(
             height: DeviceUtils.getScaledHeight(context, scale: 0.8),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                SizedBox(
-                  height: DeviceUtils.getScaledHeight(context, scale: 0.01),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 26.0),
-                  child: Align(
-                    alignment: Alignment.topRight,
-                    child: IconButton(
-                        icon: Icon(FontAwesomeIcons.times),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        }),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  SizedBox(
+                    height: DeviceUtils.getScaledHeight(context, scale: 0.01),
                   ),
-                ),
-                SizedBox(
-                  height: DeviceUtils.getScaledHeight(context, scale: 0.01),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 32.0),
-                  child: Text(
-                    Strings.accountType,
-                    style: TextStyle(
-                        color: AppColors.appColor1,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 24.0,
-                        fontFamily: FontFamily.sofiaBold),
-                  ),
-                ),
-                SizedBox(
-                  height: DeviceUtils.getScaledHeight(context, scale: 0.01),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 32.0),
-                  child: Text(
-                    Strings.preferredAccount,
-                    style: TextStyle(
-                        color: AppColors.appColor2,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 16.0,
-                        fontFamily: FontFamily.sofiaMedium),
-                  ),
-                ),
-                SizedBox(
-                  height: DeviceUtils.getScaledHeight(context, scale: 0.04),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => UserContact())
-                    );
-                  },
-                  child: Container(
-                    margin: EdgeInsets.only(left: 32, right: 32),
-                    height: 100,
-                    width: 312,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: AppColors.appPrimaryColor,
-                      // border: Border.all(width: 1, color: AppColors.color5)
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(right: 11.0, top: 11),
-                          child: Align(
-                              alignment: Alignment.topRight,
-                              child:
-                                  CircleCheckbox(value: true, onChanged: null)),
-                        ),
-                        Row(
-                          children: [
-                            SizedBox(
-                              width: DeviceUtils.getScaledWidth(context,
-                                  scale: 0.03),
-                            ),
-                            Container(
-                              height: 56,
-                              width: 56,
-                              decoration: BoxDecoration(
-                                  color: AppColors.color1,
-                                  borderRadius: BorderRadius.circular(8)),
-                            ),
-                            SizedBox(
-                              width: DeviceUtils.getScaledWidth(context,
-                                  scale: 0.03),
-                            ),
-                            Text(
-                              Strings.userAction,
-                              style: TextStyle(
-                                color: AppColors.whiteColor,
-                                fontSize: 20,
-                                fontFamily: FontFamily.sofiaSemiBold,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
+                  Padding(
+                    padding: const EdgeInsets.only(right: 26.0),
+                    child: Align(
+                      alignment: Alignment.topRight,
+                      child: IconButton(
+                          icon: Icon(FontAwesomeIcons.times),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          }),
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: DeviceUtils.getScaledHeight(context, scale: 0.01),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    // Navigator.push(context,
-                    //     MaterialPageRoute(builder: (context) => LiveStream())
-                    // );
-                  },
-                  child: Container(
-                    height: 100,
-                    width: 312,
-                    margin: EdgeInsets.only(left: 32, right: 32),
-                    decoration: BoxDecoration(
+                  SizedBox(
+                    height: DeviceUtils.getScaledHeight(context, scale: 0.01),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 32.0),
+                    child: Text(
+                      Strings.accountType,
+                      style: TextStyle(
+                          color: AppColors.appColor1,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 24.0,
+                          fontFamily: FontFamily.sofiaBold),
+                    ),
+                  ),
+                  SizedBox(
+                    height: DeviceUtils.getScaledHeight(context, scale: 0.01),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 32.0),
+                    child: Text(
+                      Strings.preferredAccount,
+                      style: TextStyle(
+                          color: AppColors.appColor2,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16.0,
+                          fontFamily: FontFamily.sofiaMedium),
+                    ),
+                  ),
+                  SizedBox(
+                    height: DeviceUtils.getScaledHeight(context, scale: 0.04),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => UserContact())
+                      );
+                    },
+                    child: Container(
+                      margin: EdgeInsets.only(left: 32, right: 32),
+                      height: 100,
+                      width: 312,
+                      decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
                         color: AppColors.appPrimaryColor,
-                        border: Border.all(width: 1, color: AppColors.color5)),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(right: 11.0, top: 11),
-                          child: Align(
-                              alignment: Alignment.topRight,
-                              child:
-                                  CircleCheckbox(value: true, onChanged: null)),
-                        ),
-                        Row(
-                          children: [
-                            SizedBox(
-                              width: DeviceUtils.getScaledWidth(context,
-                                  scale: 0.03),
-                            ),
-                            Container(
-                              height: 56,
-                              width: 56,
-                              decoration: BoxDecoration(
-                                  color: AppColors.color1,
-                                  borderRadius: BorderRadius.circular(8)),
-                            ),
-                            SizedBox(
-                              width: DeviceUtils.getScaledWidth(context,
-                                  scale: 0.03),
-                            ),
-                            Text(
-                              Strings.buyingAgent,
-                              style: TextStyle(
-                                color: AppColors.whiteColor,
-                                fontSize: 20,
-                                fontFamily: FontFamily.sofiaSemiBold,
+                        // border: Border.all(width: 1, color: AppColors.color5)
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(right: 11.0, top: 11),
+                            child: Align(
+                                alignment: Alignment.topRight,
+                                child:
+                                    CircleCheckbox(value: true, onChanged: null)),
+                          ),
+                          Row(
+                            children: [
+                              SizedBox(
+                                width: DeviceUtils.getScaledWidth(context,
+                                    scale: 0.03),
                               ),
-                            ),
-                          ],
-                        ),
-                      ],
+                              Container(
+                                height: 56,
+                                width: 56,
+                                decoration: BoxDecoration(
+                                    color: AppColors.color1,
+                                    borderRadius: BorderRadius.circular(8)),
+                              ),
+                              SizedBox(
+                                width: DeviceUtils.getScaledWidth(context,
+                                    scale: 0.03),
+                              ),
+                              Text(
+                                Strings.userAction,
+                                style: TextStyle(
+                                  color: AppColors.whiteColor,
+                                  fontSize: 20,
+                                  fontFamily: FontFamily.sofiaSemiBold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: DeviceUtils.getScaledHeight(context, scale: 0.01),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    // Navigator.push(context,
-                    //     MaterialPageRoute(builder: (context) => LiveStream())
-                    // );
-                  },
-                  child: Container(
-                    height: 100,
-                    width: 312,
-                    margin: EdgeInsets.only(left: 32, right: 32),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: AppColors.appPrimaryColor,
-                        border: Border.all(width: 1, color: AppColors.color5)),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(right: 11.0, top: 11),
-                          child: Align(
-                              alignment: Alignment.topRight,
-                              child:
-                                  CircleCheckbox(value: true, onChanged: null)),
-                        ),
-                        Row(
-                          children: [
-                            SizedBox(
-                              width: DeviceUtils.getScaledWidth(context,
-                                  scale: 0.03),
-                            ),
-                            Container(
-                              height: 56,
-                              width: 56,
-                              decoration: BoxDecoration(
-                                  color: AppColors.color1,
-                                  borderRadius: BorderRadius.circular(8)),
-                            ),
-                            SizedBox(
-                              width: DeviceUtils.getScaledWidth(context,
-                                  scale: 0.03),
-                            ),
-                            Text(
-                              Strings.deliveryAgent,
-                              style: TextStyle(
-                                color: AppColors.whiteColor,
-                                fontSize: 20,
-                                fontFamily: FontFamily.sofiaSemiBold,
+                  SizedBox(
+                    height: DeviceUtils.getScaledHeight(context, scale: 0.01),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      AccountCreation.setAccountType(Strings.buyingAgent);
+                      // Navigator.push(context,
+                      //     MaterialPageRoute(builder: (context) => LiveStream())
+                      // );
+                    },
+                    child: Container(
+                      height: 100,
+                      width: 312,
+                      margin: EdgeInsets.only(left: 32, right: 32),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: AppColors.appPrimaryColor,
+                          border: Border.all(width: 1, color: AppColors.color5)),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(right: 11.0, top: 11),
+                            child: Align(
+                                alignment: Alignment.topRight,
+                                child:
+                                    CircleCheckbox(value: true, onChanged: null)),
+                          ),
+                          Row(
+                            children: [
+                              SizedBox(
+                                width: DeviceUtils.getScaledWidth(context,
+                                    scale: 0.03),
                               ),
-                            ),
-                          ],
-                        ),
-                      ],
+                              Container(
+                                height: 56,
+                                width: 56,
+                                decoration: BoxDecoration(
+                                    color: AppColors.color1,
+                                    borderRadius: BorderRadius.circular(8)),
+                              ),
+                              SizedBox(
+                                width: DeviceUtils.getScaledWidth(context,
+                                    scale: 0.03),
+                              ),
+                              Text(
+                                Strings.buyingAgent,
+                                style: TextStyle(
+                                  color: AppColors.whiteColor,
+                                  fontSize: 20,
+                                  fontFamily: FontFamily.sofiaSemiBold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: DeviceUtils.getScaledHeight(context, scale: 0.01),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    // Navigator.push(context,
-                    //     MaterialPageRoute(builder: (context) => LiveStream())
-                    // );
-                  },
-                  child: Container(
-                    height: 100,
-                    width: 312,
-                    margin: EdgeInsets.only(left: 32, right: 32),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: AppColors.appPrimaryColor,
-                        border: Border.all(width: 1, color: AppColors.color5)),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(right: 11.0, top: 11),
-                          child: Align(
-                              alignment: Alignment.topRight,
-                              child:
-                                  CircleCheckbox(value: true, onChanged: null)),
-                        ),
-                        Row(
-                          children: [
-                            SizedBox(
-                              width: DeviceUtils.getScaledWidth(context,
-                                  scale: 0.03),
-                            ),
-                            Container(
-                              height: 56,
-                              width: 56,
-                              decoration: BoxDecoration(
-                                  color: AppColors.color1,
-                                  borderRadius: BorderRadius.circular(8)),
-                            ),
-                            SizedBox(
-                              width: DeviceUtils.getScaledWidth(context,
-                                  scale: 0.03),
-                            ),
-                            Text(
-                              Strings.shippingAgent,
-                              style: TextStyle(
-                                color: AppColors.whiteColor,
-                                fontSize: 20,
-                                fontFamily: FontFamily.sofiaSemiBold,
+                  SizedBox(
+                    height: DeviceUtils.getScaledHeight(context, scale: 0.01),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      AccountCreation.setAccountType(Strings.deliveryAgent);
+                      // Navigator.push(context,
+                      //     MaterialPageRoute(builder: (context) => LiveStream())
+                      // );
+                    },
+                    child: Container(
+                      height: 100,
+                      width: 312,
+                      margin: EdgeInsets.only(left: 32, right: 32),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: AppColors.appPrimaryColor,
+                          border: Border.all(width: 1, color: AppColors.color5)),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(right: 11.0, top: 11),
+                            child: Align(
+                                alignment: Alignment.topRight,
+                                child:
+                                    CircleCheckbox(value: true, onChanged: null)),
+                          ),
+                          Row(
+                            children: [
+                              SizedBox(
+                                width: DeviceUtils.getScaledWidth(context,
+                                    scale: 0.03),
                               ),
-                            ),
-                          ],
-                        ),
-                      ],
+                              Container(
+                                height: 56,
+                                width: 56,
+                                decoration: BoxDecoration(
+                                    color: AppColors.color1,
+                                    borderRadius: BorderRadius.circular(8)),
+                              ),
+                              SizedBox(
+                                width: DeviceUtils.getScaledWidth(context,
+                                    scale: 0.03),
+                              ),
+                              Text(
+                                Strings.deliveryAgent,
+                                style: TextStyle(
+                                  color: AppColors.whiteColor,
+                                  fontSize: 20,
+                                  fontFamily: FontFamily.sofiaSemiBold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
+                  SizedBox(
+                    height: DeviceUtils.getScaledHeight(context, scale: 0.01),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      AccountCreation.setAccountType(Strings.shippingAgent);
+
+                      // Navigator.push(context,
+                      //     MaterialPageRoute(builder: (context) => LiveStream())
+                      // );
+                    },
+                    child: Container(
+                      height: 100,
+                      width: 312,
+                      margin: EdgeInsets.only(left: 32, right: 32),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: AppColors.appPrimaryColor,
+                          border: Border.all(width: 1, color: AppColors.color5)),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(right: 11.0, top: 11),
+                            child: Align(
+                                alignment: Alignment.topRight,
+                                child:
+                                    CircleCheckbox(value: true, onChanged: null)),
+                          ),
+                          Row(
+                            children: [
+                              SizedBox(
+                                width: DeviceUtils.getScaledWidth(context,
+                                    scale: 0.03),
+                              ),
+                              Container(
+                                height: 56,
+                                width: 56,
+                                decoration: BoxDecoration(
+                                    color: AppColors.color1,
+                                    borderRadius: BorderRadius.circular(8)),
+                              ),
+                              SizedBox(
+                                width: DeviceUtils.getScaledWidth(context,
+                                    scale: 0.03),
+                              ),
+                              Text(
+                                Strings.shippingAgent,
+                                style: TextStyle(
+                                  color: AppColors.whiteColor,
+                                  fontSize: 20,
+                                  fontFamily: FontFamily.sofiaSemiBold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           );
         });

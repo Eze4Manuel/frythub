@@ -27,5 +27,4 @@ class ResponsiveSafeArea extends StatelessWidget {
       ),
     );
   }
-
 }

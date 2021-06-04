@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fryghthub/app/controller/account_creation.dart';
 import 'package:fryghthub/app/ui/pages/register/create_account.dart';
 import 'package:fryghthub/app/ui/widgets/custom_checkbox.dart';
 import 'package:fryghthub/app/utils/responsive_safe_area.dart';
@@ -67,6 +68,8 @@ class _AccountTypeState extends State<AccountType> {
             ),
             GestureDetector(
               onTap: () {
+                AccountCreation.setAccountType(Strings.userAction);
+
                 // Navigator.push(context,
                 //     MaterialPageRoute(builder: (context) => LiveStream())
                 // );
@@ -126,6 +129,8 @@ class _AccountTypeState extends State<AccountType> {
             ),
             GestureDetector(
               onTap: () {
+                AccountCreation.setAccountType(Strings.buyingAgent);
+
                 // Navigator.push(context,
                 //     MaterialPageRoute(builder: (context) => LiveStream())
                 // );
@@ -184,6 +189,7 @@ class _AccountTypeState extends State<AccountType> {
             ),
             GestureDetector(
               onTap: () {
+                AccountCreation.setAccountType(Strings.deliveryAgent);
                 // Navigator.push(context,
                 //     MaterialPageRoute(builder: (context) => LiveStream())
                 // );

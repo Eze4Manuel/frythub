@@ -131,7 +131,8 @@ class ContentPageStage extends State<ContentPage> {
               ),
               GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, _startShipping(context));
+                  _startShipping(context);
+                  // Navigator.pushNamed(context,);
                 },
                 child: Container(
                   height: 56,
