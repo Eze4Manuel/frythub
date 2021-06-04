@@ -7,6 +7,9 @@ import 'package:fryghthub/app/utils/device_utils.dart';
 import 'package:fryghthub/app/ui/theme/app_colors.dart';
 import 'package:fryghthub/app/ui/theme/app_fonts.dart';
 import 'package:fryghthub/app/ui/theme/app_strings.dart';
+import 'package:get/get.dart';
+
+import '../../../controller/account_creation.dart';
 
 class UserContact extends StatefulWidget {
   @override
@@ -86,6 +89,8 @@ class _UserContactState extends State<UserContact> {
                       autoFocus: true,
                       hint: Strings.mobileNumber,
                       inputType: TextInputType.number,
+                      onChanged: (value) => Get.find<AccountCreation>().setPhone(value),
+
                     ),
                   )
                 ],
@@ -169,10 +174,14 @@ class _UserContactState extends State<UserContact> {
                 height: DeviceUtils.getScaledHeight(context, scale: 0.08),
               ),
               GestureDetector(
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => UserLogin())
-                  );
+                onTap: () async {
+                  if( await Get.find<AccountCreation>().createNewAccount() ){
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => UserLogin())
+                    );
+                  }else{
+
+                  }
                 },
                 child: Container(
                   height: 56,

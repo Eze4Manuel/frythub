@@ -4,6 +4,8 @@ import 'package:fryghthub/app/ui/pages/onboarding.dart';
 import 'package:fryghthub/app/ui/theme/app_strings.dart';
 import 'package:get/get.dart';
 
+import 'app/bindings/controller_binding.dart';
+
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

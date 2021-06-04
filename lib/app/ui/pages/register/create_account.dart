@@ -10,6 +10,7 @@ import 'package:fryghthub/app/utils/responsive_safe_area.dart';
 import 'package:fryghthub/app/utils/device_utils.dart';
 import 'package:fryghthub/app/ui/theme/app_fonts.dart';
 import 'package:fryghthub/app/ui/theme/app_strings.dart';
+import 'package:get/get.dart';
 
 class CreateAccount extends StatefulWidget {
   @override
@@ -190,6 +191,7 @@ class _CreateAccountState extends State<CreateAccount> {
                     hintColor: AppColors.color11,
                     borderSideColor: AppColors.color9,
                     autoFocus: true,
+                    onChanged: (value) => Get.find<AccountCreation>().setFirstName(value),
                   ),
                 )
               ],
@@ -220,6 +222,7 @@ class _CreateAccountState extends State<CreateAccount> {
                     hintColor: AppColors.color11,
                     borderSideColor: AppColors.color9,
                     autoFocus: true,
+                    onChanged: (value) => Get.find<AccountCreation>().setLastName(value),
                   ),
                 )
               ],
@@ -249,6 +252,7 @@ class _CreateAccountState extends State<CreateAccount> {
                     hintColor: AppColors.color11,
                     borderSideColor: AppColors.color9,
                     autoFocus: true,
+                    onChanged: (value) => Get.find<AccountCreation>().setEmail(value),
                   ),
                 )
               ],
@@ -258,7 +262,7 @@ class _CreateAccountState extends State<CreateAccount> {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, _setUsername(context));
+                _setUsername(context);
               },
               child: Container(
                 height: 56,
@@ -391,6 +395,8 @@ class _CreateAccountState extends State<CreateAccount> {
                           borderSideColor: AppColors.color9,
                           autoFocus: true,
                           hint: Strings.username,
+                          onChanged: (value) => Get.find<AccountCreation>().setUserName(value),
+
                         ),
                       )
                     ],
@@ -495,6 +501,8 @@ class _CreateAccountState extends State<CreateAccount> {
                   ),
                   GestureDetector(
                     onTap: () {
+                      Get.find<AccountCreation>().setAccountType(Strings.userAction);
+
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) => UserContact())
                       );
@@ -555,10 +563,8 @@ class _CreateAccountState extends State<CreateAccount> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      AccountCreation.setAccountType(Strings.buyingAgent);
-                      // Navigator.push(context,
-                      //     MaterialPageRoute(builder: (context) => LiveStream())
-                      // );
+                      Get.find<AccountCreation>().setAccountType(Strings.buyingAgent);
+
                     },
                     child: Container(
                       height: 100,
@@ -615,10 +621,8 @@ class _CreateAccountState extends State<CreateAccount> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      AccountCreation.setAccountType(Strings.deliveryAgent);
-                      // Navigator.push(context,
-                      //     MaterialPageRoute(builder: (context) => LiveStream())
-                      // );
+                      Get.find<AccountCreation>().setAccountType(Strings.deliveryAgent);
+
                     },
                     child: Container(
                       height: 100,
@@ -675,11 +679,8 @@ class _CreateAccountState extends State<CreateAccount> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      AccountCreation.setAccountType(Strings.shippingAgent);
+                      Get.find<AccountCreation>().setAccountType(Strings.shippingAgent);
 
-                      // Navigator.push(context,
-                      //     MaterialPageRoute(builder: (context) => LiveStream())
-                      // );
                     },
                     child: Container(
                       height: 100,

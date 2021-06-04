@@ -7,6 +7,9 @@ import 'package:fryghthub/app/utils/device_utils.dart';
 import 'package:fryghthub/app/ui/theme/app_colors.dart';
 import 'package:fryghthub/app/ui/theme/app_fonts.dart';
 import 'package:fryghthub/app/ui/theme/app_strings.dart';
+import 'package:get/get.dart';
+
+import '../../../controller/account_creation.dart';
 
 class AccountType extends StatefulWidget {
   @override
@@ -68,7 +71,7 @@ class _AccountTypeState extends State<AccountType> {
             ),
             GestureDetector(
               onTap: () {
-                AccountCreation.setAccountType(Strings.userAction);
+                Get.find<AccountCreation>().setAccountType(Strings.userAction);
 
                 // Navigator.push(context,
                 //     MaterialPageRoute(builder: (context) => LiveStream())
@@ -129,8 +132,7 @@ class _AccountTypeState extends State<AccountType> {
             ),
             GestureDetector(
               onTap: () {
-                AccountCreation.setAccountType(Strings.buyingAgent);
-
+                  Get.find<AccountCreation>().setAccountType(Strings.buyingAgent);
                 // Navigator.push(context,
                 //     MaterialPageRoute(builder: (context) => LiveStream())
                 // );
@@ -189,7 +191,8 @@ class _AccountTypeState extends State<AccountType> {
             ),
             GestureDetector(
               onTap: () {
-                AccountCreation.setAccountType(Strings.deliveryAgent);
+                Get.find<AccountCreation>().setAccountType(Strings.deliveryAgent);
+
                 // Navigator.push(context,
                 //     MaterialPageRoute(builder: (context) => LiveStream())
                 // );
@@ -248,6 +251,8 @@ class _AccountTypeState extends State<AccountType> {
             ),
             GestureDetector(
               onTap: () {
+                Get.find<AccountCreation>().setAccountType(Strings.shippingAgent);
+
                 // Navigator.push(context,
                 //     MaterialPageRoute(builder: (context) => LiveStream())
                 // );
