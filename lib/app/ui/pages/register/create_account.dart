@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:fryghthub/app/controller/account_creation.dart';
+import 'package:fryghthub/app/controller/account_creation_controller.dart';
 import 'package:fryghthub/app/ui/pages/register/user_contact.dart';
 
 import 'package:fryghthub/app/ui/theme/app_colors.dart';
@@ -191,7 +191,7 @@ class _CreateAccountState extends State<CreateAccount> {
                     hintColor: AppColors.color11,
                     borderSideColor: AppColors.color9,
                     autoFocus: true,
-                    onChanged: (value) => Get.find<AccountCreation>().setFirstName(value),
+                    onChanged: (value) => Get.find<AccountCreationController>().setFirstName(value),
                   ),
                 )
               ],
@@ -222,7 +222,7 @@ class _CreateAccountState extends State<CreateAccount> {
                     hintColor: AppColors.color11,
                     borderSideColor: AppColors.color9,
                     autoFocus: true,
-                    onChanged: (value) => Get.find<AccountCreation>().setLastName(value),
+                    onChanged: (value) => Get.find<AccountCreationController>().setLastName(value),
                   ),
                 )
               ],
@@ -252,7 +252,7 @@ class _CreateAccountState extends State<CreateAccount> {
                     hintColor: AppColors.color11,
                     borderSideColor: AppColors.color9,
                     autoFocus: true,
-                    onChanged: (value) => Get.find<AccountCreation>().setEmail(value),
+                    onChanged: (value) => Get.find<AccountCreationController>().setEmail(value),
                   ),
                 )
               ],
@@ -395,7 +395,7 @@ class _CreateAccountState extends State<CreateAccount> {
                           borderSideColor: AppColors.color9,
                           autoFocus: true,
                           hint: Strings.username,
-                          onChanged: (value) => Get.find<AccountCreation>().setUserName(value),
+                          onChanged: (value) => Get.find<AccountCreationController>().setUserName(value),
 
                         ),
                       )
@@ -501,7 +501,7 @@ class _CreateAccountState extends State<CreateAccount> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Get.find<AccountCreation>().setAccountType(Strings.userAction);
+                      Get.find<AccountCreationController>().setAccountType(Strings.userAction);
 
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) => UserContact())
@@ -563,7 +563,7 @@ class _CreateAccountState extends State<CreateAccount> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Get.find<AccountCreation>().setAccountType(Strings.buyingAgent);
+                      Get.find<AccountCreationController>().setAccountType(Strings.buyingAgent);
 
                     },
                     child: Container(
@@ -621,7 +621,7 @@ class _CreateAccountState extends State<CreateAccount> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Get.find<AccountCreation>().setAccountType(Strings.deliveryAgent);
+                      Get.find<AccountCreationController>().setAccountType(Strings.deliveryAgent);
 
                     },
                     child: Container(
@@ -679,7 +679,7 @@ class _CreateAccountState extends State<CreateAccount> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Get.find<AccountCreation>().setAccountType(Strings.shippingAgent);
+                      Get.find<AccountCreationController>().setAccountType(Strings.shippingAgent);
 
                     },
                     child: Container(

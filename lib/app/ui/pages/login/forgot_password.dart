@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fryghthub/app/controller/forgot_password_controller.dart';
 import 'package:fryghthub/app/ui/pages/login/reset_password.dart';
 import 'package:fryghthub/app/ui/theme/app_colors.dart';
 import 'package:fryghthub/app/ui/theme/app_fonts.dart';
@@ -6,6 +7,7 @@ import 'package:fryghthub/app/ui/theme/app_strings.dart';
 import 'package:fryghthub/app/ui/widgets/custom_textfield_widget.dart';
 import 'package:fryghthub/app/utils/device_utils.dart';
 import 'package:fryghthub/app/utils/responsive_safe_area.dart';
+import 'package:get/get.dart';
 
 class ForgotPassword extends StatefulWidget {
   @override
@@ -75,7 +77,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       fontSize: 14,
                       hintColor: AppColors.color11,
                       borderSideColor: AppColors.color9,
-                      autoFocus: true),
+                      autoFocus: true,
+                      onChanged: (value) => Get.find<ForgotPasswordController>().setEmail(value),
+                  ),
                 )
               ],
             ),
@@ -83,9 +87,17 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               height: DeviceUtils.getScaledHeight(context, scale: 0.04),
             ),
             GestureDetector(
-              onTap: () {
+              onTap: () async {
+                if( await Get.find<ForgotPasswordController>().verifyEmail() ){
+                // Unsetting the current account instance details
+                Get.find<ForgotPasswordController>().removeAccountReference();
+
                 Navigator.push(
                     context, MaterialPageRoute(builder: (context) => ResetPassword()));
+                }else{
+
+                }
+
               },
               child: Container(
                 height: 56,

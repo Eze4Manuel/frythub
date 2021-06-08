@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fryghthub/app/controller/account_creation.dart';
+import 'package:fryghthub/app/controller/account_creation_controller.dart';
 import 'package:fryghthub/app/ui/pages/register/create_account.dart';
 import 'package:fryghthub/app/ui/widgets/custom_checkbox.dart';
 import 'package:fryghthub/app/utils/responsive_safe_area.dart';
@@ -9,7 +9,7 @@ import 'package:fryghthub/app/ui/theme/app_fonts.dart';
 import 'package:fryghthub/app/ui/theme/app_strings.dart';
 import 'package:get/get.dart';
 
-import '../../../controller/account_creation.dart';
+import '../../../controller/account_creation_controller.dart';
 
 class AccountType extends StatefulWidget {
   @override
@@ -71,7 +71,7 @@ class _AccountTypeState extends State<AccountType> {
             ),
             GestureDetector(
               onTap: () {
-                Get.find<AccountCreation>().setAccountType(Strings.userAction);
+                Get.find<AccountCreationController>().setAccountType(Strings.userAction);
 
                 // Navigator.push(context,
                 //     MaterialPageRoute(builder: (context) => LiveStream())
@@ -132,7 +132,7 @@ class _AccountTypeState extends State<AccountType> {
             ),
             GestureDetector(
               onTap: () {
-                  Get.find<AccountCreation>().setAccountType(Strings.buyingAgent);
+                  Get.find<AccountCreationController>().setAccountType(Strings.buyingAgent);
                 // Navigator.push(context,
                 //     MaterialPageRoute(builder: (context) => LiveStream())
                 // );
@@ -191,7 +191,7 @@ class _AccountTypeState extends State<AccountType> {
             ),
             GestureDetector(
               onTap: () {
-                Get.find<AccountCreation>().setAccountType(Strings.deliveryAgent);
+                Get.find<AccountCreationController>().setAccountType(Strings.deliveryAgent);
 
                 // Navigator.push(context,
                 //     MaterialPageRoute(builder: (context) => LiveStream())
@@ -251,11 +251,8 @@ class _AccountTypeState extends State<AccountType> {
             ),
             GestureDetector(
               onTap: () {
-                Get.find<AccountCreation>().setAccountType(Strings.shippingAgent);
+                Get.find<AccountCreationController>().setAccountType(Strings.shippingAgent);
 
-                // Navigator.push(context,
-                //     MaterialPageRoute(builder: (context) => LiveStream())
-                // );
               },
               child: Container(
                 height: 100,

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:fryghthub/app/controller/reset_password_controller.dart';
 import 'package:fryghthub/app/ui/theme/app_colors.dart';
 import 'package:fryghthub/app/ui/theme/app_fonts.dart';
 import 'package:fryghthub/app/ui/theme/app_strings.dart';
 import 'package:fryghthub/app/ui/widgets/custom_textfield_widget.dart';
 import 'package:fryghthub/app/utils/device_utils.dart';
 import 'package:fryghthub/app/utils/responsive_safe_area.dart';
+import 'package:get/get.dart';
 
 class ResetPassword extends StatefulWidget {
   @override
@@ -95,7 +97,9 @@ class _ResetPasswordState extends State<ResetPassword> {
                       fontSize: 14,
                       hintColor: AppColors.color11,
                       borderSideColor: AppColors.color9,
-                      autoFocus: true),
+                      autoFocus: true,
+                      onChanged: (value) => Get.find<ResetPasswordController>().setCode(value),
+                  ),
                 )
               ],
             ),
@@ -124,6 +128,8 @@ class _ResetPasswordState extends State<ResetPassword> {
                     hintColor: AppColors.color11,
                     borderSideColor: AppColors.color9,
                     autoFocus: true,
+                    onChanged: (value) => Get.find<ResetPasswordController>().setPassword(value),
+
                     suffixIcon: Padding(
                       padding: const EdgeInsets.only(top: 16.0),
                       child: Container(
@@ -147,9 +153,16 @@ class _ResetPasswordState extends State<ResetPassword> {
               height: DeviceUtils.getScaledHeight(context, scale: 0.04),
             ),
             GestureDetector(
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ResetPassword()));
+              onTap: () async {
+                if( await Get.find<ResetPasswordController>().resetCode() ){
+                    // Unsetting the current account instance details
+                    Get.find<ResetPasswordController>().removeAccountReference();
+
+                    Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => ResetPassword()));
+                }else{
+
+                }
               },
               child: Container(
                 height: 56,

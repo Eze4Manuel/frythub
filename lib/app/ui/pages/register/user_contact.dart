@@ -9,7 +9,7 @@ import 'package:fryghthub/app/ui/theme/app_fonts.dart';
 import 'package:fryghthub/app/ui/theme/app_strings.dart';
 import 'package:get/get.dart';
 
-import '../../../controller/account_creation.dart';
+import '../../../controller/account_creation_controller.dart';
 
 class UserContact extends StatefulWidget {
   @override
@@ -89,7 +89,7 @@ class _UserContactState extends State<UserContact> {
                       autoFocus: true,
                       hint: Strings.mobileNumber,
                       inputType: TextInputType.number,
-                      onChanged: (value) => Get.find<AccountCreation>().setPhone(value),
+                      onChanged: (value) => Get.find<AccountCreationController>().setPhone(value),
 
                     ),
                   )
@@ -175,7 +175,11 @@ class _UserContactState extends State<UserContact> {
               ),
               GestureDetector(
                 onTap: () async {
-                  if( await Get.find<AccountCreation>().createNewAccount() ){
+                  if( await Get.find<AccountCreationController>().createNewAccount() ){
+
+                    // Unsetting the current account instance details
+                    Get.find<AccountCreationController>().removeAccountReference();
+
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => UserLogin())
                     );

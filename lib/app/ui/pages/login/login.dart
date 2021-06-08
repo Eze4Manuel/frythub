@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:fryghthub/app/controller/account_creation_controller.dart';
+import 'package:fryghthub/app/controller/account_sigin_controller.dart';
 import 'package:fryghthub/app/ui/pages/login/forgot_password.dart';
 import 'package:fryghthub/app/ui/pages/register/create_account.dart';
 
@@ -9,6 +11,7 @@ import 'package:fryghthub/app/utils/responsive_safe_area.dart';
 import 'package:fryghthub/app/utils/device_utils.dart';
 import 'package:fryghthub/app/ui/theme/app_fonts.dart';
 import 'package:fryghthub/app/ui/theme/app_strings.dart';
+import 'package:get/get.dart';
 
 class UserLogin extends StatefulWidget {
   @override
@@ -160,6 +163,7 @@ class _UserLoginState extends State<UserLogin> {
                     hintColor: AppColors.color11,
                     borderSideColor: AppColors.color9,
                     autoFocus: true,
+                    onChanged: (value) => Get.find<AccountSigninController>().setEmail(value),
                   ),
                 )
               ],
@@ -191,6 +195,7 @@ class _UserLoginState extends State<UserLogin> {
                     hintColor: AppColors.color11,
                     borderSideColor: AppColors.color9,
                     autoFocus: true,
+                    onChanged: (value) => Get.find<AccountSigninController>().setPassword(value),
                   ),
                 )
               ],
@@ -200,8 +205,15 @@ class _UserLoginState extends State<UserLogin> {
               height: DeviceUtils.getScaledHeight(context, scale: 0.04),
             ),
             GestureDetector(
-              onTap: () {
-                Navigator.pushNamed(context, null);
+              onTap: () async {
+                if( await Get.find<AccountSigninController>().signInAccount() ){
+                  // Unsetting the current account instance details
+                  Get.find<AccountSigninController>().removeAccountReference();
+
+                  Navigator.pushNamed(context, null);
+                }else{
+
+                }
               },
               child: Container(
                 height: 56,
@@ -229,6 +241,9 @@ class _UserLoginState extends State<UserLogin> {
             Center(
               child: GestureDetector(
                 onTap: () {
+                  // Unsetting any created account instance
+                  Get.find<AccountSigninController>().removeAccountReference();
+
                   Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -260,6 +275,9 @@ class _UserLoginState extends State<UserLogin> {
             Center(
               child: GestureDetector(
                 onTap: () {
+                  // Unsetting any created account instance
+                  Get.find<AccountSigninController>().removeAccountReference();
+
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => CreateAccount()));
                 },
