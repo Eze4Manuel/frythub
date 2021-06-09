@@ -1,8 +1,9 @@
 
 
 import 'package:fryghthub/app/data/model/account.dart';
+import 'package:get/get.dart';
 
-class ForgotPasswordController {
+class ForgotPasswordController extends GetxController {
 
   String email;
 

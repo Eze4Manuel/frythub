@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:fryghthub/app/controller/account_creation_controller.dart';
+import 'package:fryghthub/app/controller/checkbox_toggle_controller.dart';
 import 'package:fryghthub/app/ui/pages/register/user_contact.dart';
 
 import 'package:fryghthub/app/ui/theme/app_colors.dart';
@@ -18,6 +19,13 @@ class CreateAccount extends StatefulWidget {
 }
 
 class _CreateAccountState extends State<CreateAccount> {
+
+  final AccountCreationController accountCreationController =
+  Get.put(AccountCreationController());
+  final CheckboxToggleController checkboxToggleController =
+  Get.put(CheckboxToggleController());
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -191,7 +199,7 @@ class _CreateAccountState extends State<CreateAccount> {
                     hintColor: AppColors.color11,
                     borderSideColor: AppColors.color9,
                     autoFocus: true,
-                    onChanged: (value) => Get.find<AccountCreationController>().setFirstName(value),
+                    onChanged: (value) => accountCreationController.setFirstName(value),
                   ),
                 )
               ],
@@ -222,7 +230,7 @@ class _CreateAccountState extends State<CreateAccount> {
                     hintColor: AppColors.color11,
                     borderSideColor: AppColors.color9,
                     autoFocus: true,
-                    onChanged: (value) => Get.find<AccountCreationController>().setLastName(value),
+                    onChanged: (value) => accountCreationController.setLastName(value),
                   ),
                 )
               ],
@@ -252,7 +260,7 @@ class _CreateAccountState extends State<CreateAccount> {
                     hintColor: AppColors.color11,
                     borderSideColor: AppColors.color9,
                     autoFocus: true,
-                    onChanged: (value) => Get.find<AccountCreationController>().setEmail(value),
+                    onChanged: (value) => accountCreationController.setEmail(value),
                   ),
                 )
               ],
@@ -395,7 +403,7 @@ class _CreateAccountState extends State<CreateAccount> {
                           borderSideColor: AppColors.color9,
                           autoFocus: true,
                           hint: Strings.username,
-                          onChanged: (value) => Get.find<AccountCreationController>().setUserName(value),
+                          onChanged: (value) => accountCreationController.setUserName(value),
 
                         ),
                       )
@@ -437,6 +445,8 @@ class _CreateAccountState extends State<CreateAccount> {
           );
         });
   }
+
+
 
   void _changeAccountType(context) {
     showModalBottomSheet(
@@ -501,11 +511,9 @@ class _CreateAccountState extends State<CreateAccount> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Get.find<AccountCreationController>().setAccountType(Strings.userAction);
+                      accountCreationController.setAccountType(Strings.userAction);
+                      checkboxToggleController.updateCheckbox(Strings.userAction);
 
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => UserContact())
-                      );
                     },
                     child: Container(
                       margin: EdgeInsets.only(left: 32, right: 32),
@@ -524,8 +532,16 @@ class _CreateAccountState extends State<CreateAccount> {
                             padding: const EdgeInsets.only(right: 11.0, top: 11),
                             child: Align(
                                 alignment: Alignment.topRight,
-                                child:
-                                    CircleCheckbox(value: true, onChanged: null)),
+                                child: GetBuilder<CheckboxToggleController>(
+                                  init: checkboxToggleController,
+                                  builder: (_) {
+                                    return CircleCheckbox(
+                                        value: checkboxToggleController.userAction
+                                            ? true
+                                            : false,
+                                        onChanged: null);
+                                  },
+                                )),
                           ),
                           Row(
                             children: [
@@ -563,7 +579,8 @@ class _CreateAccountState extends State<CreateAccount> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Get.find<AccountCreationController>().setAccountType(Strings.buyingAgent);
+                      accountCreationController.setAccountType(Strings.buyingAgent);
+                      checkboxToggleController.updateCheckbox(Strings.buyingAgent);
 
                     },
                     child: Container(
@@ -582,8 +599,16 @@ class _CreateAccountState extends State<CreateAccount> {
                             padding: const EdgeInsets.only(right: 11.0, top: 11),
                             child: Align(
                                 alignment: Alignment.topRight,
-                                child:
-                                    CircleCheckbox(value: true, onChanged: null)),
+                                child: GetBuilder<CheckboxToggleController>(
+                                  init: checkboxToggleController,
+                                  builder: (_) {
+                                    return CircleCheckbox(
+                                        value: checkboxToggleController.buyingAgent
+                                            ? true
+                                            : false,
+                                        onChanged: null);
+                                  },
+                                ))
                           ),
                           Row(
                             children: [
@@ -621,7 +646,8 @@ class _CreateAccountState extends State<CreateAccount> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Get.find<AccountCreationController>().setAccountType(Strings.deliveryAgent);
+                      accountCreationController.setAccountType(Strings.deliveryAgent);
+                      checkboxToggleController.updateCheckbox(Strings.deliveryAgent);
 
                     },
                     child: Container(
@@ -638,10 +664,18 @@ class _CreateAccountState extends State<CreateAccount> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(right: 11.0, top: 11),
-                            child: Align(
+                            child:Align(
                                 alignment: Alignment.topRight,
-                                child:
-                                    CircleCheckbox(value: true, onChanged: null)),
+                                child: GetBuilder<CheckboxToggleController>(
+                                  init: checkboxToggleController,
+                                  builder: (_) {
+                                    return CircleCheckbox(
+                                        value: checkboxToggleController.deliveryAgent
+                                            ? true
+                                            : false,
+                                        onChanged: null);
+                                  },
+                                )),
                           ),
                           Row(
                             children: [
@@ -679,7 +713,8 @@ class _CreateAccountState extends State<CreateAccount> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Get.find<AccountCreationController>().setAccountType(Strings.shippingAgent);
+                      accountCreationController.setAccountType(Strings.shippingAgent);
+                      checkboxToggleController.updateCheckbox(Strings.shippingAgent);
 
                     },
                     child: Container(
@@ -696,11 +731,19 @@ class _CreateAccountState extends State<CreateAccount> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(right: 11.0, top: 11),
-                            child: Align(
+                            child:  Align(
                                 alignment: Alignment.topRight,
-                                child:
-                                    CircleCheckbox(value: true, onChanged: null)),
-                          ),
+                                child:  GetBuilder<CheckboxToggleController>(
+                                  init: checkboxToggleController,
+                                  builder: (_) {
+                                    return CircleCheckbox(
+                                        value: checkboxToggleController.shippingAgent
+                                            ? true
+                                            : false,
+                                        onChanged: null);
+                                  },
+                                )
+                            )),
                           Row(
                             children: [
                               SizedBox(

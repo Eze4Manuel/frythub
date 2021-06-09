@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:fryghthub/app/controller/account_creation_controller.dart';
+import 'package:fryghthub/app/controller/checkbox_toggle_controller.dart';
 import 'package:fryghthub/app/ui/pages/register/create_account.dart';
-import 'package:fryghthub/app/ui/widgets/custom_checkbox.dart';
-import 'package:fryghthub/app/utils/responsive_safe_area.dart';
-import 'package:fryghthub/app/utils/device_utils.dart';
 import 'package:fryghthub/app/ui/theme/app_colors.dart';
 import 'package:fryghthub/app/ui/theme/app_fonts.dart';
 import 'package:fryghthub/app/ui/theme/app_strings.dart';
+import 'package:fryghthub/app/ui/widgets/custom_checkbox.dart';
+import 'package:fryghthub/app/utils/device_utils.dart';
+import 'package:fryghthub/app/utils/responsive_safe_area.dart';
 import 'package:get/get.dart';
 
 import '../../../controller/account_creation_controller.dart';
@@ -17,6 +18,11 @@ class AccountType extends StatefulWidget {
 }
 
 class _AccountTypeState extends State<AccountType> {
+  final AccountCreationController accountCreationController =
+      Get.put(AccountCreationController());
+  final CheckboxToggleController checkboxToggleController =
+      Get.put(CheckboxToggleController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,11 +77,8 @@ class _AccountTypeState extends State<AccountType> {
             ),
             GestureDetector(
               onTap: () {
-                Get.find<AccountCreationController>().setAccountType(Strings.userAction);
-
-                // Navigator.push(context,
-                //     MaterialPageRoute(builder: (context) => LiveStream())
-                // );
+                accountCreationController.setAccountType(Strings.userAction);
+                checkboxToggleController.updateCheckbox(Strings.userAction);
               },
               child: Container(
                 margin: EdgeInsets.only(left: 32, right: 32),
@@ -91,10 +94,19 @@ class _AccountTypeState extends State<AccountType> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(right:11.0,top: 11),
+                      padding: const EdgeInsets.only(right: 11.0, top: 11),
                       child: Align(
                           alignment: Alignment.topRight,
-                          child: CircleCheckbox(value: true, onChanged: null)),
+                          child: GetBuilder<CheckboxToggleController>(
+                            init: checkboxToggleController,
+                            builder: (_) {
+                              return CircleCheckbox(
+                                  value: checkboxToggleController.userAction
+                                      ? true
+                                      : false,
+                                  onChanged: null);
+                            },
+                          )),
                     ),
                     Row(
                       children: [
@@ -132,10 +144,8 @@ class _AccountTypeState extends State<AccountType> {
             ),
             GestureDetector(
               onTap: () {
-                  Get.find<AccountCreationController>().setAccountType(Strings.buyingAgent);
-                // Navigator.push(context,
-                //     MaterialPageRoute(builder: (context) => LiveStream())
-                // );
+                accountCreationController.setAccountType(Strings.buyingAgent);
+                checkboxToggleController.updateCheckbox(Strings.buyingAgent);
               },
               child: Container(
                 height: 100,
@@ -150,10 +160,19 @@ class _AccountTypeState extends State<AccountType> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(right:11.0,top: 11),
-                      child: Align(
-                          alignment: Alignment.topRight,
-                          child: CircleCheckbox(value: true, onChanged: null)),
+                        padding: const EdgeInsets.only(right: 11.0, top: 11),
+                        child: Align(
+                            alignment: Alignment.topRight,
+                            child: GetBuilder<CheckboxToggleController>(
+                              init: checkboxToggleController,
+                              builder: (_) {
+                                return CircleCheckbox(
+                                    value: checkboxToggleController.buyingAgent
+                                        ? true
+                                        : false,
+                                    onChanged: null);
+                              },
+                            ))
                     ),
                     Row(
                       children: [
@@ -191,11 +210,8 @@ class _AccountTypeState extends State<AccountType> {
             ),
             GestureDetector(
               onTap: () {
-                Get.find<AccountCreationController>().setAccountType(Strings.deliveryAgent);
-
-                // Navigator.push(context,
-                //     MaterialPageRoute(builder: (context) => LiveStream())
-                // );
+                accountCreationController.setAccountType(Strings.deliveryAgent);
+                checkboxToggleController.updateCheckbox(Strings.deliveryAgent);
               },
               child: Container(
                 height: 100,
@@ -210,10 +226,19 @@ class _AccountTypeState extends State<AccountType> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(right:11.0,top: 11),
+                      padding: const EdgeInsets.only(right: 11.0, top: 11),
                       child: Align(
                           alignment: Alignment.topRight,
-                          child: CircleCheckbox(value: true, onChanged: null)),
+                          child: GetBuilder<CheckboxToggleController>(
+                            init: checkboxToggleController,
+                            builder: (_) {
+                              return CircleCheckbox(
+                                  value: checkboxToggleController.deliveryAgent
+                                      ? true
+                                      : false,
+                                  onChanged: null);
+                            },
+                          )),
                     ),
                     Row(
                       children: [
@@ -251,8 +276,8 @@ class _AccountTypeState extends State<AccountType> {
             ),
             GestureDetector(
               onTap: () {
-                Get.find<AccountCreationController>().setAccountType(Strings.shippingAgent);
-
+                accountCreationController.setAccountType(Strings.shippingAgent);
+                checkboxToggleController.updateCheckbox(Strings.shippingAgent);
               },
               child: Container(
                 height: 100,
@@ -267,11 +292,20 @@ class _AccountTypeState extends State<AccountType> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(right:11.0,top: 11),
+                      padding: const EdgeInsets.only(right: 11.0, top: 11),
                       child: Align(
                           alignment: Alignment.topRight,
-                          child: CircleCheckbox(value: true, onChanged: null)),
-                    ),
+                          child:  GetBuilder<CheckboxToggleController>(
+                            init: checkboxToggleController,
+                            builder: (_) {
+                              return CircleCheckbox(
+                                  value: checkboxToggleController.shippingAgent
+                                      ? true
+                                      : false,
+                                  onChanged: null);
+                            },
+                          )
+                      )),
                     Row(
                       children: [
                         SizedBox(
@@ -281,7 +315,9 @@ class _AccountTypeState extends State<AccountType> {
                         Container(
                           height: 56,
                           width: 56,
-                          decoration: BoxDecoration(color: AppColors.color1, borderRadius: BorderRadius.circular(8)),
+                          decoration: BoxDecoration(
+                              color: AppColors.color1,
+                              borderRadius: BorderRadius.circular(8)),
                         ),
                         SizedBox(
                           width:
@@ -312,7 +348,7 @@ class _AccountTypeState extends State<AccountType> {
               child: Container(
                 height: 56,
                 // width: 311,
-                margin: EdgeInsets.only(left: 32, right: 32,bottom: 32),
+                margin: EdgeInsets.only(left: 32, right: 32, bottom: 32),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   color: AppColors.appPrimaryColor,

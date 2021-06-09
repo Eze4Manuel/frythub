@@ -1,8 +1,8 @@
 
 
-import 'package:fryghthub/app/data/model/account.dart';
+import 'package:get/get.dart';
 
-class ResetPasswordController {
+class ResetPasswordController extends GetxController {
 
   String code;
   String password;

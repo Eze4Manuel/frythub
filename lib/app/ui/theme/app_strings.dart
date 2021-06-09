@@ -50,4 +50,8 @@ class Strings {
   static const String resetPassword = "Reset Password";
 
 
+  static const String registerAgentLink = 'https://frythub.herokuapp.com/api/Agent/register';
+  static const String registerShippingAgentLink = 'https://frythub.herokuapp.com/api/ShippingAgent/register';
+  static const String registerUserLink = 'https://frythub.herokuapp.com/api/User/signup';
+
 }

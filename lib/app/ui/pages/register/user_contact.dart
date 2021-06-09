@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fryghthub/app/ui/pages/login/login.dart';
+import 'package:fryghthub/app/ui/pages/register/verify_email.dart';
 import 'package:fryghthub/app/ui/widgets/custom_textfield_widget.dart';
 import 'package:fryghthub/app/utils/responsive_safe_area.dart';
 
@@ -17,8 +18,18 @@ class UserContact extends StatefulWidget {
 }
 
 class _UserContactState extends State<UserContact> {
+
+  TextEditingController _controller = TextEditingController();
+
+  // GetX Binding variable
+  final AccountCreationController accountCreationController =
+  Get.put(AccountCreationController());
+
   @override
   Widget build(BuildContext context) {
+
+    _controller.text = accountCreationController.getEmail();
+
     return Scaffold(
       body: ResponsiveSafeArea(
         builder: (context, size) {
@@ -89,7 +100,7 @@ class _UserContactState extends State<UserContact> {
                       autoFocus: true,
                       hint: Strings.mobileNumber,
                       inputType: TextInputType.number,
-                      onChanged: (value) => Get.find<AccountCreationController>().setPhone(value),
+                      onChanged: (value) => accountCreationController.setPhone(value),
 
                     ),
                   )
@@ -115,10 +126,12 @@ class _UserContactState extends State<UserContact> {
                   Padding(
                     padding: const EdgeInsets.only(top: 18.0, right: 32),
                     child: TextFieldWidget(
+                      textController: _controller,
                       fontSize: 14,
                       hintColor: AppColors.color11,
                       borderSideColor: AppColors.color9,
                       autoFocus: true,
+
                       hint: Strings.emailAddress,
                       inputType: TextInputType.emailAddress,
                     ),
@@ -175,16 +188,14 @@ class _UserContactState extends State<UserContact> {
               ),
               GestureDetector(
                 onTap: () async {
-                  if( await Get.find<AccountCreationController>().createNewAccount() ){
-
+                  if( await accountCreationController.createNewAccount() ){
                     // Unsetting the current account instance details
-                    Get.find<AccountCreationController>().removeAccountReference();
 
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => UserLogin())
-                    );
+                    // Navigator.push(context,
+                    //     MaterialPageRoute(builder: (context) => VerifyEmail())
+                    // );
                   }else{
-
+                    print('errordd');
                   }
                 },
                 child: Container(
@@ -213,4 +224,13 @@ class _UserContactState extends State<UserContact> {
       ),
     );
   }
+
+
+  @override
+  void dispose() {
+    // other dispose methods
+    _controller.dispose();
+    super.dispose();
+  }
+
 }

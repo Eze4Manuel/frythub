@@ -1,13 +1,18 @@
 
 
 import 'package:fryghthub/app/data/model/account.dart';
+import 'package:fryghthub/app/data/provider/create_account_provider.dart';
+import 'package:get/get.dart';
 
-class AccountCreationController {
+class AccountCreationController extends GetxController{
 
    Account account = Account();
 
-  // sets the type of account to be created
-   void setAccountType(String accountType) =>  account.account_type = accountType;
+   // Gets email of account
+   String getEmail() => ( account.email );
+
+   // sets the type of account to be created
+   void setAccountType(String accountType) =>  account.accountType = accountType;
    void setFirstName(String firstName) => account.firstName = firstName;
    void setLastName(String lastName) => account.firstName = lastName;
    void setEmail(String email) => account.email = email;
@@ -17,10 +22,9 @@ class AccountCreationController {
 
 
    // Returns true if user is signed in
-   Future<bool> createNewAccount(){
-   // TODO Inplement the procedure to upload user account
+   Future<bool> createNewAccount() async {
+      var response = await CreateAccountProvider.createAccout(account);
 
-      print(account.toString());
       return Future<bool>.value(true);
    }
 
