@@ -62,5 +62,6 @@ class Strings {
   static const String recentActivities = "Recent Activities";
   static const String viewALl = "View All";
 
+  static const String notification = "Notification";
 
 }
