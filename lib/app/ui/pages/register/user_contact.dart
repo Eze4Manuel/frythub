@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:fryghthub/app/ui/pages/login/login.dart';
 import 'package:fryghthub/app/ui/pages/register/verify_email.dart';
 import 'package:fryghthub/app/ui/widgets/custom_textfield_widget.dart';
 import 'package:fryghthub/app/utils/responsive_safe_area.dart';
-
 import 'package:fryghthub/app/utils/device_utils.dart';
 import 'package:fryghthub/app/ui/theme/app_colors.dart';
 import 'package:fryghthub/app/ui/theme/app_fonts.dart';
@@ -189,13 +187,11 @@ class _UserContactState extends State<UserContact> {
               GestureDetector(
                 onTap: () async {
                   if( await accountCreationController.createNewAccount() ){
-                    // Unsetting the current account instance details
-
-                    // Navigator.push(context,
-                    //     MaterialPageRoute(builder: (context) => VerifyEmail())
-                    // );
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => VerifyEmail())
+                    );
                   }else{
-                    print('errordd');
+                    print('error');
                   }
                 },
                 child: Container(

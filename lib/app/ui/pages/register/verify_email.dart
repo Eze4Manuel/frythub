@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fryghthub/app/ui/pages/dashboard/get_started.dart';
 import 'package:fryghthub/app/ui/theme/app_colors.dart';
 import 'package:fryghthub/app/ui/theme/app_fonts.dart';
 import 'package:fryghthub/app/ui/theme/app_strings.dart';
@@ -105,7 +106,7 @@ class _VerifyEmailState extends State<VerifyEmail> {
             GestureDetector(
               onTap: () {
                 Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => null));
+                    context, MaterialPageRoute(builder: (context) => GetStarted()));
               },
               child: Container(
                 height: 56,

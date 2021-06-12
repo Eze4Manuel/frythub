@@ -54,4 +54,13 @@ class Strings {
   static const String registerShippingAgentLink = 'https://frythub.herokuapp.com/api/ShippingAgent/register';
   static const String registerUserLink = 'https://frythub.herokuapp.com/api/User/signup';
 
+  static const String getStarted = "Reset Password";
+  static const String shipACar = "Ship A Car";
+  static const String buyAndShipACar = "Buy & Ship a Car";
+  static const String shipALoose = "Ship A Loose Item";
+  static const String learnMore = "Learn More";
+  static const String recentActivities = "Recent Activities";
+  static const String viewALl = "View All";
+
+
 }
