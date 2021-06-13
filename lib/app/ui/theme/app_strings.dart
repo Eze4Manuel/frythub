@@ -63,5 +63,11 @@ class Strings {
   static const String viewALl = "View All";
 
   static const String notification = "Notification";
+  static const String shipACarSubtext = "Follow the 5 steps below to complete and submit your request";
+
+  static const String carinfo = "Car information";
+  static const String carinfosub = "Type of Car and other info";
+
+  static const String selectCarManufacturerLabel = "Select Car Manufacturer";
 
 }

@@ -1,11 +1,11 @@
 
 import 'package:flutter/material.dart';
+import 'package:fryghthub/app/ui/pages/dashboard/home/ship_a_car.dart';
 import 'package:fryghthub/app/ui/theme/app_colors.dart';
 import 'package:fryghthub/app/ui/theme/app_fonts.dart';
 import 'package:fryghthub/app/ui/theme/app_strings.dart';
 import 'package:fryghthub/app/utils/device_utils.dart';
 import 'package:fryghthub/app/utils/responsive_safe_area.dart';
-import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -106,64 +106,70 @@ class _HomeState extends State<Home> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Container(
-                              height: 110,
-                              width: 160,
-                              decoration: BoxDecoration(
-                                  color: AppColors.whiteColor,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: AppColors.color13,
-                                      blurRadius: 20.0, // soften the shadow
-                                      spreadRadius: 0.0, //extend the shadow
-                                      offset: Offset(
-                                        0.0, // Move to right 10  horizontally
-                                        0.0, // Move to bottom 10 Vertically
-                                      ),
+                            GestureDetector(
+                              onTap: (){
+                                Navigator.push(
+                                    context, MaterialPageRoute(builder: (context) => ShipACar()));
+                              },
+                              child: Container(
+                                height: 110,
+                                width: 160,
+                                decoration: BoxDecoration(
+                                    color: AppColors.whiteColor,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: AppColors.color13,
+                                        blurRadius: 20.0, // soften the shadow
+                                        spreadRadius: 0.0, //extend the shadow
+                                        offset: Offset(
+                                          0.0, // Move to right 10  horizontally
+                                          0.0, // Move to bottom 10 Vertically
+                                        ),
+                                      )
+                                    ],
+                                    borderRadius: BorderRadius.circular(8)),
+                                child: Column(
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.spaceEvenly,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        SizedBox(
+                                          width: DeviceUtils.getScaledWidth(
+                                              context,
+                                              scale: 0.01),
+                                        ),
+                                        Container(
+                                          height: 50,
+                                          width: 50,
+                                          decoration: BoxDecoration(
+                                              color: AppColors.color1,
+                                              borderRadius:
+                                              BorderRadius.circular(8)),
+                                        ),
+                                        SizedBox(
+                                          width: DeviceUtils.getScaledWidth(
+                                              context,
+                                              scale: 0.01),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: DeviceUtils.getScaledHeight(context,
+                                          scale: 0.01),
+                                    ),
+                                    Text(
+                                      Strings.shipACar,
+                                      style: TextStyle(
+                                          color: AppColors.appColor1,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 15.0,
+                                          fontFamily: FontFamily.sofiaBold),
                                     )
                                   ],
-                                  borderRadius: BorderRadius.circular(8)),
-                              child: Column(
-                                mainAxisAlignment:
-                                MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      SizedBox(
-                                        width: DeviceUtils.getScaledWidth(
-                                            context,
-                                            scale: 0.01),
-                                      ),
-                                      Container(
-                                        height: 50,
-                                        width: 50,
-                                        decoration: BoxDecoration(
-                                            color: AppColors.color1,
-                                            borderRadius:
-                                            BorderRadius.circular(8)),
-                                      ),
-                                      SizedBox(
-                                        width: DeviceUtils.getScaledWidth(
-                                            context,
-                                            scale: 0.01),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: DeviceUtils.getScaledHeight(context,
-                                        scale: 0.01),
-                                  ),
-                                  Text(
-                                    Strings.shipACar,
-                                    style: TextStyle(
-                                        color: AppColors.appColor1,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 15.0,
-                                        fontFamily: FontFamily.sofiaBold),
-                                  )
-                                ],
+                                ),
                               ),
                             ),
                             Container(
