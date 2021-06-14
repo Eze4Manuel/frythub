@@ -68,6 +68,28 @@ class Strings {
   static const String carinfo = "Car information";
   static const String carinfosub = "Type of Car and other info";
 
+  static const String aboutmanufacturer = "About Manufacturer";
   static const String selectCarManufacturerLabel = "Select Car Manufacturer";
+  static const String selectmodel = "Select Car Model";
+  static const String selectyearofmanufactuer = "Select Year of Manufacturer";
+  static const String setmilliage = "Set Milliage Range";
+  static const String appearance = "Appearance";
+  static const String selectColor = "Select Color";
+
+  static const String chooseTransmission = "Choose Transmission Type";
+  static const String howManySedan = "How many of this Sedan You want?";
+  static const String preferredShipping = "Preferred Shipping Method";
+
+  static const String nextstep = "Next Step";
+  static const String chooseShippingMethod = "Choose The Shipping Method You Prefer";
+  static const String container = "Container";
+  static const String rollOnRollOff = "Roll-On-Roll-Off";
+  static const String orderWithMore = "Order with more than 4 cars";
+  static const String orderWithLess = "Oder with less than 4 cars";
+
+  static const String pickUpAddress = "Pickup Address";
+  static const String setCarPickup = "Set where you want us to pick the car from";
+  static const String useGoogle = "Use Google Map";
+  static const String typesAddress = "Types Address";
 
 }

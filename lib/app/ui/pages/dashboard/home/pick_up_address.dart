@@ -1,0 +1,276 @@
+import 'package:flutter/material.dart';
+import 'package:fryghthub/app/ui/theme/app_colors.dart';
+import 'package:fryghthub/app/ui/theme/app_fonts.dart';
+import 'package:fryghthub/app/ui/theme/app_strings.dart';
+import 'package:fryghthub/app/ui/widgets/timeline.dart';
+import 'package:fryghthub/app/utils/device_utils.dart';
+import 'package:fryghthub/app/utils/responsive_safe_area.dart';
+
+class PickUpAddress extends StatefulWidget {
+  @override
+  _PickUpAddressState createState() => _PickUpAddressState();
+}
+
+class _PickUpAddressState extends State<PickUpAddress> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: AppColors.appColor4,
+      body: ResponsiveSafeArea(
+        builder: (context, size) {
+          return Container(
+            padding: EdgeInsets.symmetric(horizontal: 25),
+            decoration: BoxDecoration(
+              color: AppColors.whiteColor,
+              borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(25.0),
+                  topLeft: Radius.circular(25.0)),
+              boxShadow: [
+                BoxShadow(
+                  color: AppColors.color13,
+                  blurRadius: 25.0, // soften the shadow
+                  spreadRadius: 2.0, //extend the shadow
+                  offset: Offset(
+                    0.0, // Move to right 10  horizontally
+                    2.0, // Move to bottom 10 Vertically
+                  ),
+                )
+              ],
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                SizedBox(
+                  height:
+                  DeviceUtils.getScaledHeight(context, scale: 0.02),
+                ),
+                Container(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Center(
+                        child: Container(
+                          padding: EdgeInsets.all(10),
+                          width: 60,
+                          height: 5,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(13),
+                            color: AppColors.color13,
+                          ),
+                          child: Container(),
+                        ),
+                      ),
+                      SizedBox(
+                        height: DeviceUtils.getScaledHeight(context,
+                            scale: 0.04),
+                      ),
+                      Text(
+                        Strings.pickUpAddress,
+                        style: TextStyle(
+                            color: AppColors.appPrimaryColor,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 24.0,
+                            fontFamily: FontFamily.sofiaBold),
+                      ),
+                      SizedBox(
+                        height: DeviceUtils.getScaledHeight(context,
+                            scale: 0.01),
+                      ),
+                      Text(
+                        Strings.setCarPickup,
+                        style: TextStyle(
+                            color: AppColors.color12,
+                            fontWeight: FontWeight.normal,
+                            fontSize: 14.0,
+                            fontFamily: FontFamily.sofiaRegular),
+                      ),
+                    ],
+                  ),
+                ),
+                // About Manufacturer
+                SizedBox(
+                  height:
+                  DeviceUtils.getScaledHeight(context, scale: 0.1),
+                ),
+
+                // Pickup Address
+                Container(
+                  margin:
+                  EdgeInsets.symmetric(vertical: 8, horizontal: 0),
+                  padding:
+                  EdgeInsets.symmetric(vertical: 25, horizontal: 8),
+                  decoration: BoxDecoration(
+                      color: AppColors.color2,
+                      border: Border.all(
+                        color: AppColors.color4,
+                      ),
+                      borderRadius:
+                      BorderRadius.all(Radius.circular(10))),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 1,
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: DeviceUtils.getScaledWidth(context,
+                                  scale: 0.01),
+                            ),
+                            Icon(Icons.add_location,
+                              color: AppColors.appPrimaryColor,
+                            ),
+                            SizedBox(
+                              width: DeviceUtils.getScaledWidth(context,
+                                  scale: 0.01),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        flex: 3,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              Strings.useGoogle,
+                              style: TextStyle(
+                                  color: AppColors.appColor1,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14.0,
+                                  fontFamily: FontFamily.sofiaBold),
+                            ),
+                            SizedBox(
+                              height: DeviceUtils.getScaledHeight(context,
+                                  scale: 0.01),
+                            ),
+
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Icon(Icons.play_arrow,
+                              color: AppColors.appPrimaryColor,)
+
+
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height:
+                  DeviceUtils.getScaledHeight(context, scale: 0.02),
+                ),
+                Container(
+                  margin:
+                  EdgeInsets.symmetric(vertical: 8, horizontal: 0),
+                  padding:
+                  EdgeInsets.symmetric(vertical: 25, horizontal: 8),
+                  decoration: BoxDecoration(
+                      color: AppColors.color2,
+                      border: Border.all(
+                        color: AppColors.color4,
+                      ),
+                      borderRadius:
+                      BorderRadius.all(Radius.circular(10))),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 1,
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: DeviceUtils.getScaledWidth(context,
+                                  scale: 0.01),
+                            ),
+                            Icon(Icons.keyboard,
+                              color: AppColors.appPrimaryColor,
+                            ),
+                            SizedBox(
+                              width: DeviceUtils.getScaledWidth(context,
+                                  scale: 0.01),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        flex: 3,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              Strings.typesAddress,
+                              style: TextStyle(
+                                  color: AppColors.appColor1,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14.0,
+                                  fontFamily: FontFamily.sofiaBold),
+                            ),
+                            SizedBox(
+                              height: DeviceUtils.getScaledHeight(context,
+                                  scale: 0.01),
+                            ),
+
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Icon(Icons.play_arrow,
+                              color: AppColors.appPrimaryColor,)
+
+
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+_pickUpAddress(context) {
+  showModalBottomSheet(
+      backgroundColor: AppColors.whiteColor,
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20), topRight: Radius.circular(20))),
+      context: context,
+      builder: (BuildContext bc) {
+        return Container(
+          margin: EdgeInsets.symmetric(horizontal: 32),
+          height: DeviceUtils.getScaledHeight(context, scale: 0.7),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                SizedBox(
+                  height: DeviceUtils.getScaledHeight(context, scale: 0.02),
+                ),
+              ],
+            ),
+          ),
+        );
+      });
+}

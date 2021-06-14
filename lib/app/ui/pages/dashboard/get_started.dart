@@ -46,7 +46,6 @@ class _GetStartedState extends State<GetStarted> {
             icon: new Icon(Icons.home,),
             title: new Text('Home',
               style: TextStyle(
-                  color: AppColors.color3,
                   fontWeight: FontWeight.bold,
                   fontSize: 15.0,
                   fontFamily: FontFamily.sofiaBold),),
@@ -55,7 +54,6 @@ class _GetStartedState extends State<GetStarted> {
             icon: new Icon(Icons.reorder,),
             title: new Text('Orders',
               style: TextStyle(
-                  color: AppColors.color3,
                   fontWeight: FontWeight.bold,
                   fontSize: 15.0,
                   fontFamily: FontFamily.sofiaBold),),
@@ -64,7 +62,6 @@ class _GetStartedState extends State<GetStarted> {
               icon: Icon(Icons.mail,),
               title: Text('Messages',
                 style: TextStyle(
-                    color: AppColors.color3,
                     fontWeight: FontWeight.bold,
                     fontSize: 15.0,
                     fontFamily: FontFamily.sofiaBold),)
@@ -73,7 +70,6 @@ class _GetStartedState extends State<GetStarted> {
               icon: Icon(Icons.person,),
               title: Text('Profile',
                 style: TextStyle(
-                    color: AppColors.color3,
                     fontWeight: FontWeight.bold,
                     fontSize: 15.0,
                     fontFamily: FontFamily.sofiaBold),)

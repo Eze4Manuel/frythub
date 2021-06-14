@@ -437,11 +437,15 @@ class _HomeState extends State<Home> {
                         ),
                         Row(
                           children: [
-                            Text(Strings.viewALl),
-                            Container(
-                              height: 40,
-                              width: 40,
-                            ),
+                            Text(Strings.viewALl,
+                              style: TextStyle(
+                                  color: AppColors.appPrimaryColor,
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 14.0,
+                                  fontFamily: FontFamily.sofiaBold),),
+                            Icon(Icons.arrow_forward_ios,
+                            color: AppColors.appPrimaryColor,
+                            size: 13.0,)
                           ],
                         ),
                       ],
@@ -474,8 +478,8 @@ class _HomeState extends State<Home> {
                                             scale: 0.01),
                                       ),
                                       Container(
-                                        height: 50,
-                                        width: 50,
+                                        height: 30,
+                                        width: 30,
                                         decoration: BoxDecoration(
                                             color: AppColors.color1,
                                             borderRadius:
@@ -490,7 +494,7 @@ class _HomeState extends State<Home> {
                                   ),
                                   SizedBox(
                                     width: DeviceUtils.getScaledHeight(context,
-                                        scale: 0.01),
+                                        scale: 0.005),
                                   ),
                                   Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
@@ -518,6 +522,7 @@ class _HomeState extends State<Home> {
                                   )
                                 ],
                               ),
+                              Container(height: 45, child: VerticalDivider(color: AppColors.color13)),
                               Row(
                                 children: [
                                   Row(
@@ -525,11 +530,11 @@ class _HomeState extends State<Home> {
                                       SizedBox(
                                         width: DeviceUtils.getScaledWidth(
                                             context,
-                                            scale: 0.01),
+                                            scale: 0.005),
                                       ),
                                       Container(
-                                        height: 50,
-                                        width: 50,
+                                        height: 30,
+                                        width: 30,
                                         decoration: BoxDecoration(
                                             color: AppColors.color1,
                                             borderRadius:
@@ -571,6 +576,7 @@ class _HomeState extends State<Home> {
                                   )
                                 ],
                               ),
+                              Container(height: 45, child: VerticalDivider(color: AppColors.color13)),
                               Row(
                                 children: [
                                   Row(
@@ -578,11 +584,11 @@ class _HomeState extends State<Home> {
                                       SizedBox(
                                         width: DeviceUtils.getScaledWidth(
                                             context,
-                                            scale: 0.01),
+                                            scale: 0.005),
                                       ),
                                       Container(
-                                        height: 50,
-                                        width: 50,
+                                        height: 30,
+                                        width: 30,
                                         decoration: BoxDecoration(
                                             color: AppColors.color1,
                                             borderRadius:
@@ -633,7 +639,8 @@ class _HomeState extends State<Home> {
                           ),
                           Divider(
                             height: 10,
-                            color: AppColors.color6,
+                            thickness: 1,
+                            color: AppColors.color13,
                             indent: 20,
                             endIndent: 20,
                           ),
@@ -661,8 +668,8 @@ class RecentTabs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 8, horizontal: 10),
-      padding: EdgeInsets.symmetric(vertical: 20, horizontal: 5),
+      margin: EdgeInsets.symmetric(vertical: 8, horizontal: 0),
+      padding: EdgeInsets.symmetric(vertical: 25  , horizontal: 8),
       decoration: BoxDecoration(
           color: AppColors.color2,
           borderRadius: BorderRadius.all(
@@ -712,7 +719,7 @@ class RecentTabs extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
-                      'Status :',
+                      'Status: ',
                       style: TextStyle(
                           color: AppColors.color3,
                           fontWeight: FontWeight.bold,
@@ -720,7 +727,7 @@ class RecentTabs extends StatelessWidget {
                           fontFamily: FontFamily.sofiaBold),
                     ),
                     Text(
-                      'Pending :',
+                      'Pending',
                       style: TextStyle(
                           color: AppColors.color3,
                           fontWeight: FontWeight.bold,
@@ -733,7 +740,7 @@ class RecentTabs extends StatelessWidget {
             ),
           ),
           Expanded(
-            flex: 2,
+            flex: 1,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
