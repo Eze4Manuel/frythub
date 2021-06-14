@@ -78,7 +78,7 @@ class _CarInformationState extends State<CarInformation> {
                   style: TextStyle(
                       color: AppColors.appPrimaryColor,
                       fontWeight: FontWeight.bold,
-                      fontSize: 24.0,
+                      fontSize: 20.0,
                       fontFamily: FontFamily.sofiaBold),
                 ),
                 SizedBox(

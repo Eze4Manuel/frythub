@@ -134,8 +134,8 @@ class _ShipACarState extends State<ShipACar> {
                 SizedBox(
                   height: DeviceUtils.getScaledHeight(context, scale: 0.065),
                 ),
-                CarInformation(),
-                // PickUpAddress(),
+                // CarInformation(),
+                PickUpAddress(),
               ],
             ),
           );
