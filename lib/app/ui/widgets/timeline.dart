@@ -10,8 +10,9 @@ class Timeline extends StatelessWidget {
   IconData icon;
   Color color;
   String text;
+  bool isFilled;
 
-  Timeline({this.isFirst, this.isLast, this.color, this.icon, this.text});
+  Timeline({this.isFirst, this.isLast, this.color, this.icon, this.text, this.isFilled});
   @override
   Widget build(BuildContext context) {
     return  Expanded(
@@ -27,11 +28,11 @@ class Timeline extends StatelessWidget {
           padding: const EdgeInsets.all(0),
           indicator: Container(
             decoration: BoxDecoration(
-                color: AppColors.whiteColor,
+                color: (isFilled) ? AppColors.appPrimaryColor : AppColors.whiteColor,
                 border: Border.all(color: color, width: 2),
                 borderRadius: BorderRadius.all(Radius.circular(100))
             ),
-            child: Icon(icon, color: color,),
+            child: Icon(icon, color: (isFilled) ? AppColors.whiteColor : color,),
           ),
 
         ),

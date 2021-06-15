@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_number_picker/flutter_number_picker.dart';
+import 'package:fryghthub/app/controller/buy_a_car_timeline_controller.dart';
 import 'package:fryghthub/app/ui/pages/dashboard/home/pick_up_address.dart';
 import 'package:fryghthub/app/ui/widgets/custom_checkbox.dart';
 import 'package:fryghthub/app/utils/form_field_decoration.dart';
@@ -8,6 +9,7 @@ import 'package:fryghthub/app/ui/theme/app_colors.dart';
 import 'package:fryghthub/app/ui/theme/app_fonts.dart';
 import 'package:fryghthub/app/ui/theme/app_strings.dart';
 import 'package:fryghthub/app/utils/device_utils.dart';
+import 'package:get/get.dart';
 
 
 
@@ -18,6 +20,7 @@ class CarInformation extends StatefulWidget {
 
 class _CarInformationState extends State<CarInformation> {
   int _radioValue = 0;
+  BuyACarTimelineController buyACarTimelineController = Get.put(BuyACarTimelineController());
 
   @override
   void initState() {
@@ -454,8 +457,7 @@ class _CarInformationState extends State<CarInformation> {
               ),
               GestureDetector(
                 onTap: (){
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => PickUpAddress()) );
+                  buyACarTimelineController.updateTimeline(2);
                 },
                 child: Container(
                   height: 56,

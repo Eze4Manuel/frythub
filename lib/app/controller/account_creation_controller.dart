@@ -2,7 +2,7 @@
 
 import 'package:fryghthub/app/data/model/account.dart';
 import 'package:fryghthub/app/data/provider/create_account_provider.dart';
-import 'package:get/get.dart';
+import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
 class AccountCreationController extends GetxController{
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fryghthub/app/controller/buy_a_car_timeline_controller.dart';
 import 'package:fryghthub/app/ui/pages/dashboard/home/car_information.dart';
 import 'package:fryghthub/app/ui/pages/dashboard/home/pick_up_address.dart';
 import 'package:fryghthub/app/ui/theme/app_colors.dart';
@@ -7,6 +8,7 @@ import 'package:fryghthub/app/ui/theme/app_strings.dart';
 import 'package:fryghthub/app/ui/widgets/timeline.dart';
 import 'package:fryghthub/app/utils/device_utils.dart';
 import 'package:fryghthub/app/utils/responsive_safe_area.dart';
+import 'package:get/get.dart';
 
 class ShipACar extends StatefulWidget {
   @override
@@ -14,6 +16,9 @@ class ShipACar extends StatefulWidget {
 }
 
 class _ShipACarState extends State<ShipACar> {
+
+  BuyACarTimelineController buyACarTimelineController = Get.put(BuyACarTimelineController());
+
   @override
   void initState() {
     super.initState();
@@ -81,8 +86,6 @@ class _ShipACarState extends State<ShipACar> {
                           ),
                         ],
                       ),
-
-
                       SizedBox(
                         height:
                             DeviceUtils.getScaledHeight(context, scale: 0.065),
@@ -95,36 +98,127 @@ class _ShipACarState extends State<ShipACar> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
+                            Obx(()=>
+                            (buyACarTimelineController.timeline_steps.value > 0) ?
+                            ((buyACarTimelineController.timeline_steps.value > 1) ?
                             Timeline(
-                                isFirst: true,
+                                isFirst: false,
                                 isLast: false,
                                 icon: Icons.car_rental,
                                 color: AppColors.appPrimaryColor,
-                                text: 'Step 1/6'),
+                                text: 'Step 1/5', isFilled: true) :
                             Timeline(
                                 isFirst: false,
                                 isLast: false,
                                 icon: Icons.flag,
+                                color: AppColors.appPrimaryColor,
+                                text: 'Step 1/5', isFilled: false) )
+                                :
+                            Timeline(
+                                isFirst: false,
+                                isLast: false,
+                                icon: Icons.car_rental,
                                 color: AppColors.color13,
-                                text: ''),
+                                text: 'Step 1/6',
+                                isFilled: false)
+                            ),
+                            Obx(()=>
+                            (buyACarTimelineController.timeline_steps.value > 1) ?
+                            ((buyACarTimelineController.timeline_steps.value > 2) ?
+                              Timeline(
+                                  isFirst: false,
+                                  isLast: false,
+                                  icon: Icons.flag,
+                                  color: AppColors.appPrimaryColor,
+                                  text: 'Step 2/5', isFilled: true) :
+                              Timeline(
+                                isFirst: false,
+                                isLast: false,
+                                icon: Icons.flag,
+                                color: AppColors.appPrimaryColor,
+                                text: 'Step 2/5', isFilled: false) )
+                                :
+                                Timeline(
+                                isFirst: false,
+                                isLast: false,
+                                icon: Icons.flag,
+                                color: AppColors.color13,
+                                text: '',
+                                isFilled: false)
+                            ),
+                            Obx(()=>
+                            (buyACarTimelineController.timeline_steps.value > 2) ?
+                            ((buyACarTimelineController.timeline_steps.value > 3) ?
+                            Timeline(
+                                isFirst: false,
+                                isLast: false,
+                                icon: Icons.pin_drop_outlined,
+                                color: AppColors.appPrimaryColor,
+                                text: 'Step 3/5', isFilled: true) :
                             Timeline(
                                 isFirst: false,
                                 isLast: false,
                                 icon: Icons.pin_drop_outlined,
                                 color: AppColors.color13,
-                                text: ''),
+                                text: 'Step 3/5', isFilled: false) )
+                                :
+                            Timeline(
+                                isFirst: false,
+                                isLast: false,
+                                icon: Icons.pin_drop_outlined,
+                                color: AppColors.color13,
+                                text: '',
+                                isFilled: false)
+                            ),
+                            Obx(()=>
+                            (buyACarTimelineController.timeline_steps.value > 3) ?
+                            ((buyACarTimelineController.timeline_steps.value > 4) ?
+                            Timeline(
+                                isFirst: false,
+                                isLast: false,
+                                icon: Icons.waves,
+                                color: AppColors.appPrimaryColor,
+                                text: 'Step 4/5', isFilled: true) :
                             Timeline(
                                 isFirst: false,
                                 isLast: false,
                                 icon: Icons.waves,
                                 color: AppColors.color13,
-                                text: ''),
+                                text: 'Step 4/5', isFilled: false) )
+                                :
                             Timeline(
                                 isFirst: false,
-                                isLast: true,
+                                isLast: false,
+                                icon: Icons.waves,
+                                color: AppColors.color13,
+                                text: '',
+                                isFilled: false)
+                            ),
+                            Obx(()=>
+                            (buyACarTimelineController.timeline_steps.value > 4) ?
+                            ((buyACarTimelineController.timeline_steps.value > 5) ?
+                            Timeline(
+                                isFirst: false,
+                                isLast: false,
+                                icon: Icons.credit_card,
+                                color: AppColors.appPrimaryColor,
+                                text: 'Step 5/5', isFilled: true) :
+                            Timeline(
+                                isFirst: false,
+                                isLast: false,
                                 icon: Icons.credit_card,
                                 color: AppColors.color13,
-                                text: ''),
+                                text: 'Step 5/5', isFilled: false) )
+                                :
+                            Timeline(
+                                isFirst: false,
+                                isLast: false,
+                                icon: Icons.credit_card,
+                                color: AppColors.color13,
+                                text: '',
+                                isFilled: false)
+                            ),
+
                           ],
                         ),
                       ),
@@ -134,13 +228,39 @@ class _ShipACarState extends State<ShipACar> {
                 SizedBox(
                   height: DeviceUtils.getScaledHeight(context, scale: 0.065),
                 ),
-                // CarInformation(),
-                PickUpAddress(),
+                Obx( () => _updateTimeline(buyACarTimelineController.timeline_steps.value)),
               ],
             ),
           );
         },
       ),
     );
+  }
+}
+
+
+_updateTimeline( value){
+  print(value);
+  switch (value) {
+    case 1: return  CarInformation();
+    break;
+    case 2: return PickUpAddress();
+    break;
+    case 3: {
+
+    }
+    break;
+    case 4: {
+
+    }
+    break;
+    case 5: {
+
+    }
+    break;
+    case 6: {
+
+    }
+    break;
   }
 }
