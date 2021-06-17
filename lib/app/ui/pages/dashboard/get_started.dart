@@ -40,7 +40,6 @@ class _GetStartedState extends State<GetStarted> {
         unselectedLabelStyle: TextStyle(color: AppColors.color3),
         unselectedItemColor: AppColors.color3,
         currentIndex: _currentIndex,
-
         items: [
           BottomNavigationBarItem(
             icon: new Icon(Icons.home,),

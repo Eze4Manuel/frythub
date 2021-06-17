@@ -92,4 +92,12 @@ class Strings {
   static const String useGoogle = "Use Google Map";
   static const String typesAddress = "Types Address";
 
+  static const String step2 = "Step 2/6";
+  static const String selectCountry = "Select Country";
+  static const String selectState = "Select State/Province";
+  static const String streetName = "Street Name";
+  static const String houseNumber = "House Number";
+  static const String postalCode = "Postal Code";
+  static const String preferredPickupDate = "Preferred Pickup Date";
+
 }
