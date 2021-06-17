@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:fryghthub/app/ui/pages/dashboard/home/pick_up_address.dart';
+import 'package:fryghthub/app/ui/pages/dashboard/home/google_pick_up_address.dart';
+import 'package:fryghthub/app/ui/pages/dashboard/home/keyboard_pick_up_address.dart';
 import 'package:fryghthub/app/ui/theme/app_colors.dart';
 import 'package:fryghthub/app/ui/theme/app_fonts.dart';
 import 'package:fryghthub/app/ui/theme/app_strings.dart';
@@ -95,7 +96,7 @@ class _PickUpAddressSelectState extends State<PickUpAddressSelect> {
           GestureDetector(
             onTap: (){
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => PickUpAddress()));
+                  MaterialPageRoute(builder: (context) => GooglePickUpAddress()));
             },
             child: Container(
               margin: EdgeInsets.symmetric(vertical: 8, horizontal: 0),
@@ -171,7 +172,7 @@ class _PickUpAddressSelectState extends State<PickUpAddressSelect> {
           GestureDetector(
             onTap: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => PickUpAddress()));
+                  MaterialPageRoute(builder: (context) => KeyboardPickUpAddress()));
             },
             child: Container(
               margin: EdgeInsets.symmetric(vertical: 8, horizontal: 0),

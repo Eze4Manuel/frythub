@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fryghthub/app/ui/theme/app_colors.dart';
 
 class TextFieldWidget extends StatelessWidget {
   final Widget prefixIcon;
@@ -48,7 +49,8 @@ class TextFieldWidget extends StatelessWidget {
       this.borderSideColor,
       this.filledColor,
       this.hintStyle,
-      this.filled, this.enabled})
+      this.filled,
+      this.enabled})
       : super(key: key);
 
   @override
@@ -71,7 +73,6 @@ class TextFieldWidget extends StatelessWidget {
           hintStyle: hintStyle,
           errorText: errorText,
           // enabled: enabled,
-
           focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: borderSideColor),
               borderRadius: BorderRadius.circular(8)),

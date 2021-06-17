@@ -100,4 +100,9 @@ class Strings {
   static const String postalCode = "Postal Code";
   static const String preferredPickupDate = "Preferred Pickup Date";
 
+  static const String carPickUpAddress = "Car Pickup Address";
+  static const String chooseMapAddress = "Choose an address on the map to proceed";
+  static const String preferredPickupDateAndTime = "Preferred Pickup Date and Time";
+
+
 }

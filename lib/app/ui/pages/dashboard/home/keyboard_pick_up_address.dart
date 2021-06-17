@@ -7,12 +7,12 @@ import 'package:fryghthub/app/utils/form_field_decoration.dart';
 import 'package:fryghthub/app/utils/responsive_safe_area.dart';
 
 
-class PickUpAddress extends StatefulWidget {
+class KeyboardPickUpAddress extends StatefulWidget {
   @override
-  _PickUpAddressState createState() => _PickUpAddressState();
+  _KeyboardPickUpAddressState createState() => _KeyboardPickUpAddressState();
 }
 
-class _PickUpAddressState extends State<PickUpAddress> {
+class _KeyboardPickUpAddressState extends State<KeyboardPickUpAddress> {
   int _radioValue = 0;
 
   @override
@@ -139,7 +139,6 @@ class _PickUpAddressState extends State<PickUpAddress> {
                       ),
                     ],
                   ),
-
                   // Select State/Provice
                   SizedBox(
                     height:
@@ -273,7 +272,6 @@ class _PickUpAddressState extends State<PickUpAddress> {
                               gapPadding: 8.0),
 
                         ),
-
                       ),
                     ],
                   ),
@@ -330,9 +328,7 @@ class _PickUpAddressState extends State<PickUpAddress> {
                               borderSide: BorderSide(color: AppColors.color13, width: 2.0),
                               borderRadius: BorderRadius.circular(8),
                               gapPadding: 8.0),
-
                         ),
-
                       ),
                     ],
                   ),
@@ -383,13 +379,10 @@ class _PickUpAddressState extends State<PickUpAddress> {
                               borderSide: BorderSide(color: AppColors.color13, width: 2.0),
                               borderRadius: BorderRadius.circular(8),
                               gapPadding: 8.0),
-
                         ),
-
                       ),
                     ],
                   ),
-
 
                   SizedBox(
                     height: DeviceUtils.getScaledHeight(context, scale: 0.08),

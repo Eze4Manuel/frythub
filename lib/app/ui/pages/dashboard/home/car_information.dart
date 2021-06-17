@@ -2,10 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_number_picker/flutter_number_picker.dart';
 import 'package:fryghthub/app/controller/buy_a_car_timeline_controller.dart';
-<<<<<<< HEAD
-=======
-import 'package:fryghthub/app/ui/pages/dashboard/home/pick_up_address.dart';
->>>>>>> e3a60c6 (Abstracted timeline feature for buy_a_car section, updated .gitignore file)
 import 'package:fryghthub/app/ui/widgets/custom_checkbox.dart';
 import 'package:fryghthub/app/utils/form_field_decoration.dart';
 import 'package:fryghthub/app/ui/theme/app_colors.dart';
