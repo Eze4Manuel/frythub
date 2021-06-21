@@ -63,7 +63,7 @@ class Strings {
   static const String viewALl = "View All";
 
   static const String notification = "Notification";
-  static const String shipACarSubtext = "Follow the 5 steps below to complete and submit your request";
+  static const String shipACarSubtext = "Follow the 5 steps below to complete and \nsubmit your request";
 
   static const String carinfo = "Car information";
   static const String carinfosub = "Type of Car and other info";
@@ -81,7 +81,7 @@ class Strings {
   static const String preferredShipping = "Preferred Shipping Method";
 
   static const String nextstep = "Next Step";
-  static const String chooseShippingMethod = "Choose The Shipping Method You Prefer";
+  static const String chooseShippingMethod = "Choose The Shipping \nMethod You Prefer";
   static const String container = "Container";
   static const String rollOnRollOff = "Roll-On-Roll-Off";
   static const String orderWithMore = "Order with more than 4 cars";
@@ -101,7 +101,8 @@ class Strings {
   static const String preferredPickupDate = "Preferred Pickup Date";
 
   static const String carPickUpAddress = "Car Pickup Address";
-  static const String chooseMapAddress = "Choose an address on the map to proceed";
+
+   static const String chooseMapAddress = "Choose an address on the map\n to proceed";
   static const String preferredPickupDateAndTime = "Preferred Pickup Date and Time";
 
 

@@ -11,12 +11,9 @@ class ForgotPasswordController extends GetxController {
   void setEmail(String email) => email = email;
 
   Future<bool> verifyEmail(){
-    // TODO Inplement the procedure to upload user account
-
-    print(email);
+    // TODO Inplement the procedure to verify Email
     return Future<bool>.value(true);
   }
-
   // Removes Object instance
   void removeAccountReference () => (email != null) ? email = null : null;
 }

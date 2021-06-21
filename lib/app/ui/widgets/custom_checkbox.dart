@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fryghthub/app/ui/theme/app_colors.dart';
 
 class CircleCheckbox extends StatelessWidget {
   final bool value;
@@ -32,6 +33,7 @@ class CircleCheckbox extends StatelessWidget {
                 width: 2,
                 color: Theme.of(context).unselectedWidgetColor ??
                     Theme.of(context).disabledColor),
+            color: (value) ? AppColors.whiteColor : AppColors.color13,
             borderRadius: new BorderRadius.circular(100),
           ),
           child: Checkbox(

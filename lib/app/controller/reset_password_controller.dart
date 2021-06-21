@@ -12,7 +12,7 @@ class ResetPasswordController extends GetxController {
   void setPassword(String password) => password = password;
 
   Future<bool> resetCode(){
-    // TODO Inplement the procedure to upload user account
+    // TODO Inplement the procedure to Reset Code
 
     print(code);
     return Future<bool>.value(true);
