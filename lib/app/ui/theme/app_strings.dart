@@ -102,8 +102,15 @@ class Strings {
 
   static const String carPickUpAddress = "Car Pickup Address";
 
-   static const String chooseMapAddress = "Choose an address on the map\n to proceed";
+  static const String chooseMapAddress = "Choose an address on the map\n to proceed";
   static const String preferredPickupDateAndTime = "Preferred Pickup Date and Time";
+
+
+  static const String deliveryAddress = "Delivery Address";
+  static const String setdeliverDrop = "Set where you want us to drop the car off";
+  static const String step3 = "Step 3/6";
+  static const String carDeliveryAddress = "Car Delivery Address";
+
 
 
 }

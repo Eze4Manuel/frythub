@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fryghthub/app/controller/buy_a_car_timeline_controller.dart';
 import 'package:fryghthub/app/ui/pages/dashboard/home/ship_a_car/car_information.dart';
+import 'package:fryghthub/app/ui/pages/dashboard/home/ship_a_car/delivery_address_select.dart';
 import 'package:fryghthub/app/ui/pages/dashboard/home/ship_a_car/pick_up_address_select.dart';
 import 'package:fryghthub/app/ui/theme/app_colors.dart';
 import 'package:fryghthub/app/ui/theme/app_fonts.dart';
@@ -78,7 +79,7 @@ class _ShipACarState extends State<ShipACar> {
                               isLast: false,
                               icon: Icons.car_rental,
                               color: AppColors.appPrimaryColor,
-                              text: 'Step 1/5', isFilled: true) :
+                              text: '', isFilled: true) :
                           Timeline(
                               isFirst: true,
                               isLast: false,
@@ -91,7 +92,7 @@ class _ShipACarState extends State<ShipACar> {
                               isLast: false,
                               icon: Icons.car_rental,
                               color: AppColors.color13,
-                              text: 'Step 1/6',
+                              text: 'Step 1/5',
                               isFilled: false)
                           ),
                           Obx(()=>
@@ -102,7 +103,7 @@ class _ShipACarState extends State<ShipACar> {
                               isLast: false,
                               icon: Icons.flag,
                               color: AppColors.appPrimaryColor,
-                              text: 'Step 2/5', isFilled: true) :
+                              text: '', isFilled: true) :
                           Timeline(
                               isFirst: false,
                               isLast: false,
@@ -131,7 +132,7 @@ class _ShipACarState extends State<ShipACar> {
                               isFirst: false,
                               isLast: false,
                               icon: Icons.pin_drop_outlined,
-                              color: AppColors.color13,
+                              color: AppColors.appPrimaryColor,
                               text: 'Step 3/5', isFilled: false) )
                               :
                           Timeline(
@@ -155,7 +156,7 @@ class _ShipACarState extends State<ShipACar> {
                               isFirst: false,
                               isLast: false,
                               icon: Icons.waves,
-                              color: AppColors.color13,
+                              color: AppColors.appPrimaryColor,
                               text: 'Step 4/5', isFilled: false) )
                               :
                           Timeline(
@@ -179,7 +180,7 @@ class _ShipACarState extends State<ShipACar> {
                               isFirst: false,
                               isLast: true,
                               icon: Icons.credit_card,
-                              color: AppColors.color13,
+                              color: AppColors.appPrimaryColor,
                               text: 'Step 5/5', isFilled: false) )
                               :
                           Timeline(
@@ -233,11 +234,8 @@ _updateTimeline(value){
     case 1: return  CarInformation();
     break;
     case 2: return PickUpAddressSelect();
-
     break;
-    case 3: {
-
-    }
+    case 3: return DeliveryAddressSelect();
     break;
     case 4: {
 

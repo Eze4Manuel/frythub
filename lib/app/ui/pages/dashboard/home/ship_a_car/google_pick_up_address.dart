@@ -75,7 +75,7 @@ class _GooglePickUpAddressState extends State<GooglePickUpAddress> {
               ),
             ),
             SlidingUpPanel(
-              maxHeight: DeviceUtils.getScaledHeight(context, scale: 0.7),
+              maxHeight: DeviceUtils.getScaledHeight(context, scale: 0.65),
               padding: EdgeInsets.symmetric(horizontal: 25),
               borderRadius: BorderRadius.only(
                   topRight: Radius.circular(25.0),
@@ -170,8 +170,6 @@ class _GooglePickUpAddressState extends State<GooglePickUpAddress> {
                           children: [
                             Divider(),
                             Container(
-                              height: DeviceUtils.getScaledHeight(context,
-                                  scale: 0.15),
                               child: Row(
                                 children: [
                                   Expanded(flex: 4, child: Text('')),
@@ -234,6 +232,7 @@ class _GooglePickUpAddressState extends State<GooglePickUpAddress> {
                   ),
                   GestureDetector(
                       onTap: () {
+                        Navigator.pop(context);
                         buyACarTimelineController.updateTimeline(3);
                       },
                       child: NextStepButtonComponent(text: '3/5')),

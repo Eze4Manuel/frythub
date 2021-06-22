@@ -241,6 +241,8 @@ class _KeyboardPickUpAddressState extends State<KeyboardPickUpAddress> {
           child: GestureDetector(
               onTap: (){
                 buyACarTimelineController.updateTimeline(3);
+                Navigator.pop(context);
+
               },
               child: NextStepButtonComponent(text: "3/5"))),
     );
