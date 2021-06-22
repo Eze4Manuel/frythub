@@ -6,7 +6,9 @@ import 'package:fryghthub/app/ui/theme/app_strings.dart';
 
 class NextStepButtonComponent extends StatelessWidget {
   String text;
-  NextStepButtonComponent({this.text});
+  String trailtext;
+
+  NextStepButtonComponent({this.text, this.trailtext});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,7 @@ class NextStepButtonComponent extends StatelessWidget {
           Container(),
           Center(
             child: Text(
-              Strings.nextstep,
+              text,
               style: TextStyle(
                 color: AppColors.whiteColor,
                 fontSize: 20,
@@ -31,7 +33,7 @@ class NextStepButtonComponent extends StatelessWidget {
             ),
           ),
           Text(
-            text,
+            trailtext,
             style: TextStyle(
               color: AppColors.whiteColor,
               fontSize: 20,

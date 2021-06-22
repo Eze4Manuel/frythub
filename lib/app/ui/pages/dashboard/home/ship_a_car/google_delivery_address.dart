@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fryghthub/app/controller/buy_a_car_timeline_controller.dart';
 import 'package:fryghthub/app/ui/components/next_step_button.dart';
+import 'package:fryghthub/app/ui/components/pull_up.dart';
 import 'package:fryghthub/app/ui/theme/app_colors.dart';
 import 'package:fryghthub/app/ui/theme/app_fonts.dart';
 import 'package:fryghthub/app/ui/theme/app_strings.dart';
@@ -94,18 +95,7 @@ class _GoogleDeliveryAddressState extends State<GoogleDeliveryAddress> {
                     height:
                         DeviceUtils.getScaledHeight(context, scale: 0.02),
                   ),
-                  Center(
-                    child: Container(
-                      padding: EdgeInsets.all(10),
-                      width: 60,
-                      height: 8,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(13),
-                        color: AppColors.color13,
-                      ),
-                      child: Container(),
-                    ),
-                  ),
+                  PullUpComponent(),
                   SizedBox(
                     height:
                         DeviceUtils.getScaledHeight(context, scale: 0.04),
@@ -235,10 +225,11 @@ class _GoogleDeliveryAddressState extends State<GoogleDeliveryAddress> {
                   ),
                   GestureDetector(
                       onTap: () {
+                        // Setting GetX timeline counter to the value of 4
                         buyACarTimelineController.updateTimeline(4);
                         Navigator.pop(context);
                       },
-                      child: NextStepButtonComponent(text: '4/5')),
+                      child: NextStepButtonComponent(text: Strings.nextstep, trailtext: '4/5')),
                   SizedBox(
                     height:
                         DeviceUtils.getScaledHeight(context, scale: 0.01),

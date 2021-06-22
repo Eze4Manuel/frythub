@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fryghthub/app/ui/components/pull_up.dart';
 import 'package:fryghthub/app/ui/pages/dashboard/home/ship_a_car/google_pick_up_address.dart';
 import 'package:fryghthub/app/ui/pages/dashboard/home/ship_a_car/keyboard_pick_up_address.dart';
 import 'package:fryghthub/app/ui/theme/app_colors.dart';
@@ -47,18 +48,7 @@ class _PickUpAddressSelectState extends State<PickUpAddressSelect> {
           SizedBox(
             height: DeviceUtils.getScaledHeight(context, scale: 0.02),
           ),
-          Center(
-            child: Container(
-              padding: EdgeInsets.all(10),
-              width: 60,
-              height: 5,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(13),
-                color: AppColors.color13,
-              ),
-              child: Container(),
-            ),
-          ),
+          PullUpComponent(),
           SizedBox(
             height: DeviceUtils.getScaledHeight(context, scale: 0.04),
           ),

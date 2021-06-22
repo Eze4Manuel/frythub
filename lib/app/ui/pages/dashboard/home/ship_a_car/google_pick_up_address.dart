@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fryghthub/app/controller/buy_a_car_timeline_controller.dart';
 import 'package:fryghthub/app/ui/components/next_step_button.dart';
+import 'package:fryghthub/app/ui/components/pull_up.dart';
 import 'package:fryghthub/app/ui/theme/app_colors.dart';
 import 'package:fryghthub/app/ui/theme/app_fonts.dart';
 import 'package:fryghthub/app/ui/theme/app_strings.dart';
@@ -94,18 +95,7 @@ class _GooglePickUpAddressState extends State<GooglePickUpAddress> {
                     height:
                         DeviceUtils.getScaledHeight(context, scale: 0.02),
                   ),
-                  Center(
-                    child: Container(
-                      padding: EdgeInsets.all(10),
-                      width: 60,
-                      height: 8,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(13),
-                        color: AppColors.color13,
-                      ),
-                      child: Container(),
-                    ),
-                  ),
+                  PullUpComponent(),
                   SizedBox(
                     height:
                         DeviceUtils.getScaledHeight(context, scale: 0.04),
@@ -120,7 +110,7 @@ class _GooglePickUpAddressState extends State<GooglePickUpAddress> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child:
-                            Icon(Icons.flag, color: AppColors.whiteColor),
+                            Icon(Icons.flag_outlined, color: AppColors.whiteColor),
                       ),
                       SizedBox(
                         width: DeviceUtils.getScaledHeight(context,
@@ -146,8 +136,8 @@ class _GooglePickUpAddressState extends State<GooglePickUpAddress> {
                           children: [
                             Center(
                                 child: Icon(
-                              Icons.flag,
-                              color: AppColors.color11,
+                              Icons.flag_outlined,
+                              color: AppColors.color12,
                               size: 30,
                             )),
                             SizedBox(
@@ -158,7 +148,7 @@ class _GooglePickUpAddressState extends State<GooglePickUpAddress> {
                               Strings.chooseMapAddress,
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                  color: AppColors.color11,
+                                  color: AppColors.color12,
                                   fontWeight: FontWeight.normal,
                                   fontSize: 16.0,
                                   fontFamily: FontFamily.sofiaRegular),
@@ -188,13 +178,10 @@ class _GooglePickUpAddressState extends State<GooglePickUpAddress> {
                         ),
                   SizedBox(
                     height:
-                        DeviceUtils.getScaledHeight(context, scale: 0.02),
+                        DeviceUtils.getScaledHeight(context, scale: 0.04),
                   ),
                   // Preferred Pickup Date
-                  SizedBox(
-                    height:
-                        DeviceUtils.getScaledHeight(context, scale: 0.02),
-                  ),
+
                   Text(
                     Strings.preferredPickupDateAndTime,
                     style: TextStyle(
@@ -232,10 +219,12 @@ class _GooglePickUpAddressState extends State<GooglePickUpAddress> {
                   ),
                   GestureDetector(
                       onTap: () {
-                        Navigator.pop(context);
+                        // Setting GetX timeline counter to the value of 3
                         buyACarTimelineController.updateTimeline(3);
+                        Navigator.pop(context);
+
                       },
-                      child: NextStepButtonComponent(text: '3/5')),
+                      child: NextStepButtonComponent(text: Strings.nextstep, trailtext: '3/5')),
                   SizedBox(
                     height:
                         DeviceUtils.getScaledHeight(context, scale: 0.01),

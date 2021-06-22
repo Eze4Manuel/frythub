@@ -108,8 +108,10 @@ class Strings {
 
   static const String deliveryAddress = "Delivery Address";
   static const String setdeliverDrop = "Set where you want us to drop the car off";
-  static const String step3 = "Step 3/6";
+  static const String step3 = "Step 3/5";
   static const String carDeliveryAddress = "Car Delivery Address";
+
+  static const String requestSummary = "Request Summary";
 
 
 

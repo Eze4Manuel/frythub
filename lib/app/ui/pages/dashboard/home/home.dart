@@ -215,11 +215,6 @@ class _HomeState extends State<Home> {
                         indent: 20,
                         endIndent: 20,
                       ),
-                      SizedBox(
-                        height: DeviceUtils.getScaledHeight(context,
-                            scale: 0.02),
-                      ),
-
 
                       // Recent Tabs
                       Container(
@@ -229,6 +224,10 @@ class _HomeState extends State<Home> {
                           itemCount: 7,
                           itemBuilder: (context, index) => RecentTabs()
                         ),
+                      ),
+                      SizedBox(
+                        height: DeviceUtils.getScaledHeight(context,
+                            scale: 0.02),
                       ),
                     ],
                   )),

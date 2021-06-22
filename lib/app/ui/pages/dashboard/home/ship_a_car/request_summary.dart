@@ -11,19 +11,21 @@ import 'package:fryghthub/app/utils/device_utils.dart';
 import 'package:fryghthub/app/utils/form_field_decoration.dart';
 import 'package:get/get.dart';
 
-class CarInformation extends StatefulWidget {
+class RequestSummary extends StatefulWidget {
   @override
-  _CarInformationState createState() => _CarInformationState();
+  _RequestSummaryState createState() => _RequestSummaryState();
 }
 
-class _CarInformationState extends State<CarInformation> {
+class _RequestSummaryState extends State<RequestSummary> {
   int _radioValue = 0;
   BuyACarTimelineController buyACarTimelineController =
       Get.put(BuyACarTimelineController());
+
   @override
   void initState() {
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -52,25 +54,40 @@ class _CarInformationState extends State<CarInformation> {
           SizedBox(
             height: DeviceUtils.getScaledHeight(context, scale: 0.04),
           ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                Strings.requestSummary,
+                style: TextStyle(
+                    color: AppColors.appPrimaryColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0,
+                    fontFamily: FontFamily.sofiaBold),
+              ),
+              Text(
+                "Edit",
+                style: TextStyle(
+                    color: AppColors.appPrimaryColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14.0,
+                    fontFamily: FontFamily.sofiaBold),
+              ),
+            ],
+          ),
+
+          SizedBox(
+            height: DeviceUtils.getScaledHeight(context, scale: 0.06),
+          ),
           Text(
-            Strings.carinfo,
+            '1. ${Strings.carinfo}',
             style: TextStyle(
                 color: AppColors.appPrimaryColor,
                 fontWeight: FontWeight.bold,
-                fontSize: 20.0,
+                fontSize: 16.0,
                 fontFamily: FontFamily.sofiaBold),
           ),
-          SizedBox(
-            height: DeviceUtils.getScaledHeight(context, scale: 0.01),
-          ),
-          Text(
-            Strings.carinfosub,
-            style: TextStyle(
-                color: AppColors.color12,
-                fontWeight: FontWeight.bold,
-                fontSize: 14.0,
-                fontFamily: FontFamily.sofiaBold),
-          ),
+
           // About Manufacturer
           SizedBox(
             height: DeviceUtils.getScaledHeight(context, scale: 0.05),
@@ -344,15 +361,158 @@ class _CarInformationState extends State<CarInformation> {
           SizedBox(
             height: DeviceUtils.getScaledHeight(context, scale: 0.08),
           ),
-          GestureDetector(
-            onTap: () {
-              // Setting GetX timeline counter to the value of 2
-              buyACarTimelineController.updateTimeline(2);
-            },
-            child: NextStepButtonComponent( text:"Next Step", trailtext: '2/5'),
+
+          Text(
+            '2. ${Strings.pickUpAddress}',
+            style: TextStyle(
+                color: AppColors.appPrimaryColor,
+                fontWeight: FontWeight.bold,
+                fontSize: 16.0,
+                fontFamily: FontFamily.sofiaBold),
           ),
           SizedBox(
-            height: DeviceUtils.getScaledHeight(context, scale: 0.05),
+            height: DeviceUtils.getScaledHeight(context, scale: 0.08),
+          ),
+          Center(
+              child: Icon(
+                Icons.flag_outlined,
+                color: AppColors.color12,
+                size: 25,
+              )),
+          SizedBox(
+            height: DeviceUtils.getScaledHeight(context,
+                scale: 0.02),
+          ),
+          Center(
+            child: Text(
+              Strings.chooseMapAddress,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  color: AppColors.color12,
+                  fontWeight: FontWeight.normal,
+                  fontSize: 16.0,
+                  fontFamily: FontFamily.sofiaRegular),
+            ),
+          ),
+          SizedBox(
+            height: DeviceUtils.getScaledHeight(context, scale: 0.08),
+          ),
+
+          Text(
+            Strings.preferredPickupDateAndTime,
+            style: TextStyle(
+                color: AppColors.appColor1,
+                fontWeight: FontWeight.normal,
+                fontSize: 16.0,
+                fontFamily: FontFamily.sofiaRegular),
+          ),
+          SizedBox(
+            height:
+            DeviceUtils.getScaledHeight(context, scale: 0.01),
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: TextFormField(
+                  decoration: textInputDecoration.copyWith(
+                    hintText: "Ojay 15",
+                    suffixIcon: Icon(Icons.date_range),
+                  ),
+                  validator: (val) => val.isEmpty ? 'Name' : null,
+                  onChanged: (val) {},
+                ),
+              ),
+              SizedBox(
+                width: DeviceUtils.getScaledHeight(context,
+                    scale: 0.01),
+              ),
+              Icon(Icons.close, color: AppColors.color5)
+            ],
+          ),
+          SizedBox(
+            height: DeviceUtils.getScaledHeight(context, scale: 0.08),
+          ),
+
+          Text(
+            '3. ${Strings.deliveryAddress}',
+            style: TextStyle(
+                color: AppColors.appPrimaryColor,
+                fontWeight: FontWeight.bold,
+                fontSize: 16.0,
+                fontFamily: FontFamily.sofiaBold),
+          ),
+          SizedBox(
+            height: DeviceUtils.getScaledHeight(context, scale: 0.08),
+          ),
+          Center(
+              child: Icon(
+                Icons.flag_outlined,
+                color: AppColors.color12,
+                size: 25,
+              )),
+          SizedBox(
+            height: DeviceUtils.getScaledHeight(context,
+                scale: 0.02),
+          ),
+          Center(
+            child: Text(
+              Strings.chooseMapAddress,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  color: AppColors.color12,
+                  fontWeight: FontWeight.normal,
+                  fontSize: 16.0,
+                  fontFamily: FontFamily.sofiaRegular),
+            ),
+          ),
+          SizedBox(
+            height: DeviceUtils.getScaledHeight(context, scale: 0.08),
+          ),
+
+          Text(
+            Strings.preferredPickupDateAndTime,
+            style: TextStyle(
+                color: AppColors.appColor1,
+                fontWeight: FontWeight.normal,
+                fontSize: 16.0,
+                fontFamily: FontFamily.sofiaRegular),
+          ),
+          SizedBox(
+            height:
+            DeviceUtils.getScaledHeight(context, scale: 0.01),
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: TextFormField(
+                  decoration: textInputDecoration.copyWith(
+                    hintText: "Ojay 15",
+                    suffixIcon: Icon(Icons.date_range),
+                  ),
+                  validator: (val) => val.isEmpty ? 'Name' : null,
+                  onChanged: (val) {},
+                ),
+              ),
+              SizedBox(
+                width: DeviceUtils.getScaledHeight(context,
+                    scale: 0.01),
+              ),
+              Icon(Icons.close, color: AppColors.color5)
+            ],
+          ),
+          SizedBox(
+            height:
+            DeviceUtils.getScaledHeight(context, scale: 0.2),
+          ),
+
+          GestureDetector(
+            onTap: () {
+              buyACarTimelineController.updateTimeline(5);
+            },
+            child: NextStepButtonComponent(text: 'Proceed To Payment', trailtext: '4/5'),
+          ),
+          SizedBox(
+            height: DeviceUtils.getScaledHeight(context, scale: 0.02),
           ),
         ],
       ),
@@ -378,7 +538,17 @@ _shippingMethod(context) {
               SizedBox(
                 height: DeviceUtils.getScaledHeight(context, scale: 0.02),
               ),
-              PullUpComponent(),
+              Center(
+                child: Container(
+                  padding: EdgeInsets.all(10),
+                  width: 60,
+                  height: 5,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(13),
+                    color: AppColors.color13,
+                  ),
+                ),
+              ),
               SizedBox(
                 height: DeviceUtils.getScaledHeight(context, scale: 0.02),
               ),
