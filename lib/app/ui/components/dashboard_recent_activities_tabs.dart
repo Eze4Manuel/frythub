@@ -38,9 +38,9 @@ class RecentActivitiesComponent extends StatelessWidget {
               textBottom,
               style: TextStyle(
                   color: AppColors.color3,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 15.0,
-                  fontFamily: FontFamily.sofiaBold),
+                  fontWeight: FontWeight.normal,
+                  fontSize: 14.0,
+                  fontFamily: FontFamily.sofiaRegular),
             )
           ],
         )

@@ -182,8 +182,7 @@ class _HomeState extends State<Home> {
                 height: DeviceUtils.getScaledHeight(context, scale: 0.03),
               ),
               Container(
-                  padding:
-                  EdgeInsets.symmetric(vertical: 25, horizontal: 20),
+                  padding: EdgeInsets.fromLTRB(15, 25, 15, 0),
                   decoration: BoxDecoration(
                     color: AppColors.whiteColor,
                     borderRadius: BorderRadius.only(
@@ -209,7 +208,7 @@ class _HomeState extends State<Home> {
                             scale: 0.03),
                       ),
                       Divider(
-                        height: 10,
+                        height: 4,
                         thickness: 1,
                         color: AppColors.color13,
                         indent: 20,
@@ -220,15 +219,13 @@ class _HomeState extends State<Home> {
                       Container(
                         height: DeviceUtils.getScaledHeight(context,
                             scale: 0.6),
+                        padding: EdgeInsets.only(top: 20, bottom: 0),
                         child: ListView.builder(
                           itemCount: 7,
                           itemBuilder: (context, index) => RecentTabs()
                         ),
                       ),
-                      SizedBox(
-                        height: DeviceUtils.getScaledHeight(context,
-                            scale: 0.02),
-                      ),
+
                     ],
                   )),
             ],
@@ -243,7 +240,7 @@ class RecentTabs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 8, horizontal: 0),
+      margin: EdgeInsets.symmetric(vertical: 5, horizontal: 0),
       padding: EdgeInsets.symmetric(vertical: 25  , horizontal: 8),
       decoration: BoxDecoration(
           color: AppColors.color2,

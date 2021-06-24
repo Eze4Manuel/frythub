@@ -21,7 +21,7 @@ Widget DashboadrFeatureSelectComponent(context, text, screen, isSet){
           boxShadow: [
             BoxShadow(
               color: AppColors.color13,
-              blurRadius: 20.0, // soften the shadow
+              blurRadius: 0.0, // soften the shadow
               spreadRadius: 0.0, //extend the shadow
               offset: Offset(
                 0.0, // Move to right 10  horizontally
@@ -56,7 +56,7 @@ Widget DashboadrFeatureSelectComponent(context, text, screen, isSet){
             style: TextStyle(
                 color: AppColors.appColor1,
                 fontWeight: FontWeight.bold,
-                fontSize: 15.0,
+                fontSize: 14.0,
                 fontFamily: FontFamily.sofiaBold),
           )
         ],
