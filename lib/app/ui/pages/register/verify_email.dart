@@ -60,7 +60,7 @@ class _VerifyEmailState extends State<VerifyEmail> {
               ),
             ),
             SizedBox(
-              height: DeviceUtils.getScaledHeight(context, scale: 0.017),
+              height: DeviceUtils.getScaledHeight(context, scale: 0.02),
             ),
             Container(
               margin: EdgeInsets.only(left: 32),
@@ -68,13 +68,13 @@ class _VerifyEmailState extends State<VerifyEmail> {
                 Strings.otpMessage,
                 style: TextStyle(
                     color: AppColors.appColor1,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 28.0,
-                    fontFamily: FontFamily.sofiaBold),
+                    fontWeight: FontWeight.normal,
+                    fontSize: 16.0,
+                    fontFamily: FontFamily.sofiaRegular),
               ),
             ),
             SizedBox(
-              height: DeviceUtils.getScaledHeight(context, scale: 0.02),
+              height: DeviceUtils.getScaledHeight(context, scale: 0.1),
             ),
             Stack(
               children: [

@@ -15,7 +15,7 @@ class CarInformationController extends GetxController {
   int maxMilliage;
   String _currentColor;
   RxInt transmissionType = 0.obs;
-  int sedanNumber;
+  RxInt sedanNumber = 1.obs;
   RxString shippingMethod = 'No Shipping Method'.obs;
   TextEditingController textController = new TextEditingController();
 
@@ -43,16 +43,22 @@ class CarInformationController extends GetxController {
     _currentColor = value;
     print(_currentColor);
   }
-   setTransmissionType(val){
+  void setTransmissionType(val){
     transmissionType.value = val;
     print(transmissionType);
   }
 
-  setShippingMethod(val){
+  void setShippingMethod(val){
     textController.text = val;
     shippingMethod.value = val;
-
     print(shippingMethod);
   }
 
+  void increment(){
+    sedanNumber++;
+  }
+
+  void decrement(){
+    if(sedanNumber != 1) sedanNumber--;
+  }
 }

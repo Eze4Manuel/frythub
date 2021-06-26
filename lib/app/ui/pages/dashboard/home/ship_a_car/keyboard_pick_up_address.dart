@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:fryghthub/app/controller/buy_a_car_timeline_controller.dart';
 import 'package:fryghthub/app/ui/components/next_step_button.dart';
 import 'package:fryghthub/app/ui/components/pull_up.dart';
@@ -9,6 +10,7 @@ import 'package:fryghthub/app/utils/device_utils.dart';
 import 'package:fryghthub/app/utils/form_field_decoration.dart';
 import 'package:fryghthub/app/utils/responsive_safe_area.dart';
 import 'package:get/instance_manager.dart';
+import 'dart:ui';
 
 class KeyboardPickUpAddress extends StatefulWidget {
   @override
@@ -18,7 +20,7 @@ class KeyboardPickUpAddress extends StatefulWidget {
 class _KeyboardPickUpAddressState extends State<KeyboardPickUpAddress> {
   int _radioValue = 0;
   BuyACarTimelineController buyACarTimelineController =
-  Get.put(BuyACarTimelineController());
+      Get.put(BuyACarTimelineController());
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +39,10 @@ class _KeyboardPickUpAddressState extends State<KeyboardPickUpAddress> {
                 color: AppColors.color13,
                 blurRadius: 25.0,
                 spreadRadius: 2.0, //extend the shadow
-                offset: Offset( 0.0, 2.0, ),
+                offset: Offset(
+                  0.0,
+                  2.0,
+                ),
               )
             ],
           ),
@@ -108,8 +113,7 @@ class _KeyboardPickUpAddressState extends State<KeyboardPickUpAddress> {
                   height: DeviceUtils.getScaledHeight(context, scale: 0.01),
                 ),
                 DropdownButtonFormField(
-                  decoration:
-                      textInputDecoration.copyWith(hintText: "Ojay 15"),
+                  decoration: textInputDecoration.copyWith(hintText: "Ojay 15"),
                 ),
                 // Select State/Provice
                 SizedBox(
@@ -127,8 +131,7 @@ class _KeyboardPickUpAddressState extends State<KeyboardPickUpAddress> {
                   height: DeviceUtils.getScaledHeight(context, scale: 0.01),
                 ),
                 DropdownButtonFormField(
-                  decoration:
-                      textInputDecoration.copyWith(hintText: "Ojay 15"),
+                  decoration: textInputDecoration.copyWith(hintText: "Ojay 15"),
                 ),
 
                 // Street Name
@@ -147,8 +150,7 @@ class _KeyboardPickUpAddressState extends State<KeyboardPickUpAddress> {
                   height: DeviceUtils.getScaledHeight(context, scale: 0.01),
                 ),
                 TextFormField(
-                  decoration:
-                  textInputDecoration.copyWith(hintText: 'Ojay 15'),
+                  decoration: textInputDecoration.copyWith(hintText: 'Ojay 15'),
                   validator: (val) => val.isEmpty ? 'Name' : null,
                   onChanged: (val) {},
                 ),
@@ -169,8 +171,7 @@ class _KeyboardPickUpAddressState extends State<KeyboardPickUpAddress> {
                   height: DeviceUtils.getScaledHeight(context, scale: 0.01),
                 ),
                 TextFormField(
-                  decoration:
-                  textInputDecoration.copyWith(hintText: 'Ojay 15'),
+                  decoration: textInputDecoration.copyWith(hintText: 'Ojay 15'),
                   validator: (val) => val.isEmpty ? 'Name' : null,
                   onChanged: (val) {},
                 ),
@@ -191,8 +192,7 @@ class _KeyboardPickUpAddressState extends State<KeyboardPickUpAddress> {
                   height: DeviceUtils.getScaledHeight(context, scale: 0.01),
                 ),
                 TextFormField(
-                  decoration:
-                  textInputDecoration.copyWith(hintText: 'Ojay 15'),
+                  decoration: textInputDecoration.copyWith(hintText: 'Ojay 15'),
                   validator: (val) => val.isEmpty ? 'Name' : null,
                   onChanged: (val) {},
                 ),
@@ -212,10 +212,21 @@ class _KeyboardPickUpAddressState extends State<KeyboardPickUpAddress> {
                   height: DeviceUtils.getScaledHeight(context, scale: 0.01),
                 ),
                 TextFormField(
-                  decoration:
-                  textInputDecoration.copyWith(hintText: 'Ojay 15', suffixIcon: Icon(Icons.date_range)),
+                  readOnly: true,
+                  decoration: textInputDecoration.copyWith(
+                      hintText: 'Ojay 15', suffixIcon: Icon(Icons.date_range)),
                   validator: (val) => val.isEmpty ? 'Name' : null,
                   onChanged: (val) {},
+                  onTap: () {
+                    DatePicker.showDatePicker(context,
+                        showTitleActions: true,
+                        minTime: DateTime(2018, 3, 5),
+                        maxTime: DateTime(2022, 6, 7),
+                        onChanged: (date) {},
+                        onConfirm: (date) {
+                          print('confirm $date');
+                        }, currentTime: DateTime.now(), locale: LocaleType.en);
+                  },
                 ),
                 SizedBox(
                   height: DeviceUtils.getScaledHeight(context, scale: 0.04),
@@ -226,17 +237,16 @@ class _KeyboardPickUpAddressState extends State<KeyboardPickUpAddress> {
         );
       }),
       bottomNavigationBar: Container(
-          color: AppColors.whiteColor,
-          padding: EdgeInsets.only(bottom: 5),
-          child: GestureDetector(
-              onTap: (){
-
-                // Setting GetX timeline counter to the value of 3
-                buyACarTimelineController.updateTimeline(3);
-                Navigator.pop(context);
-
-              },
-              child: NextStepButtonComponent(text: Strings.nextstep, trailtext: '3/5')),
+        color: AppColors.whiteColor,
+        padding: EdgeInsets.only(bottom: 5),
+        child: GestureDetector(
+            onTap: () {
+              // Setting GetX timeline counter to the value of 3
+              buyACarTimelineController.updateTimeline(3);
+              Navigator.pop(context);
+            },
+            child: NextStepButtonComponent(
+                text: Strings.nextstep, trailtext: '3/5')),
       ),
     );
   }

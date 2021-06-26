@@ -15,6 +15,10 @@ class ForgotPassword extends StatefulWidget {
 }
 
 class _ForgotPasswordState extends State<ForgotPassword> {
+
+  final ForgotPasswordController forgotPasswordController =
+  Get.put(ForgotPasswordController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,7 +82,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       hintColor: AppColors.color11,
                       borderSideColor: AppColors.color9,
                       autoFocus: true,
-                      onChanged: (value) => Get.find<ForgotPasswordController>().setEmail(value),
+                      onChanged: (value) => forgotPasswordController.setEmail(value),
                   ),
                 )
               ],
@@ -88,9 +92,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
             ),
             GestureDetector(
               onTap: () async {
-                if( await Get.find<ForgotPasswordController>().verifyEmail() ){
+                if( await forgotPasswordController.verifyEmail() ){
                 // Unsetting the current account instance details
-                Get.find<ForgotPasswordController>().removeAccountReference();
 
                 Navigator.push(
                     context, MaterialPageRoute(builder: (context) => ResetPassword()));

@@ -170,90 +170,92 @@ class ContentPageStage extends State<ContentPage> {
           return Container(
             margin: EdgeInsets.symmetric(horizontal: 32),
             height: DeviceUtils.getScaledHeight(context, scale: 0.5),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                SizedBox(
-                  height: DeviceUtils.getScaledHeight(context, scale: 0.04),
-                ),
-                Container(
-                  child: Text(
-                    Strings.getIn,
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  SizedBox(
+                    height: DeviceUtils.getScaledHeight(context, scale: 0.04),
+                  ),
+                  Container(
+                    child: Text(
+                      Strings.getIn,
+                      style: TextStyle(
+                          color: AppColors.appColor1,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 24.0,
+                          fontFamily: FontFamily.sofiaBold),
+                    ),
+                  ),
+                  SizedBox(
+                    height: DeviceUtils.getScaledHeight(context, scale: 0.02),
+                  ),
+                  Text(
+                    Strings.preferredAccount,
                     style: TextStyle(
-                        color: AppColors.appColor1,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 24.0,
-                        fontFamily: FontFamily.sofiaBold),
+                        color: AppColors.appColor2,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16.0,
+                        fontFamily: FontFamily.sofiaMedium),
                   ),
-                ),
-                SizedBox(
-                  height: DeviceUtils.getScaledHeight(context, scale: 0.02),
-                ),
-                Text(
-                  Strings.preferredAccount,
-                  style: TextStyle(
-                      color: AppColors.appColor2,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 16.0,
-                      fontFamily: FontFamily.sofiaMedium),
-                ),
-                SizedBox(
-                  height: DeviceUtils.getScaledHeight(context, scale: 0.04),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => UserLogin())
-                    );
-                  },
-                  child: Container(
-                    height: 56,
-                    width: 311,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: AppColors.whiteColor,
-                        border: Border.all(width: 1, color: AppColors.color5)),
-                    child: Center(
-                      child: Text(
-                        Strings.signIn,
-                        style: TextStyle(
-                          color: AppColors.appPrimaryColor,
-                          fontSize: 20,
-                          fontFamily: FontFamily.sofiaSemiBold,
-                        ),
-                      ),
-                    ),
+                  SizedBox(
+                    height: DeviceUtils.getScaledHeight(context, scale: 0.04),
                   ),
-                ),
-                SizedBox(
-                  height: DeviceUtils.getScaledHeight(context, scale: 0.02),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => AccountType()));
-                  },
-                  child: Container(
-                    height: 56,
-                    width: 311,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: AppColors.appPrimaryColor,
-                    ),
-                    child: Center(
-                      child: Text(
-                        Strings.createAccount,
-                        style: TextStyle(
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => UserLogin())
+                      );
+                    },
+                    child: Container(
+                      height: 56,
+                      width: 311,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
                           color: AppColors.whiteColor,
-                          fontSize: 20,
-                          fontFamily: FontFamily.sofiaSemiBold,
+                          border: Border.all(width: 1, color: AppColors.color5)),
+                      child: Center(
+                        child: Text(
+                          Strings.signIn,
+                          style: TextStyle(
+                            color: AppColors.appPrimaryColor,
+                            fontSize: 20,
+                            fontFamily: FontFamily.sofiaSemiBold,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                  SizedBox(
+                    height: DeviceUtils.getScaledHeight(context, scale: 0.02),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => AccountType()));
+                    },
+                    child: Container(
+                      height: 56,
+                      width: 311,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: AppColors.appPrimaryColor,
+                      ),
+                      child: Center(
+                        child: Text(
+                          Strings.createAccount,
+                          style: TextStyle(
+                            color: AppColors.whiteColor,
+                            fontSize: 20,
+                            fontFamily: FontFamily.sofiaSemiBold,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           );
         });

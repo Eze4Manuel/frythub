@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fryghthub/app/controller/buy_a_car_timeline_controller.dart';
+import 'package:fryghthub/app/controller/pickup_address_controller.dart';
 import 'package:fryghthub/app/ui/components/next_step_button.dart';
 import 'package:fryghthub/app/ui/components/pull_up.dart';
 import 'package:fryghthub/app/ui/theme/app_colors.dart';
@@ -17,8 +18,11 @@ class KeyboardDeliveryAddress extends StatefulWidget {
 
 class _KeyboardDeliveryAddressState extends State<KeyboardDeliveryAddress> {
   int _radioValue = 0;
+
   BuyACarTimelineController buyACarTimelineController =
   Get.put(BuyACarTimelineController());
+  PickUpAddressController pickUpAddressController =
+  Get.put(PickUpAddressController());
 
   @override
   Widget build(BuildContext context) {
@@ -108,8 +112,15 @@ class _KeyboardDeliveryAddressState extends State<KeyboardDeliveryAddress> {
                   height: DeviceUtils.getScaledHeight(context, scale: 0.01),
                 ),
                 DropdownButtonFormField(
-                  decoration:
-                      textInputDecoration.copyWith(hintText: "Ojay 15"),
+                  decoration: textInputDecoration.copyWith(hintText: "Ojay 15"),
+                  items:
+                  pickUpAddressController.selectCountry.map((manufacturer) {
+                    return new DropdownMenuItem<String>(
+                        value: manufacturer, child: Text('$manufacturer'));
+                  }).toList(),
+                  onChanged: (String newValue) {
+                    pickUpAddressController.setSelectCountry(newValue);
+                  },
                 ),
                 // Select State/Provice
                 SizedBox(
@@ -127,8 +138,15 @@ class _KeyboardDeliveryAddressState extends State<KeyboardDeliveryAddress> {
                   height: DeviceUtils.getScaledHeight(context, scale: 0.01),
                 ),
                 DropdownButtonFormField(
-                  decoration:
-                      textInputDecoration.copyWith(hintText: "Ojay 15"),
+                  decoration: textInputDecoration.copyWith(hintText: "Ojay 15"),
+                  items:
+                  pickUpAddressController.selectState.map((manufacturer) {
+                    return new DropdownMenuItem<String>(
+                        value: manufacturer, child: Text('$manufacturer'));
+                  }).toList(),
+                  onChanged: (String newValue) {
+                    pickUpAddressController.setSelectState(newValue);
+                  },
                 ),
 
                 // Street Name
@@ -148,9 +166,12 @@ class _KeyboardDeliveryAddressState extends State<KeyboardDeliveryAddress> {
                 ),
                 TextFormField(
                   decoration:
-                  textInputDecoration.copyWith(hintText: 'Ojay 15'),
+                  textInputDecoration.copyWith(hintText: "Ojay 15"),
                   validator: (val) => val.isEmpty ? 'Name' : null,
-                  onChanged: (val) {},
+                  keyboardType: TextInputType.number,
+                  onChanged: (val) {
+                    pickUpAddressController.setStreetName(val);
+                  },
                 ),
 
                 // House Number
@@ -170,9 +191,12 @@ class _KeyboardDeliveryAddressState extends State<KeyboardDeliveryAddress> {
                 ),
                 TextFormField(
                   decoration:
-                  textInputDecoration.copyWith(hintText: 'Ojay 15'),
+                  textInputDecoration.copyWith(hintText: "Ojay 15"),
                   validator: (val) => val.isEmpty ? 'Name' : null,
-                  onChanged: (val) {},
+                  keyboardType: TextInputType.number,
+                  onChanged: (val) {
+                    pickUpAddressController.setHouseNumber(val);
+                  },
                 ),
 
                 // Postal Code
@@ -192,9 +216,12 @@ class _KeyboardDeliveryAddressState extends State<KeyboardDeliveryAddress> {
                 ),
                 TextFormField(
                   decoration:
-                  textInputDecoration.copyWith(hintText: 'Ojay 15'),
+                  textInputDecoration.copyWith(hintText: "Ojay 15"),
                   validator: (val) => val.isEmpty ? 'Name' : null,
-                  onChanged: (val) {},
+                  keyboardType: TextInputType.number,
+                  onChanged: (val) {
+                    pickUpAddressController.setPostalCode(val);
+                  },
                 ),
                 // Preferred Pickup Date
                 SizedBox(

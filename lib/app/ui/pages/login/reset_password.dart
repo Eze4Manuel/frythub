@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fryghthub/app/controller/reset_password_controller.dart';
+import 'package:fryghthub/app/ui/pages/login/login.dart';
 import 'package:fryghthub/app/ui/theme/app_colors.dart';
 import 'package:fryghthub/app/ui/theme/app_fonts.dart';
 import 'package:fryghthub/app/ui/theme/app_strings.dart';
@@ -14,6 +15,9 @@ class ResetPassword extends StatefulWidget {
 }
 
 class _ResetPasswordState extends State<ResetPassword> {
+  final ResetPasswordController resetPasswordController =
+  Get.put(ResetPasswordController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -98,7 +102,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                       hintColor: AppColors.color11,
                       borderSideColor: AppColors.color9,
                       autoFocus: true,
-                      onChanged: (value) => Get.find<ResetPasswordController>().setCode(value),
+                      onChanged: (value) => resetPasswordController.setCode(value),
                   ),
                 )
               ],
@@ -128,7 +132,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                     hintColor: AppColors.color11,
                     borderSideColor: AppColors.color9,
                     autoFocus: true,
-                    onChanged: (value) => Get.find<ResetPasswordController>().setPassword(value),
+                    onChanged: (value) => resetPasswordController.setPassword(value),
 
                     suffixIcon: Padding(
                       padding: const EdgeInsets.only(top: 16.0),
@@ -154,12 +158,11 @@ class _ResetPasswordState extends State<ResetPassword> {
             ),
             GestureDetector(
               onTap: () async {
-                if( await Get.find<ResetPasswordController>().resetCode() ){
+                if( await resetPasswordController.resetCode() ){
                     // Unsetting the current account instance details
-                    Get.find<ResetPasswordController>().removeAccountReference();
 
                     Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => ResetPassword()));
+                    context, MaterialPageRoute(builder: (context) => UserLogin()));
                 }else{
 
                 }

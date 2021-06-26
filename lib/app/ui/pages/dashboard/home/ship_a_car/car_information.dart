@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_number_picker/flutter_number_picker.dart';
 import 'package:fryghthub/app/controller/buy_a_car_timeline_controller.dart';
 import 'package:fryghthub/app/controller/car_information_controller.dart';
+import 'package:fryghthub/app/ui/components/form_counter.dart';
 import 'package:fryghthub/app/ui/components/next_step_button.dart';
 import 'package:fryghthub/app/ui/components/pull_up.dart';
 import 'package:fryghthub/app/ui/components/shipping_method_select.dart';
@@ -18,25 +18,24 @@ class CarInformation extends StatefulWidget {
 }
 
 class _CarInformationState extends State<CarInformation> {
-   BuyACarTimelineController buyACarTimelineController =
-  Get.put(BuyACarTimelineController());
+  BuyACarTimelineController buyACarTimelineController =
+      Get.put(BuyACarTimelineController());
   CarInformationController carInformationController =
-  Get.put(CarInformationController());
-   final formKey = GlobalKey<FormState>();
+      Get.put(CarInformationController());
+  final formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
     super.initState();
 
     carInformationController.textController.text = 'No Shipping Set';
-
   }
 
   @override
   Widget build(BuildContext context) {
     return Form(
       key: formKey,
-      child:  Container(
+      child: Container(
         padding: EdgeInsets.symmetric(horizontal: 25),
         decoration: BoxDecoration(
           color: AppColors.whiteColor,
@@ -96,7 +95,7 @@ class _CarInformationState extends State<CarInformation> {
                       fontFamily: FontFamily.sofiaBold),
                 ),
                 SizedBox(
-                  width: DeviceUtils.getScaledHeight(context, scale: 0.03),
+                  width: DeviceUtils.getScaledWidth(context, scale: 0.03),
                 ),
                 Expanded(
                   child: Divider(
@@ -125,11 +124,10 @@ class _CarInformationState extends State<CarInformation> {
             ),
             DropdownButtonFormField(
               decoration: textInputDecoration.copyWith(hintText: "Ojay 15"),
-              items: carInformationController.carManufacturer.map((manufacturer){
-                 return new DropdownMenuItem<String>(
-                    value: manufacturer,
-                    child: Text('$manufacturer')
-                );
+              items:
+                  carInformationController.carManufacturer.map((manufacturer) {
+                return new DropdownMenuItem<String>(
+                    value: manufacturer, child: Text('$manufacturer'));
               }).toList(),
               onChanged: (String newValue) {
                 carInformationController.setCurrentCarManufacturer(newValue);
@@ -153,11 +151,9 @@ class _CarInformationState extends State<CarInformation> {
             ),
             DropdownButtonFormField(
               decoration: textInputDecoration.copyWith(hintText: "Ojay 15"),
-              items: carInformationController.carModel.map((model){
+              items: carInformationController.carModel.map((model) {
                 return new DropdownMenuItem<String>(
-                    value: model,
-                    child: Text('$model')
-                );
+                    value: model, child: Text('$model'));
               }).toList(),
               onChanged: (String newValue) {
                 carInformationController.setCurrentCarModel(newValue);
@@ -181,11 +177,9 @@ class _CarInformationState extends State<CarInformation> {
             ),
             DropdownButtonFormField(
               decoration: textInputDecoration.copyWith(hintText: "Ojay 15"),
-              items: carInformationController.manufacturerYear.map((year){
+              items: carInformationController.manufacturerYear.map((year) {
                 return new DropdownMenuItem<String>(
-                    value: year,
-                    child: Text('$year')
-                );
+                    value: year, child: Text('$year'));
               }).toList(),
               onChanged: (String newValue) {
                 carInformationController.setManufacturerYear(newValue);
@@ -212,7 +206,7 @@ class _CarInformationState extends State<CarInformation> {
                 Flexible(
                   child: TextFormField(
                     decoration:
-                    textInputDecoration.copyWith(hintText: "Min Milliage"),
+                        textInputDecoration.copyWith(hintText: "Min Milliage"),
                     validator: (val) => val.isEmpty ? 'Name' : null,
                     keyboardType: TextInputType.number,
                     onChanged: (val) {
@@ -226,7 +220,7 @@ class _CarInformationState extends State<CarInformation> {
                 Flexible(
                   child: TextFormField(
                     decoration:
-                    textInputDecoration.copyWith(hintText: "Max Milliage"),
+                        textInputDecoration.copyWith(hintText: "Max Milliage"),
                     keyboardType: TextInputType.number,
                     validator: (val) => val.isEmpty ? 'Name' : null,
                     onChanged: (val) {
@@ -252,7 +246,7 @@ class _CarInformationState extends State<CarInformation> {
                       fontFamily: FontFamily.sofiaBold),
                 ),
                 SizedBox(
-                  width: DeviceUtils.getScaledHeight(context, scale: 0.03),
+                  width: DeviceUtils.getScaledWidth(context, scale: 0.03),
                 ),
                 Flexible(
                   child: Divider(
@@ -281,16 +275,14 @@ class _CarInformationState extends State<CarInformation> {
             ),
             DropdownButtonFormField(
               decoration: textInputDecoration.copyWith(hintText: "Grey"),
-              items: carInformationController.selectColor.map((color){
+              items: carInformationController.selectColor.map((color) {
                 return new DropdownMenuItem<String>(
-                    value: color,
-                    child: Text('$color')
-                );
+                    value: color, child: Text('$color'));
               }).toList(),
               onChanged: (String newValue) {
                 carInformationController.setCurrentColor(newValue);
               },
-              onTap: (){
+              onTap: () {
                 FocusScope.of(context).unfocus();
               },
             ),
@@ -313,26 +305,38 @@ class _CarInformationState extends State<CarInformation> {
 
             Row(
               children: [
-                 Obx(() => new Radio(
-                  value: 0,
-                  groupValue: carInformationController.transmissionType.value,
-                  onChanged: carInformationController.setTransmissionType,
-                ),),
+                Obx(
+                  () => new Radio(
+                    value: 0,
+                    groupValue: carInformationController.transmissionType.value,
+                    onChanged: carInformationController.setTransmissionType,
+                  ),
+                ),
                 new Text(
                   'Auto',
-                  style: new TextStyle(fontSize: 16.0),
+                  style: TextStyle(
+                      color: AppColors.appColor1,
+                      fontWeight: FontWeight.normal,
+                      fontSize: 16.0,
+                      fontFamily: FontFamily.sofiaRegular),
                 ),
                 SizedBox(
                   width: DeviceUtils.getScaledWidth(context, scale: 0.03),
                 ),
-                 Obx(()=> new Radio(
-                  value: 1,
-                  groupValue: carInformationController.transmissionType.value,
-                  onChanged: carInformationController.setTransmissionType,
-                ),),
+                Obx(
+                  () => new Radio(
+                    value: 1,
+                    groupValue: carInformationController.transmissionType.value,
+                    onChanged: carInformationController.setTransmissionType,
+                  ),
+                ),
                 new Text(
                   'Manual',
-                  style: new TextStyle(fontSize: 16.0),
+                  style: TextStyle(
+                      color: AppColors.appColor1,
+                      fontWeight: FontWeight.normal,
+                      fontSize: 16.0,
+                      fontFamily: FontFamily.sofiaRegular),
                 ),
               ],
             ),
@@ -351,20 +355,10 @@ class _CarInformationState extends State<CarInformation> {
             ),
 
             //TODO: Use your custom designed widgets
-            Container(
-              width: DeviceUtils.getScaledHeight(context, scale: 1),
-              child: CustomNumberPicker(
-                initialValue: 1,
-                maxValue: 100,
-                minValue: 0,
-                step: 10,
-                enable: true,
-                onValue: (value) {
-                  print(value.toString());
-                },
-              ),
+            SizedBox(
+              height: DeviceUtils.getScaledHeight(context, scale: 0.03),
             ),
-
+            FormCounter(controller: carInformationController),
             // Preferred shipping
             SizedBox(
               height: DeviceUtils.getScaledHeight(context, scale: 0.04),
@@ -380,7 +374,7 @@ class _CarInformationState extends State<CarInformation> {
             SizedBox(
               height: DeviceUtils.getScaledHeight(context, scale: 0.01),
             ),
-             TextFormField(
+            TextFormField(
               controller: carInformationController.textController,
               readOnly: true,
               autofocus: true,
@@ -391,7 +385,6 @@ class _CarInformationState extends State<CarInformation> {
                   fontFamily: FontFamily.sofiaRegular),
               decoration: textInputDecoration.copyWith(
                 hintText: 'No Shipping Method',
-
                 suffixText: 'Choose',
                 suffixStyle: TextStyle(
                     color: AppColors.appPrimaryColor,
@@ -401,7 +394,7 @@ class _CarInformationState extends State<CarInformation> {
                     fontFamily: FontFamily.sofiaBold),
               ),
               validator: (val) => val.isEmpty ? 'Name' : null,
-               onTap: () {
+              onTap: () {
                 _shippingMethod(context, carInformationController);
               },
             ),
@@ -413,7 +406,8 @@ class _CarInformationState extends State<CarInformation> {
                 // Setting GetX timeline counter to the value of 2
                 buyACarTimelineController.updateTimeline(2);
               },
-              child: NextStepButtonComponent(text: "Next Step", trailtext: '2/5'),
+              child:
+                  NextStepButtonComponent(text: "Next Step", trailtext: '2/5'),
             ),
             SizedBox(
               height: DeviceUtils.getScaledHeight(context, scale: 0.05),
@@ -451,7 +445,7 @@ _shippingMethod(context, carInformationController) {
                   alignment: Alignment.centerRight,
                   child: GestureDetector(
                     onTap: () {
-                       Navigator.of(context).pop();
+                      Navigator.of(context).pop();
                     },
                     child: Icon(
                       Icons.close,
@@ -476,12 +470,12 @@ _shippingMethod(context, carInformationController) {
               GestureDetector(
                 onTap: () {
                   carInformationController.setShippingMethod('Container');
-                   Navigator.of(context).pop();
+
                 },
-                child: ShippingMethodSelectComponent(
+                child: Obx(()=> ShippingMethodSelectComponent(
                     topText: Strings.container,
                     bottomText: Strings.orderWithLess,
-                    isSelected: true),
+                    isSelected: (carInformationController.shippingMethod.value == 'Container' ) ? true : false),)
               ),
               // Roll on Roll off  Select
               SizedBox(
@@ -489,14 +483,14 @@ _shippingMethod(context, carInformationController) {
               ),
               GestureDetector(
                 onTap: () {
-                  carInformationController.setShippingMethod('Roll-On-Roll-Off');
-                   Navigator.of(context).pop();
-
+                  carInformationController
+                      .setShippingMethod('Roll-On-Roll-Off');
                 },
-                child: ShippingMethodSelectComponent(
+                child: Obx(() => ShippingMethodSelectComponent(
                     topText: Strings.rollOnRollOff,
                     bottomText: Strings.orderWithMore,
-                    isSelected: false),
+                    isSelected: (carInformationController.shippingMethod.value == 'Roll-On-Roll-Off' ) ? true : false
+                ),)
               ),
               SizedBox(
                 height: DeviceUtils.getScaledHeight(context, scale: 0.04),
