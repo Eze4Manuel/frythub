@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:fryghthub/app/controller/buy_a_car_timeline_controller.dart';
+import 'package:fryghthub/app/controller/google_delivery_controller.dart';
 import 'package:fryghthub/app/ui/components/next_step_button.dart';
 import 'package:fryghthub/app/ui/components/pull_up.dart';
 import 'package:fryghthub/app/ui/theme/app_colors.dart';
@@ -20,6 +22,15 @@ class _GoogleDeliveryAddressState extends State<GoogleDeliveryAddress> {
   bool _isSelected = false;
   BuyACarTimelineController buyACarTimelineController =
       Get.put(BuyACarTimelineController());
+
+  GoogleDeliveryController googleDeliveryController =
+  Get.put(GoogleDeliveryController());
+
+  @override
+  void initState() {
+    super.initState();
+    googleDeliveryController.textDateController.text = '';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -204,19 +215,38 @@ class _GoogleDeliveryAddressState extends State<GoogleDeliveryAddress> {
                     children: [
                       Expanded(
                         child: TextFormField(
+                          controller: googleDeliveryController.textDateController,
+                          readOnly: true,
+                          style: TextStyle(
+                              color: AppColors.color12,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16.0,
+                              fontFamily: FontFamily.sofiaBold),
                           decoration: textInputDecoration.copyWith(
-                            hintText: "Ojay 15",
-                            suffixIcon: Icon(Icons.date_range),
-                          ),
+                              hintText: 'Ojay 15', suffixIcon: Icon(Icons.date_range)),
                           validator: (val) => val.isEmpty ? 'Name' : null,
                           onChanged: (val) {},
+                          onTap: () {
+                            DatePicker.showDatePicker(context,
+                                showTitleActions: true,
+                                minTime: DateTime(2018, 3, 5),
+                                maxTime: DateTime(2022, 6, 7),
+                                onChanged: (date) {},
+                                onConfirm: (date) {
+                                  googleDeliveryController.setPreferredPickupDate(date);
+                                }, currentTime: new DateTime.now(), locale: LocaleType.en);
+                          },
                         ),
                       ),
                       SizedBox(
                         width: DeviceUtils.getScaledHeight(context,
                             scale: 0.01),
                       ),
-                      Icon(Icons.close, color: AppColors.color5)
+                      GestureDetector(
+                          onTap: (){
+                            googleDeliveryController.textDateController.text = '';
+                          },
+                          child: Icon(Icons.close, color: AppColors.color5))
                     ],
                   ),
                   SizedBox(

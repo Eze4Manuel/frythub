@@ -28,7 +28,7 @@ class _CarInformationState extends State<CarInformation> {
   void initState() {
     super.initState();
 
-    carInformationController.textController.text = 'No Shipping Set';
+    carInformationController.textController.text = '';
   }
 
   @override
@@ -308,6 +308,7 @@ class _CarInformationState extends State<CarInformation> {
                 Obx(
                   () => new Radio(
                     value: 0,
+                    activeColor: AppColors.appPrimaryColor,
                     groupValue: carInformationController.transmissionType.value,
                     onChanged: carInformationController.setTransmissionType,
                   ),
@@ -326,6 +327,8 @@ class _CarInformationState extends State<CarInformation> {
                 Obx(
                   () => new Radio(
                     value: 1,
+                    activeColor: AppColors.appPrimaryColor,
+
                     groupValue: carInformationController.transmissionType.value,
                     onChanged: carInformationController.setTransmissionType,
                   ),

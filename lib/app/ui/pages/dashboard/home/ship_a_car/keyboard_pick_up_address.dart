@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:fryghthub/app/controller/buy_a_car_timeline_controller.dart';
+ import 'package:fryghthub/app/controller/keyboard_pickup_controller.dart';
 import 'package:fryghthub/app/ui/components/next_step_button.dart';
 import 'package:fryghthub/app/ui/components/pull_up.dart';
 import 'package:fryghthub/app/ui/theme/app_colors.dart';
@@ -18,9 +19,21 @@ class KeyboardPickUpAddress extends StatefulWidget {
 }
 
 class _KeyboardPickUpAddressState extends State<KeyboardPickUpAddress> {
-  int _radioValue = 0;
+
   BuyACarTimelineController buyACarTimelineController =
-      Get.put(BuyACarTimelineController());
+  Get.put(BuyACarTimelineController());
+  KeyboardPickUpController keyboardPickupController =
+  Get.put(KeyboardPickUpController());
+
+
+  @override
+  void initState() {
+    super.initState();
+
+    keyboardPickupController.textDateController.text = '';
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -114,6 +127,14 @@ class _KeyboardPickUpAddressState extends State<KeyboardPickUpAddress> {
                 ),
                 DropdownButtonFormField(
                   decoration: textInputDecoration.copyWith(hintText: "Ojay 15"),
+                  items:
+                  keyboardPickupController.selectCountry.map((manufacturer) {
+                    return new DropdownMenuItem<String>(
+                        value: manufacturer, child: Text('$manufacturer'));
+                  }).toList(),
+                  onChanged: (String newValue) {
+                    keyboardPickupController.setSelectCountry(newValue);
+                  },
                 ),
                 // Select State/Provice
                 SizedBox(
@@ -132,8 +153,15 @@ class _KeyboardPickUpAddressState extends State<KeyboardPickUpAddress> {
                 ),
                 DropdownButtonFormField(
                   decoration: textInputDecoration.copyWith(hintText: "Ojay 15"),
+                  items:
+                  keyboardPickupController.selectState.map((manufacturer) {
+                    return new DropdownMenuItem<String>(
+                        value: manufacturer, child: Text('$manufacturer'));
+                  }).toList(),
+                  onChanged: (String newValue) {
+                    keyboardPickupController.setSelectState(newValue);
+                  },
                 ),
-
                 // Street Name
                 SizedBox(
                   height: DeviceUtils.getScaledHeight(context, scale: 0.04),
@@ -150,9 +178,13 @@ class _KeyboardPickUpAddressState extends State<KeyboardPickUpAddress> {
                   height: DeviceUtils.getScaledHeight(context, scale: 0.01),
                 ),
                 TextFormField(
-                  decoration: textInputDecoration.copyWith(hintText: 'Ojay 15'),
+                  decoration:
+                  textInputDecoration.copyWith(hintText: "Ojay 15"),
                   validator: (val) => val.isEmpty ? 'Name' : null,
-                  onChanged: (val) {},
+                  keyboardType: TextInputType.number,
+                  onChanged: (val) {
+                    keyboardPickupController.setStreetName(val);
+                  },
                 ),
 
                 // House Number
@@ -171,9 +203,13 @@ class _KeyboardPickUpAddressState extends State<KeyboardPickUpAddress> {
                   height: DeviceUtils.getScaledHeight(context, scale: 0.01),
                 ),
                 TextFormField(
-                  decoration: textInputDecoration.copyWith(hintText: 'Ojay 15'),
+                  decoration:
+                  textInputDecoration.copyWith(hintText: "Ojay 15"),
                   validator: (val) => val.isEmpty ? 'Name' : null,
-                  onChanged: (val) {},
+                  keyboardType: TextInputType.number,
+                  onChanged: (val) {
+                    keyboardPickupController.setHouseNumber(val);
+                  },
                 ),
 
                 // Postal Code
@@ -192,9 +228,13 @@ class _KeyboardPickUpAddressState extends State<KeyboardPickUpAddress> {
                   height: DeviceUtils.getScaledHeight(context, scale: 0.01),
                 ),
                 TextFormField(
-                  decoration: textInputDecoration.copyWith(hintText: 'Ojay 15'),
+                  decoration:
+                  textInputDecoration.copyWith(hintText: "Ojay 15"),
                   validator: (val) => val.isEmpty ? 'Name' : null,
-                  onChanged: (val) {},
+                  keyboardType: TextInputType.number,
+                  onChanged: (val) {
+                    keyboardPickupController.setPostalCode(val);
+                  },
                 ),
                 // Preferred Pickup Date
                 SizedBox(
@@ -211,8 +251,15 @@ class _KeyboardPickUpAddressState extends State<KeyboardPickUpAddress> {
                 SizedBox(
                   height: DeviceUtils.getScaledHeight(context, scale: 0.01),
                 ),
+
                 TextFormField(
+                  controller: keyboardPickupController.textDateController,
                   readOnly: true,
+                  style: TextStyle(
+                      color: AppColors.color12,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16.0,
+                      fontFamily: FontFamily.sofiaBold),
                   decoration: textInputDecoration.copyWith(
                       hintText: 'Ojay 15', suffixIcon: Icon(Icons.date_range)),
                   validator: (val) => val.isEmpty ? 'Name' : null,
@@ -224,7 +271,7 @@ class _KeyboardPickUpAddressState extends State<KeyboardPickUpAddress> {
                         maxTime: DateTime(2022, 6, 7),
                         onChanged: (date) {},
                         onConfirm: (date) {
-                          print('confirm $date');
+                          keyboardPickupController.setPreferredPickupDate(date);
                         }, currentTime: DateTime.now(), locale: LocaleType.en);
                   },
                 ),

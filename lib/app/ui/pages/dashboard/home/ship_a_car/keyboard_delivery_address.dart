@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:fryghthub/app/controller/buy_a_car_timeline_controller.dart';
-import 'package:fryghthub/app/controller/pickup_address_controller.dart';
+import 'package:fryghthub/app/controller/keyboard_delivery_controller.dart';
 import 'package:fryghthub/app/ui/components/next_step_button.dart';
 import 'package:fryghthub/app/ui/components/pull_up.dart';
 import 'package:fryghthub/app/ui/theme/app_colors.dart';
@@ -17,12 +18,20 @@ class KeyboardDeliveryAddress extends StatefulWidget {
 }
 
 class _KeyboardDeliveryAddressState extends State<KeyboardDeliveryAddress> {
-  int _radioValue = 0;
 
   BuyACarTimelineController buyACarTimelineController =
   Get.put(BuyACarTimelineController());
-  PickUpAddressController pickUpAddressController =
-  Get.put(PickUpAddressController());
+  KeyboardDeliveryController keyboardDeliveryController =
+  Get.put(KeyboardDeliveryController());
+
+
+  @override
+  void initState() {
+    super.initState();
+
+    keyboardDeliveryController.textDateController.text = '';
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -114,12 +123,12 @@ class _KeyboardDeliveryAddressState extends State<KeyboardDeliveryAddress> {
                 DropdownButtonFormField(
                   decoration: textInputDecoration.copyWith(hintText: "Ojay 15"),
                   items:
-                  pickUpAddressController.selectCountry.map((manufacturer) {
+                  keyboardDeliveryController.selectCountry.map((manufacturer) {
                     return new DropdownMenuItem<String>(
                         value: manufacturer, child: Text('$manufacturer'));
                   }).toList(),
                   onChanged: (String newValue) {
-                    pickUpAddressController.setSelectCountry(newValue);
+                    keyboardDeliveryController.setSelectCountry(newValue);
                   },
                 ),
                 // Select State/Provice
@@ -140,15 +149,14 @@ class _KeyboardDeliveryAddressState extends State<KeyboardDeliveryAddress> {
                 DropdownButtonFormField(
                   decoration: textInputDecoration.copyWith(hintText: "Ojay 15"),
                   items:
-                  pickUpAddressController.selectState.map((manufacturer) {
+                  keyboardDeliveryController.selectState.map((manufacturer) {
                     return new DropdownMenuItem<String>(
                         value: manufacturer, child: Text('$manufacturer'));
                   }).toList(),
                   onChanged: (String newValue) {
-                    pickUpAddressController.setSelectState(newValue);
+                    keyboardDeliveryController.setSelectState(newValue);
                   },
                 ),
-
                 // Street Name
                 SizedBox(
                   height: DeviceUtils.getScaledHeight(context, scale: 0.04),
@@ -170,7 +178,7 @@ class _KeyboardDeliveryAddressState extends State<KeyboardDeliveryAddress> {
                   validator: (val) => val.isEmpty ? 'Name' : null,
                   keyboardType: TextInputType.number,
                   onChanged: (val) {
-                    pickUpAddressController.setStreetName(val);
+                    keyboardDeliveryController.setStreetName(val);
                   },
                 ),
 
@@ -195,7 +203,7 @@ class _KeyboardDeliveryAddressState extends State<KeyboardDeliveryAddress> {
                   validator: (val) => val.isEmpty ? 'Name' : null,
                   keyboardType: TextInputType.number,
                   onChanged: (val) {
-                    pickUpAddressController.setHouseNumber(val);
+                    keyboardDeliveryController.setHouseNumber(val);
                   },
                 ),
 
@@ -220,7 +228,7 @@ class _KeyboardDeliveryAddressState extends State<KeyboardDeliveryAddress> {
                   validator: (val) => val.isEmpty ? 'Name' : null,
                   keyboardType: TextInputType.number,
                   onChanged: (val) {
-                    pickUpAddressController.setPostalCode(val);
+                    keyboardDeliveryController.setPostalCode(val);
                   },
                 ),
                 // Preferred Pickup Date
@@ -239,10 +247,27 @@ class _KeyboardDeliveryAddressState extends State<KeyboardDeliveryAddress> {
                   height: DeviceUtils.getScaledHeight(context, scale: 0.01),
                 ),
                 TextFormField(
-                  decoration:
-                  textInputDecoration.copyWith(hintText: 'Ojay 15', suffixIcon: Icon(Icons.date_range)),
+                  controller: keyboardDeliveryController.textDateController,
+                  readOnly: true,
+                  style: TextStyle(
+                      color: AppColors.color12,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16.0,
+                      fontFamily: FontFamily.sofiaBold),
+                  decoration: textInputDecoration.copyWith(
+                      hintText: 'Ojay 15', suffixIcon: Icon(Icons.date_range)),
                   validator: (val) => val.isEmpty ? 'Name' : null,
                   onChanged: (val) {},
+                  onTap: () {
+                    DatePicker.showDatePicker(context,
+                        showTitleActions: true,
+                        minTime: DateTime(2008, 3, 5),
+                        maxTime: DateTime(2022, 6, 7),
+                        onChanged: (date) {},
+                        onConfirm: (date) {
+                          keyboardDeliveryController.setPreferredPickupDate(date);
+                        }, currentTime: DateTime.now(), locale: LocaleType.en);
+                  },
                 ),
                 SizedBox(
                   height: DeviceUtils.getScaledHeight(context, scale: 0.04),
