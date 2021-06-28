@@ -2,7 +2,7 @@
 import 'package:get/get.dart';
 
 class CarInformationController extends GetxController {
-
+  
   final List<String> carManufacturer = ["Toyota", "Honda", "Ford"];
   final List<String> carModel = ['Corolla', 'Bitrex', 'Ford'];
   final List<String> manufacturerYear = ['2020', '2021', '2022'];
@@ -60,5 +60,19 @@ class CarInformationController extends GetxController {
 
   void decrement(){
     if(sedanNumber != 1) sedanNumber--;
+  }
+
+
+  void resetVariables (){
+    _currentCarManufacturer = '';
+    _currentCarModel = '';
+    _currentManufacturerYear = '';
+    minMilliage = 0;
+    maxMilliage = 0;
+    _currentColor = '';
+    transmissionType = 0.obs;
+    sedanNumber = 1.obs;
+    shippingMethod = 'No Shipping Method'.obs;
+    textController.text =  '';
   }
 }

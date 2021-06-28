@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_number_picker/flutter_number_picker.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:fryghthub/app/controller/buy_a_car_timeline_controller.dart';
+import 'package:fryghthub/app/controller/request_summary_controller.dart';
+import 'package:fryghthub/app/ui/components/form_counter.dart';
 import 'package:fryghthub/app/ui/components/next_step_button.dart';
 import 'package:fryghthub/app/ui/components/pull_up.dart';
+import 'package:fryghthub/app/ui/components/select_shipping_method.dart';
 import 'package:fryghthub/app/ui/components/shipping_method_select.dart';
 import 'package:fryghthub/app/ui/theme/app_colors.dart';
 import 'package:fryghthub/app/ui/theme/app_fonts.dart';
@@ -20,11 +23,13 @@ class _RequestSummaryState extends State<RequestSummary> {
   int _radioValue = 0;
   BuyACarTimelineController buyACarTimelineController =
       Get.put(BuyACarTimelineController());
+  RequestSummaryController requestSummaryController =
+      Get.put(RequestSummaryController());
 
   @override
   void initState() {
     super.initState();
-  }
+   }
 
   @override
   Widget build(BuildContext context) {
@@ -132,6 +137,13 @@ class _RequestSummaryState extends State<RequestSummary> {
           ),
           DropdownButtonFormField(
             decoration: textInputDecoration.copyWith(hintText: "Ojay 15"),
+            items: requestSummaryController.carManufacturer.map((manufacturer) {
+              return new DropdownMenuItem<String>(
+                  value: manufacturer, child: Text('$manufacturer'));
+            }).toList(),
+            onChanged: (String newValue) {
+              requestSummaryController.setCurrentCarManufacturer(newValue);
+            },
           ),
 
           // Select Car Model
@@ -151,6 +163,13 @@ class _RequestSummaryState extends State<RequestSummary> {
           ),
           DropdownButtonFormField(
             decoration: textInputDecoration.copyWith(hintText: "Ojay 15"),
+            items: requestSummaryController.carModel.map((model) {
+              return new DropdownMenuItem<String>(
+                  value: model, child: Text('$model'));
+            }).toList(),
+            onChanged: (String newValue) {
+              requestSummaryController.setCurrentCarModel(newValue);
+            },
           ),
 
           // Select Year of Manufacturer
@@ -170,6 +189,13 @@ class _RequestSummaryState extends State<RequestSummary> {
           ),
           DropdownButtonFormField(
             decoration: textInputDecoration.copyWith(hintText: "Ojay 15"),
+            items: requestSummaryController.manufacturerYear.map((year) {
+              return new DropdownMenuItem<String>(
+                  value: year, child: Text('$year'));
+            }).toList(),
+            onChanged: (String newValue) {
+              requestSummaryController.setManufacturerYear(newValue);
+            },
           ),
 
           // Select Milliage Range
@@ -194,20 +220,25 @@ class _RequestSummaryState extends State<RequestSummary> {
                   decoration:
                       textInputDecoration.copyWith(hintText: "Min Milliage"),
                   validator: (val) => val.isEmpty ? 'Name' : null,
-                  onChanged: (val) {},
+                  keyboardType: TextInputType.number,
+                  onChanged: (val) {
+                    requestSummaryController.setMinMilliage(val);
+                  },
                 ),
               ),
               SizedBox(
                 width: DeviceUtils.getScaledHeight(context, scale: 0.04),
               ),
               Flexible(
-                child: TextFormField(
-                  decoration:
-                      textInputDecoration.copyWith(hintText: "Max Milliage"),
-                  validator: (val) => val.isEmpty ? 'Name' : null,
-                  onChanged: (val) {},
-                ),
-              )
+                  child: TextFormField(
+                decoration:
+                    textInputDecoration.copyWith(hintText: "Max Milliage"),
+                keyboardType: TextInputType.number,
+                validator: (val) => val.isEmpty ? 'Name' : null,
+                onChanged: (val) {
+                  requestSummaryController.setMaxMilliage(val);
+                },
+              ))
             ],
           ),
 
@@ -255,6 +286,16 @@ class _RequestSummaryState extends State<RequestSummary> {
           ),
           DropdownButtonFormField(
             decoration: textInputDecoration.copyWith(hintText: "Grey"),
+            items: requestSummaryController.selectColor.map((color) {
+              return new DropdownMenuItem<String>(
+                  value: color, child: Text('$color'));
+            }).toList(),
+            onChanged: (String newValue) {
+              requestSummaryController.setCurrentColor(newValue);
+            },
+            onTap: () {
+              FocusScope.of(context).unfocus();
+            },
           ),
 
           // Choose Transmission Type
@@ -275,24 +316,40 @@ class _RequestSummaryState extends State<RequestSummary> {
 
           Row(
             children: [
-              new Radio(
-                value: 2,
-                groupValue: _radioValue,
+              Obx(
+                () => new Radio(
+                  value: 0,
+                  activeColor: AppColors.appPrimaryColor,
+                  groupValue: requestSummaryController.transmissionType.value,
+                  onChanged: requestSummaryController.setTransmissionType,
+                ),
               ),
               new Text(
                 'Auto',
-                style: new TextStyle(fontSize: 16.0),
+                style: TextStyle(
+                    color: AppColors.appColor1,
+                    fontWeight: FontWeight.normal,
+                    fontSize: 16.0,
+                    fontFamily: FontFamily.sofiaRegular),
               ),
               SizedBox(
                 width: DeviceUtils.getScaledWidth(context, scale: 0.03),
               ),
-              new Radio(
-                value: 2,
-                groupValue: _radioValue,
+              Obx(
+                () => new Radio(
+                  value: 1,
+                  activeColor: AppColors.appPrimaryColor,
+                  groupValue: requestSummaryController.transmissionType.value,
+                  onChanged: requestSummaryController.setTransmissionType,
+                ),
               ),
               new Text(
                 'Manual',
-                style: new TextStyle(fontSize: 16.0),
+                style: TextStyle(
+                    color: AppColors.appColor1,
+                    fontWeight: FontWeight.normal,
+                    fontSize: 16.0,
+                    fontFamily: FontFamily.sofiaRegular),
               ),
             ],
           ),
@@ -310,21 +367,10 @@ class _RequestSummaryState extends State<RequestSummary> {
                 fontFamily: FontFamily.sofiaRegular),
           ),
 
-          //TODO: Use your custom designed widgets
-          Container(
-            width: DeviceUtils.getScaledHeight(context, scale: 1),
-            child: CustomNumberPicker(
-              initialValue: 1,
-              maxValue: 100,
-              minValue: 0,
-              step: 10,
-              enable: true,
-              onValue: (value) {
-                print(value.toString());
-              },
-            ),
+          SizedBox(
+            height: DeviceUtils.getScaledHeight(context, scale: 0.03),
           ),
-
+          FormCounter(controller: requestSummaryController),
           // Preferred shipping
           SizedBox(
             height: DeviceUtils.getScaledHeight(context, scale: 0.04),
@@ -341,8 +387,14 @@ class _RequestSummaryState extends State<RequestSummary> {
             height: DeviceUtils.getScaledHeight(context, scale: 0.01),
           ),
           TextFormField(
+            controller: requestSummaryController.textController,
             readOnly: true,
             autofocus: true,
+            style: TextStyle(
+                color: AppColors.color6,
+                fontWeight: FontWeight.normal,
+                fontSize: 16.0,
+                fontFamily: FontFamily.sofiaRegular),
             decoration: textInputDecoration.copyWith(
               hintText: 'No Shipping Method',
               suffixText: 'Choose',
@@ -355,7 +407,7 @@ class _RequestSummaryState extends State<RequestSummary> {
             ),
             validator: (val) => val.isEmpty ? 'Name' : null,
             onTap: () {
-              _shippingMethod(context);
+              _shippingMethod(context, requestSummaryController);
             },
           ),
           SizedBox(
@@ -375,13 +427,12 @@ class _RequestSummaryState extends State<RequestSummary> {
           ),
           Center(
               child: Icon(
-                Icons.flag_outlined,
-                color: AppColors.color12,
-                size: 25,
-              )),
+            Icons.flag_outlined,
+            color: AppColors.color12,
+            size: 25,
+          )),
           SizedBox(
-            height: DeviceUtils.getScaledHeight(context,
-                scale: 0.02),
+            height: DeviceUtils.getScaledHeight(context, scale: 0.02),
           ),
           Center(
             child: Text(
@@ -397,7 +448,6 @@ class _RequestSummaryState extends State<RequestSummary> {
           SizedBox(
             height: DeviceUtils.getScaledHeight(context, scale: 0.08),
           ),
-
           Text(
             Strings.preferredPickupDateAndTime,
             style: TextStyle(
@@ -407,24 +457,37 @@ class _RequestSummaryState extends State<RequestSummary> {
                 fontFamily: FontFamily.sofiaRegular),
           ),
           SizedBox(
-            height:
-            DeviceUtils.getScaledHeight(context, scale: 0.01),
+            height: DeviceUtils.getScaledHeight(context, scale: 0.01),
           ),
           Row(
             children: [
               Expanded(
                 child: TextFormField(
+                  controller: requestSummaryController.textPickupDateController,
+                  readOnly: true,
+                  style: TextStyle(
+                      color: AppColors.color12,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16.0,
+                      fontFamily: FontFamily.sofiaBold),
                   decoration: textInputDecoration.copyWith(
-                    hintText: "Ojay 15",
-                    suffixIcon: Icon(Icons.date_range),
-                  ),
+                      hintText: 'Ojay 15', suffixIcon: Icon(Icons.date_range)),
                   validator: (val) => val.isEmpty ? 'Name' : null,
                   onChanged: (val) {},
+                  onTap: () {
+                    DatePicker.showDatePicker(context,
+                        showTitleActions: true,
+                        minTime: DateTime(2018, 3, 5),
+                        maxTime: DateTime(2022, 6, 7),
+                        onChanged: (date) {},
+                        onConfirm: (date) {
+                          requestSummaryController.setPreferredPickupDate(date);
+                        }, currentTime: new DateTime.now(), locale: LocaleType.en);
+                  },
                 ),
               ),
               SizedBox(
-                width: DeviceUtils.getScaledHeight(context,
-                    scale: 0.01),
+                width: DeviceUtils.getScaledHeight(context, scale: 0.01),
               ),
               Icon(Icons.close, color: AppColors.color5)
             ],
@@ -446,13 +509,12 @@ class _RequestSummaryState extends State<RequestSummary> {
           ),
           Center(
               child: Icon(
-                Icons.flag_outlined,
-                color: AppColors.color12,
-                size: 25,
-              )),
+            Icons.flag_outlined,
+            color: AppColors.color12,
+            size: 25,
+          )),
           SizedBox(
-            height: DeviceUtils.getScaledHeight(context,
-                scale: 0.02),
+            height: DeviceUtils.getScaledHeight(context, scale: 0.02),
           ),
           Center(
             child: Text(
@@ -478,38 +540,56 @@ class _RequestSummaryState extends State<RequestSummary> {
                 fontFamily: FontFamily.sofiaRegular),
           ),
           SizedBox(
-            height:
-            DeviceUtils.getScaledHeight(context, scale: 0.01),
+            height: DeviceUtils.getScaledHeight(context, scale: 0.01),
           ),
           Row(
             children: [
               Expanded(
                 child: TextFormField(
+                  controller: requestSummaryController.textDeliveryDateController,
+                  readOnly: true,
+                  style: TextStyle(
+                      color: AppColors.color12,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16.0,
+                      fontFamily: FontFamily.sofiaBold),
                   decoration: textInputDecoration.copyWith(
-                    hintText: "Ojay 15",
-                    suffixIcon: Icon(Icons.date_range),
-                  ),
+                      hintText: 'Ojay 15', suffixIcon: Icon(Icons.date_range)),
                   validator: (val) => val.isEmpty ? 'Name' : null,
                   onChanged: (val) {},
+                  onTap: () {
+                    DatePicker.showDatePicker(context,
+                        showTitleActions: true,
+                        minTime: DateTime(2018, 3, 5),
+                        maxTime: DateTime(2022, 6, 7),
+                        onChanged: (date) {},
+                        onConfirm: (date) {
+                          requestSummaryController.setPreferredDeliveryDate(date);
+                        }, locale: LocaleType.en);
+                  },
                 ),
               ),
               SizedBox(
                 width: DeviceUtils.getScaledHeight(context,
                     scale: 0.01),
               ),
-              Icon(Icons.close, color: AppColors.color5)
+              GestureDetector(
+                  onTap: (){
+                    requestSummaryController.textDeliveryDateController.text = '';
+                  },
+                  child: Icon(Icons.close, color: AppColors.color5))
             ],
           ),
           SizedBox(
-            height:
-            DeviceUtils.getScaledHeight(context, scale: 0.2),
+            height: DeviceUtils.getScaledHeight(context, scale: 0.2),
           ),
 
           GestureDetector(
             onTap: () {
               buyACarTimelineController.updateTimeline(5);
             },
-            child: NextStepButtonComponent(text: 'Proceed To Payment', trailtext: '4/5'),
+            child: NextStepButtonComponent(
+                text: 'Proceed To Payment', trailtext: '4/5'),
           ),
           SizedBox(
             height: DeviceUtils.getScaledHeight(context, scale: 0.02),
@@ -520,7 +600,8 @@ class _RequestSummaryState extends State<RequestSummary> {
   }
 }
 
-_shippingMethod(context) {
+
+_shippingMethod(context, requestSummaryController) {
   showModalBottomSheet(
       backgroundColor: AppColors.whiteColor,
       isScrollControlled: true,
@@ -529,103 +610,6 @@ _shippingMethod(context) {
               topLeft: Radius.circular(20), topRight: Radius.circular(20))),
       context: context,
       builder: (BuildContext bc) {
-        return Container(
-          margin: EdgeInsets.symmetric(horizontal: 32),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              SizedBox(
-                height: DeviceUtils.getScaledHeight(context, scale: 0.02),
-              ),
-              Center(
-                child: Container(
-                  padding: EdgeInsets.all(10),
-                  width: 60,
-                  height: 5,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(13),
-                    color: AppColors.color13,
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: DeviceUtils.getScaledHeight(context, scale: 0.02),
-              ),
-              Align(
-                  alignment: Alignment.centerRight,
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: Icon(
-                      Icons.close,
-                      color: AppColors.appPrimaryColor,
-                    ),
-                  )),
-              SizedBox(
-                height: DeviceUtils.getScaledHeight(context, scale: 0.02),
-              ),
-              Text(
-                Strings.chooseShippingMethod,
-                style: TextStyle(
-                    color: AppColors.appColor1,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20.0,
-                    fontFamily: FontFamily.sofiaBold),
-              ),
-              // Container Select
-              SizedBox(
-                height: DeviceUtils.getScaledHeight(context, scale: 0.02),
-              ),
-              GestureDetector(
-                onTap: () {},
-                child: ShippingMethodSelectComponent(
-                    topText: Strings.container,
-                    bottomText: Strings.orderWithLess,
-                    isSelected: true),
-              ),
-              // Roll on Roll off  Select
-              SizedBox(
-                height: DeviceUtils.getScaledHeight(context, scale: 0.02),
-              ),
-              GestureDetector(
-                onTap: () {},
-                child: ShippingMethodSelectComponent(
-                    topText: Strings.rollOnRollOff,
-                    bottomText: Strings.orderWithMore,
-                    isSelected: false),
-              ),
-              SizedBox(
-                height: DeviceUtils.getScaledHeight(context, scale: 0.04),
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.of(context).pop();
-                },
-                child: Container(
-                  height: 56,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: AppColors.appPrimaryColor,
-                  ),
-                  child: Center(
-                    child: Text(
-                      Strings.continueText,
-                      style: TextStyle(
-                        color: AppColors.whiteColor,
-                        fontSize: 20,
-                        fontFamily: FontFamily.sofiaSemiBold,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: DeviceUtils.getScaledHeight(context, scale: 0.02),
-              ),
-            ],
-          ),
-        );
+        return ShippingMethod(context: context, controller: requestSummaryController);
       });
 }

@@ -4,6 +4,7 @@ import 'package:fryghthub/app/controller/car_information_controller.dart';
 import 'package:fryghthub/app/ui/components/form_counter.dart';
 import 'package:fryghthub/app/ui/components/next_step_button.dart';
 import 'package:fryghthub/app/ui/components/pull_up.dart';
+import 'package:fryghthub/app/ui/components/select_shipping_method.dart';
 import 'package:fryghthub/app/ui/components/shipping_method_select.dart';
 import 'package:fryghthub/app/ui/theme/app_colors.dart';
 import 'package:fryghthub/app/ui/theme/app_fonts.dart';
@@ -357,8 +358,7 @@ class _CarInformationState extends State<CarInformation> {
                   fontFamily: FontFamily.sofiaRegular),
             ),
 
-            //TODO: Use your custom designed widgets
-            SizedBox(
+             SizedBox(
               height: DeviceUtils.getScaledHeight(context, scale: 0.03),
             ),
             FormCounter(controller: carInformationController),
@@ -431,100 +431,6 @@ _shippingMethod(context, carInformationController) {
               topLeft: Radius.circular(20), topRight: Radius.circular(20))),
       context: context,
       builder: (BuildContext bc) {
-        return Container(
-          margin: EdgeInsets.symmetric(horizontal: 32),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              SizedBox(
-                height: DeviceUtils.getScaledHeight(context, scale: 0.02),
-              ),
-              PullUpComponent(),
-              SizedBox(
-                height: DeviceUtils.getScaledHeight(context, scale: 0.02),
-              ),
-              Align(
-                  alignment: Alignment.centerRight,
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: Icon(
-                      Icons.close,
-                      color: AppColors.appPrimaryColor,
-                    ),
-                  )),
-              SizedBox(
-                height: DeviceUtils.getScaledHeight(context, scale: 0.02),
-              ),
-              Text(
-                Strings.chooseShippingMethod,
-                style: TextStyle(
-                    color: AppColors.appColor1,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20.0,
-                    fontFamily: FontFamily.sofiaBold),
-              ),
-              // Container Select
-              SizedBox(
-                height: DeviceUtils.getScaledHeight(context, scale: 0.02),
-              ),
-              GestureDetector(
-                onTap: () {
-                  carInformationController.setShippingMethod('Container');
-
-                },
-                child: Obx(()=> ShippingMethodSelectComponent(
-                    topText: Strings.container,
-                    bottomText: Strings.orderWithLess,
-                    isSelected: (carInformationController.shippingMethod.value == 'Container' ) ? true : false),)
-              ),
-              // Roll on Roll off  Select
-              SizedBox(
-                height: DeviceUtils.getScaledHeight(context, scale: 0.02),
-              ),
-              GestureDetector(
-                onTap: () {
-                  carInformationController
-                      .setShippingMethod('Roll-On-Roll-Off');
-                },
-                child: Obx(() => ShippingMethodSelectComponent(
-                    topText: Strings.rollOnRollOff,
-                    bottomText: Strings.orderWithMore,
-                    isSelected: (carInformationController.shippingMethod.value == 'Roll-On-Roll-Off' ) ? true : false
-                ),)
-              ),
-              SizedBox(
-                height: DeviceUtils.getScaledHeight(context, scale: 0.04),
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.of(context).pop();
-                },
-                child: Container(
-                  height: 56,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: AppColors.appPrimaryColor,
-                  ),
-                  child: Center(
-                    child: Text(
-                      Strings.continueText,
-                      style: TextStyle(
-                        color: AppColors.whiteColor,
-                        fontSize: 20,
-                        fontFamily: FontFamily.sofiaSemiBold,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: DeviceUtils.getScaledHeight(context, scale: 0.02),
-              ),
-            ],
-          ),
-        );
+        return ShippingMethod(context: context, controller: carInformationController);
       });
 }

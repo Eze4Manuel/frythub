@@ -6,7 +6,7 @@ import 'package:fryghthub/app/utils/device_utils.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 
 class FormCounter extends StatelessWidget {
-  CarInformationController controller;
+  var controller;
 
   FormCounter({this.controller});
 

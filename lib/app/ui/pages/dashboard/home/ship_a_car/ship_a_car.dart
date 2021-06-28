@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:fryghthub/app/controller/buy_a_car_timeline_controller.dart';
+import 'package:fryghthub/app/controller/car_information_controller.dart';
+import 'package:fryghthub/app/controller/request_summary_controller.dart';
 import 'package:fryghthub/app/ui/pages/dashboard/home/ship_a_car/car_information.dart';
 import 'package:fryghthub/app/ui/pages/dashboard/home/ship_a_car/delivery_address_select.dart';
 import 'package:fryghthub/app/ui/pages/dashboard/home/ship_a_car/pick_up_address_select.dart';
+import 'package:fryghthub/app/ui/pages/dashboard/home/ship_a_car/process_payment.dart';
 import 'package:fryghthub/app/ui/pages/dashboard/home/ship_a_car/request_summary.dart';
 import 'package:fryghthub/app/ui/theme/app_colors.dart';
 import 'package:fryghthub/app/ui/theme/app_fonts.dart';
@@ -19,6 +22,10 @@ class ShipACar extends StatefulWidget {
 
 class _ShipACarState extends State<ShipACar> {
   BuyACarTimelineController buyACarTimelineController = Get.put(BuyACarTimelineController());
+  RequestSummaryController requestSummaryController =
+  Get.put(RequestSummaryController());
+  CarInformationController carInformationController =
+  Get.put(CarInformationController());
   @override
   void initState() {
     super.initState();
@@ -31,7 +38,8 @@ class _ShipACarState extends State<ShipACar> {
 
         // Setting GetX timeline counter to the initial value of 1
         buyACarTimelineController.updateTimeline(1);
-
+        requestSummaryController.resetVariables();
+        carInformationController.resetVariables();
         return true;
       },
       child: Scaffold(
@@ -225,6 +233,8 @@ class _ShipACarState extends State<ShipACar> {
 
                         // Setting GetX timeline counter to the initial value of 1
                         buyACarTimelineController.updateTimeline(1);
+                        requestSummaryController.resetVariables();
+                        carInformationController.resetVariables();
                         Navigator.pop(context);
                       },
                       child: Icon(
@@ -253,9 +263,7 @@ _updateTimeline(value){
     break;
     case 4: return RequestSummary();
     break;
-    case 5: {
-
-    }
+    case 5: return ProcessPayment();
     break;
   }
 }
