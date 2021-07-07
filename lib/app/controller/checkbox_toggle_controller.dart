@@ -43,6 +43,14 @@ class CheckboxToggleController extends GetxController {
           shippingAgent = true;
         }
         break;
+      case "${Strings.buyingAgent}:${Strings.deliveryAgent}":
+        {
+          CheckboxToggleController.selectedOption = Strings.shippingAgent;
+          makeRestNull();
+          buyingAgent = true;
+          deliveryAgent = true;
+        }
+        break;
     }
     update();
   }

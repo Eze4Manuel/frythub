@@ -1,5 +1,5 @@
 
-import 'package:fryghthub/app/controller/account_sigin_controller.dart';
+import 'package:fryghthub/app/controller/account_signin_controller.dart';
 import 'package:get/get_instance/src/bindings_interface.dart';
 import 'package:get/instance_manager.dart';
 

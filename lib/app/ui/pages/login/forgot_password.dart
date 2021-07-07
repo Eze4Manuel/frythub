@@ -115,6 +115,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                         forgotPasswordController.message.value,
                         context,
                         AppColors.appPrimaryColor);
+                    forgotPasswordController.setLoading(false);
                     Navigator.push(
                         context,
                         MaterialPageRoute(

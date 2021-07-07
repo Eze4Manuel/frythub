@@ -1,7 +1,6 @@
 
 
 import 'package:fryghthub/app/data/model/account.dart';
-import 'package:fryghthub/app/data/provider/create_account_provider.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
 class AccountCreationController extends GetxController{
@@ -23,7 +22,34 @@ class AccountCreationController extends GetxController{
 
    // Returns true if user is signed in
    Future<bool> createNewAccount() async {
-      var response = await CreateAccountProvider.createAccout(account);
+      switch(account.accountType){
+         case 'Buying Agent':
+            {
+
+            }
+            break;
+         case 'Shipping Agent':
+            {
+
+            }
+            break;
+         case 'Delivery Agent':
+            {
+
+            }
+            break;
+         case 'I want to Buy/Ship':
+            {
+
+            }
+            break;
+         case 'Buying Agent:Delivery Agent':
+            {
+
+            }
+            break;
+
+      }
 
       return Future<bool>.value(true);
    }

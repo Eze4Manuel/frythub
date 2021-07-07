@@ -1,5 +1,5 @@
 //
-// import 'package:fryghthub/app/controller/account_sigin_controller.dart';
+// import 'package:fryghthub/app/controller/account_signin_controller.dart';
 // import 'package:fryghthub/app/controller/buy_a_car_timeline_controller.dart';
 // import 'package:fryghthub/app/controller/car_information_controller.dart';
 // import 'package:fryghthub/app/controller/checkbox_toggle_controller.dart';

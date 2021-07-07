@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:fryghthub/app/controller/account_sigin_controller.dart';
+import 'package:fryghthub/app/controller/account_signin_controller.dart';
 import 'package:fryghthub/app/ui/pages/dashboard/get_started.dart';
 import 'package:fryghthub/app/ui/pages/login/forgot_password.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -231,16 +231,17 @@ class _UserLoginState extends State<UserLogin> {
                         if(_formKey.currentState.validate()){
                           accountSigninController.setLoading(true);
                           if( await accountSigninController.signInAccount() ){
+                            // Displaying Toast Information
                             MessageNotification.messageToast(accountSigninController.message.value, context, AppColors.appPrimaryColor);
+                            accountSigninController.setLoading(false);
+                            // Pushing to the Dashboard screen
+                            // TODO: Change to rushNmedReplaced
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) => GetStarted()));
                           }else{
                             accountSigninController.setLoading(false);
                             MessageNotification.messageToast(accountSigninController.message.value, context, AppColors.appPrimaryColor);
                           }
-                        }
-                        else{
-
                         }
                       },
                       child: Obx(() => (accountSigninController.loading.value) ?

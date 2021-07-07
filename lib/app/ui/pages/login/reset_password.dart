@@ -194,6 +194,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                               resetPasswordController.message.value,
                               context,
                               AppColors.appPrimaryColor);
+                          resetPasswordController.setLoading(false);
                           Navigator.push(
                               context,
                               MaterialPageRoute(

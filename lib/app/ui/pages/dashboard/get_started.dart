@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fryghthub/app/ui/theme/app_colors.dart';
 import 'package:fryghthub/app/ui/theme/app_fonts.dart';
+import 'package:fryghthub/app/utils/shared_prefs.dart';
 
 import 'home/home.dart';
 
@@ -27,7 +28,8 @@ class _GetStartedState extends State<GetStarted> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context)  {
+
     return Scaffold(
       backgroundColor: AppColors.appColor4,
       bottomNavigationBar: BottomNavigationBar(

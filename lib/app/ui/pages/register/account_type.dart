@@ -144,8 +144,20 @@ class _AccountTypeState extends State<AccountType> {
             ),
             GestureDetector(
               onTap: () {
-                accountCreationController.setAccountType(Strings.buyingAgent);
-                checkboxToggleController.updateCheckbox(Strings.buyingAgent);
+                if(checkboxToggleController.deliveryAgent){
+                  accountCreationController
+                      .setAccountType('${Strings.buyingAgent}:${Strings.deliveryAgent}');
+                  checkboxToggleController
+                      .updateCheckbox('${Strings.buyingAgent}:${Strings.deliveryAgent}');
+                }
+                else {
+                  accountCreationController
+                      .setAccountType(Strings.buyingAgent);
+                  checkboxToggleController
+                      .updateCheckbox(Strings.buyingAgent);
+                };
+
+
               },
               child: Container(
                 height: 100,
@@ -172,8 +184,7 @@ class _AccountTypeState extends State<AccountType> {
                                         : false,
                                     onChanged: null);
                               },
-                            ))
-                    ),
+                            ))),
                     Row(
                       children: [
                         SizedBox(
@@ -210,8 +221,18 @@ class _AccountTypeState extends State<AccountType> {
             ),
             GestureDetector(
               onTap: () {
-                accountCreationController.setAccountType(Strings.deliveryAgent);
-                checkboxToggleController.updateCheckbox(Strings.deliveryAgent);
+                if(checkboxToggleController.buyingAgent){
+                        accountCreationController
+                            .setAccountType('${Strings.buyingAgent}:${Strings.deliveryAgent}');
+                        checkboxToggleController
+                            .updateCheckbox('${Strings.buyingAgent}:${Strings.deliveryAgent}');
+                      }
+                    else {
+                        accountCreationController
+                            .setAccountType(Strings.deliveryAgent);
+                        checkboxToggleController
+                            .updateCheckbox(Strings.deliveryAgent);
+                      };
               },
               child: Container(
                 height: 100,
@@ -292,20 +313,20 @@ class _AccountTypeState extends State<AccountType> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(right: 11.0, top: 11),
-                      child: Align(
-                          alignment: Alignment.topRight,
-                          child:  GetBuilder<CheckboxToggleController>(
-                            init: checkboxToggleController,
-                            builder: (_) {
-                              return CircleCheckbox(
-                                  value: checkboxToggleController.shippingAgent
-                                      ? true
-                                      : false,
-                                  onChanged: null);
-                            },
-                          )
-                      )),
+                        padding: const EdgeInsets.only(right: 11.0, top: 11),
+                        child: Align(
+                            alignment: Alignment.topRight,
+                            child: GetBuilder<CheckboxToggleController>(
+                              init: checkboxToggleController,
+                              builder: (_) {
+                                return CircleCheckbox(
+                                    value:
+                                        checkboxToggleController.shippingAgent
+                                            ? true
+                                            : false,
+                                    onChanged: null);
+                              },
+                            ))),
                     Row(
                       children: [
                         SizedBox(
