@@ -15,6 +15,7 @@ class TextFieldWidget extends StatelessWidget {
   final FocusNode focusNode;
   final ValueChanged onFieldSubmitted;
   final ValueChanged onChanged;
+  final Function validator;
   final bool autoFocus;
   final TextInputAction inputAction;
   final Color borderSideColor;
@@ -44,6 +45,7 @@ class TextFieldWidget extends StatelessWidget {
       this.focusNode,
       this.onFieldSubmitted,
       this.onChanged,
+      this.validator,
       this.autoFocus = false,
       this.inputAction,
       this.borderSideColor,
@@ -60,6 +62,7 @@ class TextFieldWidget extends StatelessWidget {
       focusNode: focusNode,
       onFieldSubmitted: onFieldSubmitted,
       onChanged: onChanged,
+      validator: validator,
       autofocus: autoFocus,
       textInputAction: inputAction,
       obscureText: this.isObscure,

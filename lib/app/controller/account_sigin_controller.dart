@@ -1,22 +1,65 @@
+import 'dart:convert';
 
 import 'package:fryghthub/app/data/model/account.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+import 'package:fryghthub/app/ui/theme/app_strings.dart';
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
+import 'package:http/http.dart' as http;
 
-class AccountSigninController extends GetxController {
+import 'base_controller.dart';
+
+class AccountSigninController extends BaseController {
 
   Account account = Account();
+  String signInUrl = '${Strings.domain}api/User/signin';
+  RxBool loading = false.obs;
+
+  dynamic data;
 
   // sets the email of account to be logged in
   void setEmail(String email) => account.email = email;
+
   void setPassword(String password) => account.password = password;
 
-  Future<bool> signInAccount(){
-    // TODO Inplement the procedure to upload user account
+  void setLoading(bool val) {
+    loading.value = val;
+   }
 
-    print(account.toString());
-    return Future<bool>.value(true);
+  Future<bool> signInAccount() async {
+
+      var url = Uri.parse(signInUrl);
+      print(url);
+      data = {
+        "authenticateDto": {
+          "username": account.email,
+          "password": account.password
+        }
+      };
+      try {
+        var response =
+        await http.post(
+            url,
+            headers: {"Accept": "*/*", "Content-Type": "application/json"},
+            body: jsonEncode(data));
+        print('Response status: ${response.statusCode}');
+        print('Response body: ${jsonDecode(response.body)}');
+
+        //TODO: Implement shared Prefenece. Use it to store users details
+        if(jsonDecode(response.body)['isSuccess']){
+          setMessage("Sign In success");
+          return Future<bool>.value(true);
+        }else{
+          setMessage(jsonDecode(response.body)['message']);
+          return Future<bool>.value(false);
+        }
+      }catch(e){
+        print(e);
+        setMessage("Something went wrong");
+        return Future<bool>.value(false);
+
+      }
   }
 
+
   // Removes Object instance
-  void removeAccountReference () => (account != null) ? account = null : null;
+  void removeAccountReference() => (account != null) ? account = null : null;
 }

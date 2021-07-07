@@ -1,6 +1,7 @@
 class Strings {
   Strings._();
 
+  static const String domain = "https://frythub.herokuapp.com/";
   static const String appName = "Fryght hub";
   static const String borderlessDelivery = "Borderless Delivery";
   static const String startShipping = "Start Shipping";
@@ -32,6 +33,7 @@ class Strings {
   static const String borderessDeliveryMessage =
       "Your are one step away from\nborderless delivery.";
   static const String emailAddress = "Email Address";
+  static const String enterResetEmail = "Enter Reset Email Address";
   static const String password = "Password";
   static const String createAccount = "Create Account";
   static const String noAccount = "Don’t have an account?";

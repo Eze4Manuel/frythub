@@ -3,8 +3,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:fryghthub/app/controller/account_sigin_controller.dart';
 import 'package:fryghthub/app/ui/pages/dashboard/get_started.dart';
 import 'package:fryghthub/app/ui/pages/login/forgot_password.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fryghthub/app/ui/pages/register/account_type.dart';
-import 'package:fryghthub/app/ui/pages/register/create_account.dart';
+import 'package:fryghthub/app/utils/message_notification.dart';
 
 import 'package:fryghthub/app/ui/theme/app_colors.dart';
 import 'package:fryghthub/app/ui/widgets/custom_textfield_widget.dart';
@@ -23,7 +24,7 @@ class _UserLoginState extends State<UserLogin> {
 
   final AccountSigninController accountSigninController =
   Get.put(AccountSigninController());
-
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -125,7 +126,7 @@ class _UserLoginState extends State<UserLogin> {
                     width: DeviceUtils.getScaledWidth(context, scale: 0.03),
                   ),
                   Text(
-                    Strings.or,
+                    Strings.emailAddress,
                     style: TextStyle(
                       color: AppColors.color10,
                       fontSize: 20,
@@ -147,108 +148,138 @@ class _UserLoginState extends State<UserLogin> {
             SizedBox(
               height: DeviceUtils.getScaledHeight(context, scale: 0.024),
             ),
-            Stack(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 32.0),
-                  child: Text(
-                    Strings.emailAddress,
-                    style: TextStyle(
-                      color: AppColors.color6,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                      fontFamily: FontFamily.sofiaMedium,
-                    ),
+            Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  Stack(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 32.0),
+                        child: Text(
+                          Strings.emailAddress,
+                          style: TextStyle(
+                            color: AppColors.color6,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                            fontFamily: FontFamily.sofiaMedium,
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 16.0, right: 32),
+                        child: TextFieldWidget(
+                          hint: Strings.emailAddress,
+                          fontSize: 14,
+                          hintColor: AppColors.color11,
+                          borderSideColor: AppColors.color9,
+                          autoFocus: true,
+                          onChanged: (value) => accountSigninController.setEmail(value),
+                          validator: (value) {
+                            if (!accountSigninController.emailRegex.hasMatch(value)) {
+                              return 'Please enter valid email';
+                            }
+                            return null;
+                          },
+                        ),
+                      )
+                    ],
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 16.0, right: 32),
-                  child: TextFieldWidget(
-                    hint: Strings.emailAddress,
-                    fontSize: 14,
-                    hintColor: AppColors.color11,
-                    borderSideColor: AppColors.color9,
-                    autoFocus: true,
-                    onChanged: (value) => accountSigninController.setEmail(value),
+                  SizedBox(
+                    height: DeviceUtils.getScaledHeight(context, scale: 0.02),
                   ),
-                )
-              ],
-            ),
-            SizedBox(
-              height: DeviceUtils.getScaledHeight(context, scale: 0.02),
-            ),
-            Stack(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 32.0),
-                  child: Text(
-                    Strings.password,
-                    style: TextStyle(
-                      color: AppColors.color6,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                      fontFamily: FontFamily.sofiaMedium,
-                    ),
+                  Stack(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 32.0),
+                        child: Text(
+                          Strings.password,
+                          style: TextStyle(
+                            color: AppColors.color6,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                            fontFamily: FontFamily.sofiaMedium,
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 18, right: 32),
+                        child: TextFieldWidget(
+                          // enabled: false,
+                          hint: Strings.password,
+                          isObscure: true,
+                          fontSize: 14,
+                          hintColor: AppColors.color11,
+                          borderSideColor: AppColors.color9,
+                          autoFocus: true,
+                          onChanged: (value) => accountSigninController.setPassword(value),
+                          validator: (value) {
+                            if (value.isEmpty) {
+                              return 'Fill in password';
+                            }
+                            return null;
+                          },
+                        ),
+                      )
+                    ],
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 18, right: 32),
-                  child: TextFieldWidget(
-                    // enabled: false,
-                    hint: Strings.password,
-                    isObscure: true,
-                    fontSize: 14,
-                    hintColor: AppColors.color11,
-                    borderSideColor: AppColors.color9,
-                    autoFocus: true,
-                    onChanged: (value) => accountSigninController.setPassword(value),
+                  SizedBox(
+                    height: DeviceUtils.getScaledHeight(context, scale: 0.04),
                   ),
-                )
-              ],
-            ),
+                  GestureDetector(
+                      onTap: () async {
+                        if(_formKey.currentState.validate()){
+                          accountSigninController.setLoading(true);
+                          if( await accountSigninController.signInAccount() ){
+                            MessageNotification.messageToast(accountSigninController.message.value, context, AppColors.appPrimaryColor);
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) => GetStarted()));
+                          }else{
+                            accountSigninController.setLoading(false);
+                            MessageNotification.messageToast(accountSigninController.message.value, context, AppColors.appPrimaryColor);
+                          }
+                        }
+                        else{
 
-            SizedBox(
-              height: DeviceUtils.getScaledHeight(context, scale: 0.04),
-            ),
-            GestureDetector(
-              onTap: () async {
-                if( await accountSigninController.signInAccount() ){
-                  // Unsetting the current account instance details
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => GetStarted()));
-                }else{
-
-                }
-              },
-              child: Container(
-                height: 56,
-                // width: 311,
-                margin: EdgeInsets.only(left: 32, right: 32),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color: AppColors.appPrimaryColor,
-                ),
-                child: Center(
-                  child: Text(
-                    Strings.continueShipping,
-                    style: TextStyle(
-                      color: AppColors.whiteColor,
-                      fontSize: 20,
-                      fontFamily: FontFamily.sofiaSemiBold,
-                    ),
+                        }
+                      },
+                      child: Obx(() => (accountSigninController.loading.value) ?
+                      Center(
+                        child: CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation<Color>(AppColors.appPrimaryColor),
+                        ),
+                      )
+                          :
+                      Container(
+                        height: 56,
+                        // width: 311,
+                        margin: EdgeInsets.only(left: 32, right: 32),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: AppColors.appPrimaryColor,
+                        ),
+                        child: Center(
+                          child: Text(
+                            Strings.continueShipping,
+                            style: TextStyle(
+                              color: AppColors.whiteColor,
+                              fontSize: 20,
+                              fontFamily: FontFamily.sofiaSemiBold,
+                            ),
+                          ),
+                        ),
+                      ),)
                   ),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: DeviceUtils.getScaledHeight(context, scale: 0.04),
+                  SizedBox(
+                    height: DeviceUtils.getScaledHeight(context, scale: 0.04),
+                  ),
+                ],
+              )
             ),
             Center(
               child: GestureDetector(
                 onTap: () {
                   // Unsetting any created account instance
-                  accountSigninController.removeAccountReference();
-
                   Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -263,7 +294,8 @@ class _UserLoginState extends State<UserLogin> {
                   ),
                 ),
               ),
-            ),  SizedBox(
+            ),
+            SizedBox(
               height: DeviceUtils.getScaledHeight(context, scale: 0.04),
             ),
             Center(
@@ -280,9 +312,6 @@ class _UserLoginState extends State<UserLogin> {
             Center(
               child: GestureDetector(
                 onTap: () {
-                  // Unsetting any created account instance
-                  accountSigninController.removeAccountReference();
-
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => AccountType()));
                 },
@@ -303,3 +332,4 @@ class _UserLoginState extends State<UserLogin> {
     );
   }
 }
+
