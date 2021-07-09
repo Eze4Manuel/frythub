@@ -5,6 +5,7 @@ import 'package:fryghthub/app/ui/theme/app_strings.dart';
 import 'package:fryghthub/app/utils/shared_prefs.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:http/http.dart' as http;
+import 'package:google_sign_in/google_sign_in.dart';
 
 import 'base_controller.dart';
 
@@ -15,6 +16,13 @@ class AccountSigninController extends BaseController {
   RxBool loading = false.obs;
   List user_keys = ['email','token', 'tokenExpiry'];
   dynamic data;
+
+  GoogleSignIn _googleSignIn = GoogleSignIn(
+    scopes: [
+      'email',
+      'https://www.googleapis.com/auth/contacts.readonly',
+    ],
+  );
 
   // sets the email of account to be logged in
   void setEmail(String email) => account.email = email;
@@ -50,7 +58,6 @@ class AccountSigninController extends BaseController {
           if(await storeuserDetails(jsonDecode(response.body))){
             return Future<bool>.value(true);
           }
-
         }else{
           setMessage(jsonDecode(response.body)['message']);
           return Future<bool>.value(false);
@@ -59,8 +66,19 @@ class AccountSigninController extends BaseController {
         print(e);
         setMessage("Something went wrong");
         return Future<bool>.value(false);
-
       }
+  }
+
+
+  signInWithGoogle() async {
+    try {
+      GoogleSignInAccount? account = await _googleSignIn.signIn();
+      var authHeader = await account?.authHeaders;
+      print(authHeader);
+      //_handleSignOut();
+    } catch (error) {
+      print(error);
+    }
   }
 
 

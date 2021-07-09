@@ -155,9 +155,7 @@ class _AccountTypeState extends State<AccountType> {
                       .setAccountType(Strings.buyingAgent);
                   checkboxToggleController
                       .updateCheckbox(Strings.buyingAgent);
-                };
-
-
+                }
               },
               child: Container(
                 height: 100,
@@ -232,7 +230,7 @@ class _AccountTypeState extends State<AccountType> {
                             .setAccountType(Strings.deliveryAgent);
                         checkboxToggleController
                             .updateCheckbox(Strings.deliveryAgent);
-                      };
+                      }
               },
               child: Container(
                 height: 100,

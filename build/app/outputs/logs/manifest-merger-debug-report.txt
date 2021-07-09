@@ -5,7 +5,9 @@ INJECTED from C:\Users\VP\AndroidStudioProjects\frythub\android\app\src\main\And
 INJECTED from C:\Users\VP\AndroidStudioProjects\frythub\android\app\src\main\AndroidManifest.xml:1:1-43:12
 INJECTED from C:\Users\VP\AndroidStudioProjects\frythub\android\app\src\main\AndroidManifest.xml:1:1-43:12
 MERGED from C:\Users\VP\AndroidStudioProjects\frythub\android\app\src\main\AndroidManifest.xml:1:1-43:12
+MERGED from [:libphonenumber_plugin] C:\Users\VP\AndroidStudioProjects\frythub\build\libphonenumber_plugin\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [:shared_preferences] C:\Users\VP\AndroidStudioProjects\frythub\build\shared_preferences\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:libphonenumber] C:\Users\VP\AndroidStudioProjects\frythub\build\libphonenumber\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\VP\.gradle\caches\transforms-2\files-2.1\ba80674a1a5fdce2b1b29eea5683af77\fragment-1.1.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.activity:activity:1.0.0] C:\Users\VP\.gradle\caches\transforms-2\files-2.1\68865d38a53fb5c240061f062e474515\jetified-activity-1.0.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\VP\.gradle\caches\transforms-2\files-2.1\2f70304b103eacfab05dbe55739e869f\viewpager-1.0.0\AndroidManifest.xml:17:1-22:12
@@ -100,8 +102,12 @@ uses-sdk
 INJECTED from C:\Users\VP\AndroidStudioProjects\frythub\android\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\VP\AndroidStudioProjects\frythub\android\app\src\main\AndroidManifest.xml
 INJECTED from C:\Users\VP\AndroidStudioProjects\frythub\android\app\src\main\AndroidManifest.xml
+MERGED from [:libphonenumber_plugin] C:\Users\VP\AndroidStudioProjects\frythub\build\libphonenumber_plugin\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:libphonenumber_plugin] C:\Users\VP\AndroidStudioProjects\frythub\build\libphonenumber_plugin\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:shared_preferences] C:\Users\VP\AndroidStudioProjects\frythub\build\shared_preferences\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:shared_preferences] C:\Users\VP\AndroidStudioProjects\frythub\build\shared_preferences\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:libphonenumber] C:\Users\VP\AndroidStudioProjects\frythub\build\libphonenumber\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:libphonenumber] C:\Users\VP\AndroidStudioProjects\frythub\build\libphonenumber\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\VP\.gradle\caches\transforms-2\files-2.1\ba80674a1a5fdce2b1b29eea5683af77\fragment-1.1.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\VP\.gradle\caches\transforms-2\files-2.1\ba80674a1a5fdce2b1b29eea5683af77\fragment-1.1.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.activity:activity:1.0.0] C:\Users\VP\.gradle\caches\transforms-2\files-2.1\68865d38a53fb5c240061f062e474515\jetified-activity-1.0.0\AndroidManifest.xml:20:5-22:41

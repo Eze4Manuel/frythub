@@ -3,10 +3,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:fryghthub/app/controller/account_signin_controller.dart';
 import 'package:fryghthub/app/ui/pages/dashboard/get_started.dart';
 import 'package:fryghthub/app/ui/pages/login/forgot_password.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fryghthub/app/ui/pages/register/account_type.dart';
 import 'package:fryghthub/app/utils/message_notification.dart';
-
 import 'package:fryghthub/app/ui/theme/app_colors.dart';
 import 'package:fryghthub/app/ui/widgets/custom_textfield_widget.dart';
 import 'package:fryghthub/app/utils/responsive_safe_area.dart';
@@ -14,6 +12,8 @@ import 'package:fryghthub/app/utils/device_utils.dart';
 import 'package:fryghthub/app/ui/theme/app_fonts.dart';
 import 'package:fryghthub/app/ui/theme/app_strings.dart';
 import 'package:get/get.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class UserLogin extends StatefulWidget {
   @override
@@ -25,6 +25,16 @@ class _UserLoginState extends State<UserLogin> {
   final AccountSigninController accountSigninController =
   Get.put(AccountSigninController());
   final _formKey = GlobalKey<FormState>();
+
+  GoogleSignIn _googleSignIn = GoogleSignIn(
+    // Optional clientId
+    // clientId:
+    //     '',
+    scopes: <String>[
+      'email',
+      'https://www.googleapis.com/auth/contacts.readonly',
+    ],
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -81,17 +91,22 @@ class _UserLoginState extends State<UserLogin> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
-                  width: 80,
-                  height: 48,
-                  child: Icon(
-                    FontAwesomeIcons.google,
-                    color: AppColors.whiteColor,
-                    size: 18,
+                GestureDetector(
+                  onTap: (){
+
+                  },
+                  child: Container(
+                    width: 80,
+                    height: 48,
+                    child: Icon(
+                      FontAwesomeIcons.google,
+                      color: AppColors.whiteColor,
+                      size: 18,
+                    ),
+                    decoration: BoxDecoration(
+                        color: AppColors.color7,
+                        borderRadius: BorderRadius.circular(8)),
                   ),
-                  decoration: BoxDecoration(
-                      color: AppColors.color7,
-                      borderRadius: BorderRadius.circular(8)),
                 ),
                 SizedBox(
                   width: DeviceUtils.getScaledWidth(context, scale: 0.04),
