@@ -3,14 +3,13 @@ import 'package:get/get.dart';
 
 class GooglePickupController extends GetxController {
 
-  DateTime _preferredPickupDate;
+  DateTime preferredPickupDate;
   TextEditingController textDateController = new TextEditingController();
 
   void setPreferredPickupDate(value){
     textDateController.text = value.toString();
 
-    _preferredPickupDate = value;
-    print(_preferredPickupDate);
+    preferredPickupDate = value;
+    print(preferredPickupDate);
   }
-
 }

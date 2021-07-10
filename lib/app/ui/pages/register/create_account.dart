@@ -3,7 +3,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:fryghthub/app/controller/account_creation_controller.dart';
 import 'package:fryghthub/app/controller/checkbox_toggle_controller.dart';
 import 'package:fryghthub/app/ui/pages/register/user_contact.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import 'package:fryghthub/app/ui/theme/app_colors.dart';

@@ -26,7 +26,6 @@ class _GooglePickUpAddressState extends State<GooglePickUpAddress> {
   GooglePickupController googlePickupController =
   Get.put(GooglePickupController());
 
-
   @override
   void initState() {
     super.initState();
@@ -227,7 +226,9 @@ class _GooglePickUpAddressState extends State<GooglePickUpAddress> {
                                 showTitleActions: true,
                                 minTime: DateTime(2018, 3, 5),
                                 maxTime: DateTime(2022, 6, 7),
-                                onChanged: (date) {},
+                                onChanged: (date) {
+                                print('de');
+                                },
                                 onConfirm: (date) {
                                   googlePickupController.setPreferredPickupDate(date);
                                 }, currentTime: new DateTime.now(), locale: LocaleType.en);

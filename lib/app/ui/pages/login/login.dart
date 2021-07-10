@@ -12,7 +12,6 @@ import 'package:fryghthub/app/utils/device_utils.dart';
 import 'package:fryghthub/app/ui/theme/app_fonts.dart';
 import 'package:fryghthub/app/ui/theme/app_strings.dart';
 import 'package:get/get.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class UserLogin extends StatefulWidget {
@@ -28,13 +27,23 @@ class _UserLoginState extends State<UserLogin> {
 
   GoogleSignIn _googleSignIn = GoogleSignIn(
     // Optional clientId
-    // clientId:
-    //     '',
+    // clientId: '711926648021-i0fc8jtl81l9uulhsjirfr0q8cb3iq35.apps.googleusercontent.com',
     scopes: <String>[
       'email',
       'https://www.googleapis.com/auth/contacts.readonly',
     ],
   );
+
+  signInWithGoogle() async {
+    try {
+      GoogleSignInAccount account = await _googleSignIn.signIn();
+      var authHeader = await account?.authHeaders;
+      print(authHeader);
+      //_handleSignOut();
+    } catch (error) {
+      print(error);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +102,7 @@ class _UserLoginState extends State<UserLogin> {
               children: [
                 GestureDetector(
                   onTap: (){
-
+                    signInWithGoogle();
                   },
                   child: Container(
                     width: 80,

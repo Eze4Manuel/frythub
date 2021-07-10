@@ -35,10 +35,8 @@ class _ShipACarState extends State<ShipACar> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-
         // Setting GetX timeline counter to the initial value of 1
         buyACarTimelineController.updateTimeline(1);
-        requestSummaryController.resetVariables();
         carInformationController.resetVariables();
         return true;
       },
@@ -81,7 +79,6 @@ class _ShipACarState extends State<ShipACar> {
                         height:
                         DeviceUtils.getScaledHeight(context, scale: 0.025),
                       ),
-
                       // Timeline Conditions. Handles timeline coloring and background filling
                       Container(
                         height: 55,
@@ -233,8 +230,7 @@ class _ShipACarState extends State<ShipACar> {
 
                         // Setting GetX timeline counter to the initial value of 1
                         buyACarTimelineController.updateTimeline(1);
-                        requestSummaryController.resetVariables();
-                        carInformationController.resetVariables();
+                         carInformationController.resetVariables();
                         Navigator.pop(context);
                       },
                       child: Icon(

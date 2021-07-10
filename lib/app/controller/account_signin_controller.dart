@@ -14,15 +14,11 @@ class AccountSigninController extends BaseController {
   Account account = Account();
   String signInUrl = '${Strings.domain}api/User/signin';
   RxBool loading = false.obs;
-  List user_keys = ['email','token', 'tokenExpiry'];
+  static const List user_keys = ['email','token','tokenExpiry'];
   dynamic data;
 
-  GoogleSignIn _googleSignIn = GoogleSignIn(
-    scopes: [
-      'email',
-      'https://www.googleapis.com/auth/contacts.readonly',
-    ],
-  );
+
+
 
   // sets the email of account to be logged in
   void setEmail(String email) => account.email = email;
@@ -70,16 +66,6 @@ class AccountSigninController extends BaseController {
   }
 
 
-  signInWithGoogle() async {
-    try {
-      GoogleSignInAccount? account = await _googleSignIn.signIn();
-      var authHeader = await account?.authHeaders;
-      print(authHeader);
-      //_handleSignOut();
-    } catch (error) {
-      print(error);
-    }
-  }
 
 
   // Removes Object instance

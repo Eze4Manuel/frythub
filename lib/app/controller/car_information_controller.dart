@@ -8,40 +8,40 @@ class CarInformationController extends GetxController {
   final List<String> manufacturerYear = ['2020', '2021', '2022'];
   final List<String> selectColor = ['Red', 'Black', 'White'];
 
-  String _currentCarManufacturer;
-  String _currentCarModel;
-  String _currentManufacturerYear;
-  int minMilliage;
-  int maxMilliage;
-  String _currentColor;
+  String currentCarManufacturer;
+  String currentCarModel;
+  String currentManufacturerYear;
+  int minMilliage = 0;
+  int maxMilliage = 0;
+  String currentColor;
   RxInt transmissionType = 0.obs;
   RxInt sedanNumber = 1.obs;
   RxString shippingMethod = 'No Shipping Method'.obs;
   TextEditingController textController = new TextEditingController();
 
   void  setCurrentCarManufacturer(value){
-    _currentCarManufacturer = value;
-    print(_currentCarManufacturer);
+    currentCarManufacturer = value;
+    print(currentCarManufacturer);
   }
   void setCurrentCarModel(value){
-    _currentCarModel = value;
-    print(_currentCarModel);
+    currentCarModel = value;
+    print(currentCarModel);
   }
   void setManufacturerYear(value){
-    _currentManufacturerYear = value;
-    print(_currentManufacturerYear);
+    currentManufacturerYear = value;
+    print(currentManufacturerYear);
   }
   void setMinMilliage(value){
-    minMilliage = value;
+    minMilliage = int.parse(value);
     print(minMilliage);
   }
   void setMaxMilliage(value){
-    maxMilliage = value;
+    maxMilliage = int.parse(value);
     print(maxMilliage);
   }
   void setCurrentColor(value){
-    _currentColor = value;
-    print(_currentColor);
+    currentColor = value;
+    print(currentColor);
   }
   void setTransmissionType(val){
     transmissionType.value = val;
@@ -64,12 +64,12 @@ class CarInformationController extends GetxController {
 
 
   void resetVariables (){
-    _currentCarManufacturer = '';
-    _currentCarModel = '';
-    _currentManufacturerYear = '';
+    currentCarManufacturer = '';
+    currentCarModel = '';
+    currentManufacturerYear = '';
     minMilliage = 0;
     maxMilliage = 0;
-    _currentColor = '';
+    currentColor = '';
     transmissionType = 0.obs;
     sedanNumber = 1.obs;
     shippingMethod = 'No Shipping Method'.obs;

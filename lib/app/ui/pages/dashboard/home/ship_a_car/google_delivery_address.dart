@@ -233,7 +233,7 @@ class _GoogleDeliveryAddressState extends State<GoogleDeliveryAddress> {
                                 maxTime: DateTime(2022, 6, 7),
                                 onChanged: (date) {},
                                 onConfirm: (date) {
-                                  googleDeliveryController.setPreferredPickupDate(date);
+                                  googleDeliveryController.setPreferredDeliveryDate(date);
                                 }, currentTime: new DateTime.now(), locale: LocaleType.en);
                           },
                         ),

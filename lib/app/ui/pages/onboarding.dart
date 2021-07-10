@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fryghthub/app/ui/pages/dashboard/get_started.dart';
 import 'package:fryghthub/app/ui/pages/login/login.dart';
 import 'package:fryghthub/app/ui/pages/register/account_type.dart';
 import 'package:fryghthub/app/utils/responsive_safe_area.dart';
@@ -132,7 +133,9 @@ class ContentPageStage extends State<ContentPage> {
               GestureDetector(
                 onTap: () {
                   _startShipping(context);
-                  // Navigator.pushNamed(context,);
+                  // Navigator.push(context,
+                  //     MaterialPageRoute(builder: (context) => GetStarted())
+                  // );
                 },
                 child: Container(
                   height: 56,

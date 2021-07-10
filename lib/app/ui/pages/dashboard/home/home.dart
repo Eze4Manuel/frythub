@@ -208,18 +208,18 @@ class _HomeState extends State<Home> {
                             scale: 0.03),
                       ),
                       Divider(
-                        height: 4,
+                        height: 2,
                         thickness: 1,
                         color: AppColors.color13,
-                        indent: 20,
-                        endIndent: 20,
+                        indent: 0,
+                        endIndent: 0,
                       ),
 
                       // Recent Tabs
                       Container(
                         height: DeviceUtils.getScaledHeight(context,
                             scale: 0.6),
-                        padding: EdgeInsets.only(top: 20, bottom: 0),
+                        padding: EdgeInsets.only(top: 0, bottom: 20),
                         child: ListView.builder(
                           itemCount: 7,
                           itemBuilder: (context, index) => RecentTabs()
