@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "339690562412",
+    "project_id": "frythub-3f3a2",
+    "storage_bucket": "frythub-3f3a2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:339690562412:android:02ab575d5ee5d2b1b60949",
+        "android_client_info": {
+          "package_name": "com.frythub.frythub"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "339690562412-7uln6m3ttab3rvjbt03tpejeh4n4vv2e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCz_HdT5rO4nXw8Zl-ocaLUvSTk28ox4Dk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "339690562412-7uln6m3ttab3rvjbt03tpejeh4n4vv2e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

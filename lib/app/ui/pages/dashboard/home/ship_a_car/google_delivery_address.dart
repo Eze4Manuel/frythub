@@ -11,6 +11,7 @@ import 'package:fryghthub/app/utils/device_utils.dart';
 import 'package:fryghthub/app/utils/form_field_decoration.dart';
 import 'package:fryghthub/app/utils/responsive_safe_area.dart';
 import 'package:get/instance_manager.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class GoogleDeliveryAddress extends StatefulWidget {
@@ -39,9 +40,8 @@ class _GoogleDeliveryAddressState extends State<GoogleDeliveryAddress> {
         body: ResponsiveSafeArea(builder: (context, size) {
           return Stack(children: <Widget>[
             Container(
-              height: DeviceUtils.getScaledHeight(context, scale: 0.2),
-              padding: EdgeInsets.symmetric(horizontal: 25),
-              decoration: BoxDecoration(
+              height: DeviceUtils.getScaledHeight(context, scale: 1),
+               decoration: BoxDecoration(
                 color: AppColors.whiteColor,
               ),
               child: Column(
@@ -50,42 +50,65 @@ class _GoogleDeliveryAddressState extends State<GoogleDeliveryAddress> {
                   SizedBox(
                     height: DeviceUtils.getScaledHeight(context, scale: 0.03),
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: Icon(
-                      Icons.arrow_back,
-                      color: AppColors.appColor1,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Icon(
+                        Icons.arrow_back,
+                        color: AppColors.appColor1,
+                      ),
                     ),
                   ),
                   SizedBox(
                     height: DeviceUtils.getScaledHeight(context, scale: 0.03),
                   ),
-                  TextFormField(
-                    decoration: textInputDecoration.copyWith(
-                      hintText: 'Search by address',
-                      suffixIcon: Icon(
-                        Icons.search,
-                        color: AppColors.color7,
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(25, 0, 25, 10),
+
+                    child: TextFormField(
+                      decoration: textInputDecoration.copyWith(
+                        hintText: 'Search by address',
+                        suffixIcon: Icon(
+                          Icons.search,
+                          color: AppColors.color7,
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide:
+                          BorderSide(color: AppColors.color4, width: 1.0),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        border: OutlineInputBorder(
+                          borderSide:
+                          BorderSide(color: AppColors.color4, width: 2.0),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
                       ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: AppColors.color4, width: 1.0),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      border: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: AppColors.color4, width: 2.0),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
+                      validator: (val) => val.isEmpty ? 'Name' : null,
+                      onChanged: (val) {},
                     ),
-                    validator: (val) => val.isEmpty ? 'Name' : null,
-                    onChanged: (val) {},
+                  ),
+                  Container(
+                    height: DeviceUtils.getScaledHeight(context, scale: 0.72),
+                    child: GoogleMap(
+                      initialCameraPosition: CameraPosition(
+                        target: googleDeliveryController.mainLocation,
+                        zoom: 13.0,
+                      ),
+                      mapType: MapType.normal,
+                      onMapCreated: (controller) {
+                        setState(() {
+                          googleDeliveryController.myMapController = controller;
+                        });
+                      },
+                    ),
                   ),
                 ],
               ),
             ),
+
             SlidingUpPanel(
               maxHeight: DeviceUtils.getScaledHeight(context, scale: 0.65),
               padding: EdgeInsets.symmetric(horizontal: 25),

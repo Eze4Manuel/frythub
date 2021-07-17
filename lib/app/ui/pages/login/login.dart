@@ -4,15 +4,15 @@ import 'package:fryghthub/app/controller/account_signin_controller.dart';
 import 'package:fryghthub/app/ui/pages/dashboard/get_started.dart';
 import 'package:fryghthub/app/ui/pages/login/forgot_password.dart';
 import 'package:fryghthub/app/ui/pages/register/account_type.dart';
-import 'package:fryghthub/app/utils/message_notification.dart';
 import 'package:fryghthub/app/ui/theme/app_colors.dart';
-import 'package:fryghthub/app/ui/widgets/custom_textfield_widget.dart';
-import 'package:fryghthub/app/utils/responsive_safe_area.dart';
-import 'package:fryghthub/app/utils/device_utils.dart';
 import 'package:fryghthub/app/ui/theme/app_fonts.dart';
 import 'package:fryghthub/app/ui/theme/app_strings.dart';
+import 'package:fryghthub/app/ui/widgets/custom_textfield_widget.dart';
+import 'package:fryghthub/app/ui/widgets/google_map_widgets.dart';
+import 'package:fryghthub/app/utils/device_utils.dart';
+import 'package:fryghthub/app/utils/message_notification.dart';
+import 'package:fryghthub/app/utils/responsive_safe_area.dart';
 import 'package:get/get.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 
 class UserLogin extends StatefulWidget {
   @override
@@ -20,30 +20,9 @@ class UserLogin extends StatefulWidget {
 }
 
 class _UserLoginState extends State<UserLogin> {
-
   final AccountSigninController accountSigninController =
-  Get.put(AccountSigninController());
+      Get.put(AccountSigninController());
   final _formKey = GlobalKey<FormState>();
-
-  GoogleSignIn _googleSignIn = GoogleSignIn(
-    // Optional clientId
-    // clientId: '711926648021-i0fc8jtl81l9uulhsjirfr0q8cb3iq35.apps.googleusercontent.com',
-    scopes: <String>[
-      'email',
-      'https://www.googleapis.com/auth/contacts.readonly',
-    ],
-  );
-
-  signInWithGoogle() async {
-    try {
-      GoogleSignInAccount account = await _googleSignIn.signIn();
-      var authHeader = await account?.authHeaders;
-      print(authHeader);
-      //_handleSignOut();
-    } catch (error) {
-      print(error);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -101,8 +80,18 @@ class _UserLoginState extends State<UserLogin> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 GestureDetector(
-                  onTap: (){
-                    signInWithGoogle();
+                  onTap: () async {
+                    if (await accountSigninController.signInWithGoogle()) {
+                      MessageNotification.messageToast(
+                          accountSigninController.message.value,
+                          context,
+                          AppColors.appPrimaryColor);
+                    }else{
+                      MessageNotification.messageToast(
+                          accountSigninController.message.value,
+                          context,
+                          AppColors.appPrimaryColor);
+                    }
                   },
                   child: Container(
                     width: 80,
@@ -120,18 +109,42 @@ class _UserLoginState extends State<UserLogin> {
                 SizedBox(
                   width: DeviceUtils.getScaledWidth(context, scale: 0.04),
                 ),
-                Container(
-                  width: 80,
-                  height: 48,
-                  decoration: BoxDecoration(
-                      color: AppColors.color8,
-                      borderRadius: BorderRadius.circular(8)),
-                  child: Icon(
-                    FontAwesomeIcons.facebookSquare,
-                    color: AppColors.whiteColor,
-                    size: 18,
+                GestureDetector(
+                  onTap: () async {
+                    if(await accountSigninController.signInWithFaceBook()){
+                      MessageNotification.messageToast(
+                          accountSigninController.message.value,
+                          context,
+                          AppColors.appPrimaryColor);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => GetStarted()));
+                    }else MessageNotification.messageToast(
+                        accountSigninController.message.value,
+                        context,
+                        AppColors.appPrimaryColor);
+                  },
+                  child: Container(
+                    width: 80,
+                    height: 48,
+                    decoration: BoxDecoration(
+                        color: AppColors.color8,
+                        borderRadius: BorderRadius.circular(8)),
+                    child: Icon(
+                      FontAwesomeIcons.facebookSquare,
+                      color: AppColors.whiteColor,
+                      size: 18,
+                    ),
                   ),
                 ),
+
+                // GestureDetector(
+                //     onTap: (){
+                //       accountSigninController.signOutWithGoogle();
+                //     },
+                //     child: Icon(Icons.close))
+
               ],
             ),
             SizedBox(
@@ -173,134 +186,145 @@ class _UserLoginState extends State<UserLogin> {
               height: DeviceUtils.getScaledHeight(context, scale: 0.024),
             ),
             Form(
-              key: _formKey,
-              child: Column(
-                children: [
-                  Stack(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 32.0),
-                        child: Text(
-                          Strings.emailAddress,
-                          style: TextStyle(
-                            color: AppColors.color6,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                            fontFamily: FontFamily.sofiaMedium,
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 16.0, right: 32),
-                        child: TextFieldWidget(
-                          hint: Strings.emailAddress,
-                          fontSize: 14,
-                          hintColor: AppColors.color11,
-                          borderSideColor: AppColors.color9,
-                          autoFocus: true,
-                          onChanged: (value) => accountSigninController.setEmail(value),
-                          validator: (value) {
-                            if (!accountSigninController.emailRegex.hasMatch(value)) {
-                              return 'Please enter valid email';
-                            }
-                            return null;
-                          },
-                        ),
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    height: DeviceUtils.getScaledHeight(context, scale: 0.02),
-                  ),
-                  Stack(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 32.0),
-                        child: Text(
-                          Strings.password,
-                          style: TextStyle(
-                            color: AppColors.color6,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                            fontFamily: FontFamily.sofiaMedium,
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 18, right: 32),
-                        child: TextFieldWidget(
-                          // enabled: false,
-                          hint: Strings.password,
-                          isObscure: true,
-                          fontSize: 14,
-                          hintColor: AppColors.color11,
-                          borderSideColor: AppColors.color9,
-                          autoFocus: true,
-                          onChanged: (value) => accountSigninController.setPassword(value),
-                          validator: (value) {
-                            if (value.isEmpty) {
-                              return 'Fill in password';
-                            }
-                            return null;
-                          },
-                        ),
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    height: DeviceUtils.getScaledHeight(context, scale: 0.04),
-                  ),
-                  GestureDetector(
-                      onTap: () async {
-                        if(_formKey.currentState.validate()){
-                          accountSigninController.setLoading(true);
-                          if( await accountSigninController.signInAccount() ){
-                            // Displaying Toast Information
-                            MessageNotification.messageToast(accountSigninController.message.value, context, AppColors.appPrimaryColor);
-                            accountSigninController.setLoading(false);
-                            // Pushing to the Dashboard screen
-                            // TODO: Change to rushNmedReplaced
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) => GetStarted()));
-                          }else{
-                            accountSigninController.setLoading(false);
-                            MessageNotification.messageToast(accountSigninController.message.value, context, AppColors.appPrimaryColor);
-                          }
-                        }
-                      },
-                      child: Obx(() => (accountSigninController.loading.value) ?
-                      Center(
-                        child: CircularProgressIndicator(
-                          valueColor: AlwaysStoppedAnimation<Color>(AppColors.appPrimaryColor),
-                        ),
-                      )
-                          :
-                      Container(
-                        height: 56,
-                        // width: 311,
-                        margin: EdgeInsets.only(left: 32, right: 32),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          color: AppColors.appPrimaryColor,
-                        ),
-                        child: Center(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    Stack(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 32.0),
                           child: Text(
-                            Strings.continueShipping,
+                            Strings.emailAddress,
                             style: TextStyle(
-                              color: AppColors.whiteColor,
-                              fontSize: 20,
-                              fontFamily: FontFamily.sofiaSemiBold,
+                              color: AppColors.color6,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                              fontFamily: FontFamily.sofiaMedium,
                             ),
                           ),
                         ),
-                      ),)
-                  ),
-                  SizedBox(
-                    height: DeviceUtils.getScaledHeight(context, scale: 0.04),
-                  ),
-                ],
-              )
-            ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 16.0, right: 32),
+                          child: TextFieldWidget(
+                            hint: Strings.emailAddress,
+                            fontSize: 14,
+                            hintColor: AppColors.color11,
+                            borderSideColor: AppColors.color9,
+                            autoFocus: true,
+                            onChanged: (value) =>
+                                accountSigninController.setEmail(value),
+                            validator: (value) {
+                              if (!accountSigninController.emailRegex
+                                  .hasMatch(value.trim())) {
+                                return 'Please enter valid email';
+                              }
+                              return null;
+                            },
+                          ),
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: DeviceUtils.getScaledHeight(context, scale: 0.02),
+                    ),
+                    Stack(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 32.0),
+                          child: Text(
+                            Strings.password,
+                            style: TextStyle(
+                              color: AppColors.color6,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                              fontFamily: FontFamily.sofiaMedium,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 18, right: 32),
+                          child: TextFieldWidget(
+                            // enabled: false,
+                            hint: Strings.password,
+                            isObscure: true,
+                            fontSize: 14,
+                            hintColor: AppColors.color11,
+                            borderSideColor: AppColors.color9,
+                            autoFocus: true,
+                            onChanged: (value) =>
+                                accountSigninController.setPassword(value),
+                            validator: (value) {
+                              if (value.isEmpty) {
+                                return 'Fill in password';
+                              }
+                              return null;
+                            },
+                          ),
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: DeviceUtils.getScaledHeight(context, scale: 0.04),
+                    ),
+                    GestureDetector(
+                        onTap: () async {
+                          if (_formKey.currentState.validate()) {
+                            accountSigninController.setLoading(true);
+                            if (await accountSigninController.signInAccount()) {
+                              // Displaying Toast Information
+                              MessageNotification.messageToast(
+                                  accountSigninController.message.value,
+                                  context,
+                                  AppColors.appPrimaryColor);
+                              accountSigninController.setLoading(false);
+                              // Pushing to the Dashboard screen
+
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => GetStarted()));
+                            } else {
+                              accountSigninController.setLoading(false);
+                              MessageNotification.messageToast(
+                                  accountSigninController.message.value,
+                                  context,
+                                  AppColors.appPrimaryColor);
+                            }
+                          }
+                        },
+                        child: Obx(
+                          () => (accountSigninController.loading.value)
+                              ? Center(
+                                  child: CircularProgressIndicator(
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                        AppColors.appPrimaryColor),
+                                  ),
+                                )
+                              : Container(
+                                  height: 56,
+                                  // width: 311,
+                                  margin: EdgeInsets.only(left: 32, right: 32),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
+                                    color: AppColors.appPrimaryColor,
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      Strings.continueShipping,
+                                      style: TextStyle(
+                                        color: AppColors.whiteColor,
+                                        fontSize: 20,
+                                        fontFamily: FontFamily.sofiaSemiBold,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                        )),
+                    SizedBox(
+                      height: DeviceUtils.getScaledHeight(context, scale: 0.04),
+                    ),
+                  ],
+                )),
             Center(
               child: GestureDetector(
                 onTap: () {
@@ -357,4 +381,3 @@ class _UserLoginState extends State<UserLogin> {
     );
   }
 }
-
