@@ -31,17 +31,19 @@ class CircleCheckbox extends StatelessWidget {
           decoration: new BoxDecoration(
             border: Border.all(
                 width: 2,
-                color: Theme.of(context).unselectedWidgetColor ??
-                    Theme.of(context).disabledColor),
-            color: (value) ? AppColors.whiteColor : AppColors.color13,
+                color: AppColors.whiteColor),
+            color: AppColors .whiteColor,
             borderRadius: new BorderRadius.circular(100),
           ),
           child: Checkbox(
             value: value,
             tristate: tristate,
             onChanged: onChanged,
-            activeColor: AppColors.appPrimaryColor,
+            hoverColor: AppColors.whiteColor,
+            overlayColor: MaterialStateColor.resolveWith((states) => AppColors.whiteColor),
+            activeColor: AppColors.whiteColor,
             checkColor: AppColors.appPrimaryColor,
+            fillColor: MaterialStateColor.resolveWith((states) => AppColors.whiteColor),
             // materialTapTargetSize: materialTapTargetSize,
           ),
         ),

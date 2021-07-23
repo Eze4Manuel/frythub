@@ -3,15 +3,14 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:fryghthub/app/controller/account_creation_controller.dart';
 import 'package:fryghthub/app/controller/checkbox_toggle_controller.dart';
 import 'package:fryghthub/app/ui/pages/register/user_contact.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-
 import 'package:fryghthub/app/ui/theme/app_colors.dart';
-import 'package:fryghthub/app/ui/widgets/custom_checkbox.dart';
-import 'package:fryghthub/app/ui/widgets/custom_textfield_widget.dart';
-import 'package:fryghthub/app/utils/responsive_safe_area.dart';
-import 'package:fryghthub/app/utils/device_utils.dart';
 import 'package:fryghthub/app/ui/theme/app_fonts.dart';
 import 'package:fryghthub/app/ui/theme/app_strings.dart';
+import 'package:fryghthub/app/ui/widgets/custom_checkbox.dart';
+import 'package:fryghthub/app/ui/widgets/custom_textfield_widget.dart';
+import 'package:fryghthub/app/utils/device_utils.dart';
+import 'package:fryghthub/app/utils/message_notification.dart';
+import 'package:fryghthub/app/utils/responsive_safe_area.dart';
 import 'package:get/get.dart';
 
 class CreateAccount extends StatefulWidget {
@@ -20,13 +19,11 @@ class CreateAccount extends StatefulWidget {
 }
 
 class _CreateAccountState extends State<CreateAccount> {
-
   final _formKey = GlobalKey<FormState>();
   final AccountCreationController accountCreationController =
-  Get.put(AccountCreationController());
+      Get.put(AccountCreationController());
   final CheckboxToggleController checkboxToggleController =
-  Get.put(CheckboxToggleController());
-
+      Get.put(CheckboxToggleController());
 
   @override
   Widget build(BuildContext context) {
@@ -115,8 +112,24 @@ class _CreateAccountState extends State<CreateAccount> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   GestureDetector(
-                    onTap: (){
-
+                    onTap: () async {
+                      if (await accountCreationController.signUpWithGoogle()) {
+                        MessageNotification.messageToast(
+                            accountCreationController.message.value,
+                            context,
+                            AppColors.appPrimaryColor);
+                        // Navigator.pushAndRemoveUntil(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (context) => GetStarted()),
+                        //         (route) => false
+                        // );
+                      } else {
+                        MessageNotification.messageToast(
+                            accountCreationController.message.value,
+                            context,
+                            AppColors.appPrimaryColor);
+                      }
                     },
                     child: Container(
                       width: 80,
@@ -135,8 +148,24 @@ class _CreateAccountState extends State<CreateAccount> {
                     width: DeviceUtils.getScaledWidth(context, scale: 0.04),
                   ),
                   GestureDetector(
-                    onTap: (){
-
+                    onTap: () async {
+                      if (await accountCreationController
+                          .signUpWithFaceBook()) {
+                        MessageNotification.messageToast(
+                            accountCreationController.message.value,
+                            context,
+                            AppColors.appPrimaryColor);
+                        // Navigator.pushAndRemoveUntil(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //       builder: (context) => GetStarted()),
+                        //       (route) => false,
+                        // );
+                      } else
+                        MessageNotification.messageToast(
+                            accountCreationController.message.value,
+                            context,
+                            AppColors.appPrimaryColor);
                     },
                     child: Container(
                       width: 80,
@@ -213,7 +242,8 @@ class _CreateAccountState extends State<CreateAccount> {
                       hintColor: AppColors.color11,
                       borderSideColor: AppColors.color9,
                       autoFocus: true,
-                      onChanged: (value) => accountCreationController.setFirstName(value),
+                      onChanged: (value) =>
+                          accountCreationController.setFirstName(value),
                       validator: (value) {
                         if (value.isEmpty) {
                           return 'Enter First Name';
@@ -250,7 +280,8 @@ class _CreateAccountState extends State<CreateAccount> {
                       hintColor: AppColors.color11,
                       borderSideColor: AppColors.color9,
                       autoFocus: true,
-                      onChanged: (value) => accountCreationController.setLastName(value),
+                      onChanged: (value) =>
+                          accountCreationController.setLastName(value),
                       validator: (value) {
                         if (value.isEmpty) {
                           return 'Enter Last name';
@@ -286,7 +317,8 @@ class _CreateAccountState extends State<CreateAccount> {
                       hintColor: AppColors.color11,
                       borderSideColor: AppColors.color9,
                       autoFocus: true,
-                      onChanged: (value) => accountCreationController.setEmail(value),
+                      onChanged: (value) =>
+                          accountCreationController.setEmail(value),
                       validator: (value) {
                         if (value.isEmpty) {
                           return 'Enter Email';
@@ -302,7 +334,7 @@ class _CreateAccountState extends State<CreateAccount> {
               ),
               GestureDetector(
                 onTap: () {
-                  if(_formKey.currentState.validate()) {
+                  if (_formKey.currentState.validate()) {
                     _setUsername(context);
                   }
                 },
@@ -438,7 +470,8 @@ class _CreateAccountState extends State<CreateAccount> {
                           borderSideColor: AppColors.color9,
                           autoFocus: true,
                           hint: Strings.username,
-                          onChanged: (value) => accountCreationController.setUserName(value),
+                          onChanged: (value) =>
+                              accountCreationController.setUserName(value),
                           validator: (value) {
                             if (value.isEmpty) {
                               return 'Enter Username';
@@ -453,42 +486,64 @@ class _CreateAccountState extends State<CreateAccount> {
                     height: DeviceUtils.getScaledHeight(context, scale: 0.04),
                   ),
                   GestureDetector(
-                    onTap: () {
-                      if(_formKey.currentState.validate()){
-                      Navigator.push(
-                          context,
-                        MaterialPageRoute(
-                            builder: (context) => UserContact()));
-                      }
-                    },
-                    child: Container(
-                      height: 56,
-                      // width: 311,
-                      margin: EdgeInsets.only(left: 32, right: 32),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: AppColors.appPrimaryColor,
-                      ),
-                      child: Center(
-                        child: Text(
-                          Strings.Next,
-                          style: TextStyle(
-                            color: AppColors.whiteColor,
-                            fontSize: 20,
-                            fontFamily: FontFamily.sofiaSemiBold,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
+                      onTap: () async {
+                        if (_formKey.currentState.validate()) {
+                          accountCreationController.setLoading(true);
+                          if (await accountCreationController.checkUserName()) {
+                            MessageNotification.messageToast(
+                                accountCreationController.message.value,
+                                context,
+                                AppColors.appPrimaryColor);
+                            accountCreationController.setLoading(false);
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => UserContact()));
+                          }else{
+
+                            MessageNotification.messageToast(
+                                accountCreationController.message.value,
+                                context,
+                                AppColors.appPrimaryColor);
+                            accountCreationController.setLoading(false);
+
+                          }
+                        }
+                      },
+                      child: Obx(
+                        () => (accountCreationController.loading.value)
+                            ? Center(
+                                child: CircularProgressIndicator(
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                      AppColors.appPrimaryColor),
+                                ),
+                              )
+                            : Container(
+                                height: 56,
+                                // width: 311,
+                                margin: EdgeInsets.only(left: 32, right: 32),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  color: AppColors.appPrimaryColor,
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    Strings.Next,
+                                    style: TextStyle(
+                                      color: AppColors.whiteColor,
+                                      fontSize: 20,
+                                      fontFamily: FontFamily.sofiaSemiBold,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                      )),
                 ],
               ),
             ),
           );
         });
   }
-
-
 
   void _changeAccountType(context) {
     showModalBottomSheet(
@@ -552,10 +607,11 @@ class _CreateAccountState extends State<CreateAccount> {
                     height: DeviceUtils.getScaledHeight(context, scale: 0.04),
                   ),
                   GestureDetector(
-                    onTap: () {
-                      accountCreationController.setAccountType(Strings.userAction);
-                      checkboxToggleController.updateCheckbox(Strings.userAction);
-
+                    onTap: () async {
+                      accountCreationController
+                          .setAccountType(Strings.userAction);
+                      checkboxToggleController
+                          .updateCheckbox(Strings.userAction);
                     },
                     child: Container(
                       margin: EdgeInsets.only(left: 32, right: 32),
@@ -571,16 +627,18 @@ class _CreateAccountState extends State<CreateAccount> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(right: 11.0, top: 11),
+                            padding:
+                                const EdgeInsets.only(right: 11.0, top: 11),
                             child: Align(
                                 alignment: Alignment.topRight,
                                 child: GetBuilder<CheckboxToggleController>(
                                   init: checkboxToggleController,
                                   builder: (_) {
                                     return CircleCheckbox(
-                                        value: checkboxToggleController.userAction
-                                            ? true
-                                            : false,
+                                        value:
+                                            checkboxToggleController.userAction
+                                                ? true
+                                                : false,
                                         onChanged: null);
                                   },
                                 )),
@@ -621,9 +679,10 @@ class _CreateAccountState extends State<CreateAccount> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      accountCreationController.setAccountType(Strings.buyingAgent);
-                      checkboxToggleController.updateCheckbox(Strings.buyingAgent);
-
+                      accountCreationController
+                          .setAccountType(Strings.buyingAgent);
+                      checkboxToggleController
+                          .updateCheckbox(Strings.buyingAgent);
                     },
                     child: Container(
                       height: 100,
@@ -632,26 +691,28 @@ class _CreateAccountState extends State<CreateAccount> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
                           color: AppColors.appPrimaryColor,
-                          border: Border.all(width: 1, color: AppColors.color5)),
+                          border:
+                              Border.all(width: 1, color: AppColors.color5)),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(right: 11.0, top: 11),
-                            child: Align(
-                                alignment: Alignment.topRight,
-                                child: GetBuilder<CheckboxToggleController>(
-                                  init: checkboxToggleController,
-                                  builder: (_) {
-                                    return CircleCheckbox(
-                                        value: checkboxToggleController.buyingAgent
-                                            ? true
-                                            : false,
-                                        onChanged: null);
-                                  },
-                                ))
-                          ),
+                              padding:
+                                  const EdgeInsets.only(right: 11.0, top: 11),
+                              child: Align(
+                                  alignment: Alignment.topRight,
+                                  child: GetBuilder<CheckboxToggleController>(
+                                    init: checkboxToggleController,
+                                    builder: (_) {
+                                      return CircleCheckbox(
+                                          value: checkboxToggleController
+                                                  .buyingAgent
+                                              ? true
+                                              : false,
+                                          onChanged: null);
+                                    },
+                                  ))),
                           Row(
                             children: [
                               SizedBox(
@@ -688,9 +749,10 @@ class _CreateAccountState extends State<CreateAccount> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      accountCreationController.setAccountType(Strings.deliveryAgent);
-                      checkboxToggleController.updateCheckbox(Strings.deliveryAgent);
-
+                      accountCreationController
+                          .setAccountType(Strings.deliveryAgent);
+                      checkboxToggleController
+                          .updateCheckbox(Strings.deliveryAgent);
                     },
                     child: Container(
                       height: 100,
@@ -699,20 +761,23 @@ class _CreateAccountState extends State<CreateAccount> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
                           color: AppColors.appPrimaryColor,
-                          border: Border.all(width: 1, color: AppColors.color5)),
+                          border:
+                              Border.all(width: 1, color: AppColors.color5)),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(right: 11.0, top: 11),
-                            child:Align(
+                            padding:
+                                const EdgeInsets.only(right: 11.0, top: 11),
+                            child: Align(
                                 alignment: Alignment.topRight,
                                 child: GetBuilder<CheckboxToggleController>(
                                   init: checkboxToggleController,
                                   builder: (_) {
                                     return CircleCheckbox(
-                                        value: checkboxToggleController.deliveryAgent
+                                        value: checkboxToggleController
+                                                .deliveryAgent
                                             ? true
                                             : false,
                                         onChanged: null);
@@ -755,9 +820,10 @@ class _CreateAccountState extends State<CreateAccount> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      accountCreationController.setAccountType(Strings.shippingAgent);
-                      checkboxToggleController.updateCheckbox(Strings.shippingAgent);
-
+                      accountCreationController
+                          .setAccountType(Strings.shippingAgent);
+                      checkboxToggleController
+                          .updateCheckbox(Strings.shippingAgent);
                     },
                     child: Container(
                       height: 100,
@@ -766,26 +832,28 @@ class _CreateAccountState extends State<CreateAccount> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
                           color: AppColors.appPrimaryColor,
-                          border: Border.all(width: 1, color: AppColors.color5)),
+                          border:
+                              Border.all(width: 1, color: AppColors.color5)),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(right: 11.0, top: 11),
-                            child:  Align(
-                                alignment: Alignment.topRight,
-                                child:  GetBuilder<CheckboxToggleController>(
-                                  init: checkboxToggleController,
-                                  builder: (_) {
-                                    return CircleCheckbox(
-                                        value: checkboxToggleController.shippingAgent
-                                            ? true
-                                            : false,
-                                        onChanged: null);
-                                  },
-                                )
-                            )),
+                              padding:
+                                  const EdgeInsets.only(right: 11.0, top: 11),
+                              child: Align(
+                                  alignment: Alignment.topRight,
+                                  child: GetBuilder<CheckboxToggleController>(
+                                    init: checkboxToggleController,
+                                    builder: (_) {
+                                      return CircleCheckbox(
+                                          value: checkboxToggleController
+                                                  .shippingAgent
+                                              ? true
+                                              : false,
+                                          onChanged: null);
+                                    },
+                                  ))),
                           Row(
                             children: [
                               SizedBox(
@@ -823,5 +891,4 @@ class _CreateAccountState extends State<CreateAccount> {
           );
         });
   }
-  // void changeAccountType(String value) {}
 }

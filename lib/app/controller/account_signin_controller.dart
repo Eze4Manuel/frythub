@@ -1,9 +1,7 @@
 import 'dart:convert';
-import 'package:flutter/foundation.dart' show kIsWeb;
 
 import 'package:fryghthub/app/data/model/account.dart';
 import 'package:fryghthub/app/ui/theme/app_strings.dart';
-import 'package:fryghthub/app/utils/shared_prefs.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:http/http.dart' as http;
 import 'package:google_sign_in/google_sign_in.dart';
@@ -22,102 +20,22 @@ class AccountSigninController extends BaseController {
   dynamic data;
   GoogleSignIn _googleSignIn = GoogleSignIn();
 
-  Future<bool> signInWithGoogle() async {
-    var url = Uri.parse(signInWithGoogleUrl);
-    print(url);
-
-    try{
-      GoogleSignInAccount res = await _googleSignIn.signIn();
-      if(res != null){
-        await res.authentication.then((value) => {
-          print(value.accessToken),
-          data = {
-            "accessToken": value.accessToken
-          },
-        });
-        print(data);
-        var response =
-        await http.post(
-            url,
-            headers: {"Accept": "*/*", "Content-Type": "application/json"},
-            body: jsonEncode(data));
-        print('Response status: ${response.statusCode}');
-        print('Response body: ${jsonDecode(response.body)}');
-
-         if(jsonDecode(response.body)['isSuccess']){
-          setMessage("Sign In success");
-          return Future<bool>.value(true);
-
-         }else{
-          setMessage(jsonDecode(response.body)['message']);
-          return Future<bool>.value(false);
-        }
-      } else {
-        setMessage('An error occurred');
-        return Future<bool>.value(false);
-      }
-    }catch(err){
-      print(err);
-      setMessage("Something went wrong");
-      return Future<bool>.value(false);
-    }
-  }
-
-
-  Future<bool> signInWithFaceBook () async {
-    var url = Uri.parse(signInWithFacebookUrl);
-    print(url);
-
-    try{
-      final LoginResult result = await FacebookAuth.instance.login();
-      if (result.status == LoginStatus.success) {
-        // you are logged
-        final AccessToken accessToken = result.accessToken;
-        var packet = accessToken.toJson();
-        data = {
-          "accessToken": packet['token']
-        };
-        var response =
-        await http.post(
-            url,
-            headers: {"Accept": "*/*", "Content-Type": "application/json"},
-            body: jsonEncode(data));
-        print('Response status: ${response.statusCode}');
-        print('Response body: ${jsonDecode(response.body)}');
-        if(jsonDecode(response.body)['isSuccess']){
-          setMessage("Sign In success");
-          return Future<bool>.value(true);
-        }else{
-          setMessage(jsonDecode(response.body)['message']);
-          return Future<bool>.value(false);
-        }
-      }else{
-        setMessage("Cannot log in");
-        return Future<bool>.value(false);
-      }
-    }catch(err){
-      print(err);
-      setMessage("Something went wrong");
-      return Future<bool>.value(false);
-    }
-  }
-
-
-
-  // Signing Out of Google
-  void signOutWithGoogle () async => await _googleSignIn.signOut().then((value) => print(value));
 
 
   // sets the email of account to be logged in
   void setEmail(String email) => account.email = email.trim();
 
+  // sets password
   void setPassword(String password) => account.password = password;
 
+  // updates loading bar
   void setLoading(bool val) => loading.value = val;
 
 
-  Future<bool> signInAccount() async {
 
+
+  //------------ Account Sign-In ------------//
+  Future<bool> signInAccount() async {
     var url = Uri.parse(signInUrl);
     print(url);
     data = {
@@ -136,7 +54,7 @@ class AccountSigninController extends BaseController {
       print('Response body: ${jsonDecode(response.body)}');
 
       if(jsonDecode(response.body)['isSuccess']){
-        setMessage("Sign In success");
+        setMessage(jsonDecode(response.body)['message']);
 
         // Storing the data to local storage
         if(await storeUserDetails(jsonDecode(response.body), user_keys)){
@@ -154,22 +72,64 @@ class AccountSigninController extends BaseController {
     return false;
   }
 
-  // Signing out of Facebook
+
+  //------------ Signing in with Google ------------//
+  Future<bool> signInWithGoogle() async {
+    var url = Uri.parse(signInWithGoogleUrl);
+    print(url);
+    GoogleSignInAccount res = await _googleSignIn.signIn();
+    if(res != null) {
+      await res.authentication.then((value) =>
+      {
+        print(value.accessToken),
+        data = {
+          "accessToken": value.accessToken
+        },
+      });
+      print(data);
+
+      // Sending parameters to http request. Implemented in base controller
+      return await sendHttpRequest(url, data );
+    }else {
+      setMessage('An error occurred');
+      return Future<bool>.value(false);
+    }
+  }
+
+  //------------ Signing Out of Google ---------------//
+  void signOutWithGoogle () async => await _googleSignIn.signOut().then((value) => print(value));
+
+  //------------ Signin with Facebook ------------//
+  Future<bool> signInWithFaceBook () async {
+    var url = Uri.parse(signInWithFacebookUrl);
+    print(url);
+    final LoginResult result = await FacebookAuth.instance.login();
+    if (result.status == LoginStatus.success) {
+      // you are logged
+      final AccessToken accessToken = result.accessToken;
+      var packet = accessToken.toJson();
+      data = {
+        "accessToken": packet['token']
+      };
+      print(packet['token']);
+
+      // Sending parameters to http request. Implemented in base controller
+      return await sendHttpRequest(url, data );
+    }else{
+      print(result.message);
+      print(result.status);
+      setMessage("Cannot log in");
+      return Future<bool>.value(false);
+    }
+  }
+
+  //------------ Signing out of Facebook ------------//
   void signOutOfFaceBook () async =>
-     await FacebookAuth.instance.logOut().then((value) => print('Logged Out'), );
+     await FacebookAuth.instance.logOut().then((value) => print('Logged Out'));
 
-
-
-  // Removes Object instance
+  //------------ Removes Object instance ------------//
   void removeAccountReference() => (account != null) ? account = null : null;
 
-  // Stores data locally using Shared prefs
-  Future<bool> storeUserDetails(body, listKeys) async {
-    await listKeys.map((key) async =>
-        await SharedPrefs.saveString(key, jsonEncode(body[key]))
-    );
-    return true;
-  }
 }
 
 

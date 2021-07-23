@@ -3,14 +3,14 @@
 import 'package:fryghthub/app/ui/theme/app_strings.dart';
 
 class Account {
-  String accountType = '';
-  String firstName = '';
-  String lastName = '';
-  String email = '';
-  String username = '';
-  String phone = '';
-  String address = '';
-  String password = '';
+  String accountType;
+  String firstName;
+  String lastName;
+  String email;
+  String username;
+  String phone;
+  String address ;
+  String password;
 
   Account(
       {this.accountType,

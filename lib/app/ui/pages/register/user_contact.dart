@@ -151,6 +151,7 @@ class _UserContactState extends State<UserContact> {
                         hintColor: AppColors.color11,
                         borderSideColor: AppColors.color9,
                         autoFocus: true,
+                        readOnly: true,
                         hint: Strings.emailAddress,
                         inputType: TextInputType.emailAddress,
                       ),

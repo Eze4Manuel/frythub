@@ -8,7 +8,6 @@ import 'package:fryghthub/app/ui/theme/app_colors.dart';
 import 'package:fryghthub/app/ui/theme/app_fonts.dart';
 import 'package:fryghthub/app/ui/theme/app_strings.dart';
 import 'package:fryghthub/app/ui/widgets/custom_textfield_widget.dart';
-import 'package:fryghthub/app/ui/widgets/google_map_widgets.dart';
 import 'package:fryghthub/app/utils/device_utils.dart';
 import 'package:fryghthub/app/utils/message_notification.dart';
 import 'package:fryghthub/app/utils/responsive_safe_area.dart';
@@ -86,6 +85,12 @@ class _UserLoginState extends State<UserLogin> {
                           accountSigninController.message.value,
                           context,
                           AppColors.appPrimaryColor);
+                      Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => GetStarted()),
+                            (route) => false
+                      );
                     }else{
                       MessageNotification.messageToast(
                           accountSigninController.message.value,
@@ -116,10 +121,12 @@ class _UserLoginState extends State<UserLogin> {
                           accountSigninController.message.value,
                           context,
                           AppColors.appPrimaryColor);
-                      Navigator.push(
+                      Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => GetStarted()));
+                              builder: (context) => GetStarted()),
+                            (route) => false,
+                      );
                     }else MessageNotification.messageToast(
                         accountSigninController.message.value,
                         context,
